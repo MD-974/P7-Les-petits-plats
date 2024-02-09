@@ -1,0 +1,38 @@
+/* --------- GENERAL --------- */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* fonts */
+.font-anton{
+    font-family: 'Anton', sans-serif;
+}
+.font-manrope{
+    font-family: 'Manrope', sans-serif;
+}
+
+/* colors */
+.text-color{
+    color:#FFD15B;
+}
+.bg-color{
+    color:#FFD15B;
+}
+
+/* cursor */
+button{
+    cursor: pointer;
+}
+
+
+/* ---------- HEADER ---------- */
+.header__banner{
+    width: 100%;
+    height: 100%;
+}
+.header__container__logo__image{
+    background-color: red;
+}

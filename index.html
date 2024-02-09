@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ⁡⁢⁢⁢lien font manrope and anton -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope&display=swap" rel="stylesheet">
+    <!-- ⁡⁢⁢⁢lien font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- lien css -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- titre -->
+    <title>Les petits plats</title>
+</head>
+
+<body class="body">
+
+    <!-- HEADER -->
+    <header id="header" class="header">
+      <!-- banner -->
+        <img src="assets/logo/banner.jpg" class="header__banner" alt="image d'une assiette plein de nourriture">
+        <h1 class="sr-only" >Les petits plats</h1>
+       <!-- container -->
+        <div class="header__container">
+
+           <!-- logo -->
+            <div class="header__container__logo">
+                <img src="assets/logo/petit-plat.svg" class="header__container__logo__image" alt="logo du site les petits plats">
+                <img src="assets/logo/petit-plat-sign.svg" class="header__container__logo__image--sign" alt="icone du site les petits plats" >
+            </div>
+
+          <!-- search -->
+            <div class="header__container__search">
+                <h2 class="header__container__search__title">cherchez parmi plus de 1500 recettes <br> du quotidien, simples et délicieuses</h2>
+                <div class="header__container__search__box">
+                    <label for="input_search" class="sr-only">rechercher principale</label>
+                    <input type="text" id="input_search" class="header__container__search__box__input" placeholder="Rechercher un plat, une recette, un ingrédient, ..." >
+                    <button id="header-search-close-button" class="header__container__search__box__button__close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <button id="header-search-magnifying-glass-button" class="header__container__search__box__button__magnifying-glass">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- MAIN⁡ -->
+    <main id="main" class="main">
+
+        <!-- filter -->
+        <div class="main__filter">
+            <!-- dropbox -->
+            <div class="main__filter__dropbox">
+
+                <!-- dropdown__ingredients -->
+                <div id="dropdown-ingredients" class="dropdown">
+                    <button class="dropdown__button">
+                       <span class="dropdown__button__title"> ingrédients </span> 
+                       <i class="fa-solid fa-chevron-up"></i>
+                       <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                </div>
+                <!-- dropdown__ustensiles -->
+                <div id="dropdown-ustensiles" class="dropdown">
+                    <button class="dropdown__button">
+                        <span class="dropdown__button__title">ustensiles</span>
+                        <i class="fa-solid fa-chevron-up"></i>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                </div>
+                <!-- dropdown__appareils -->
+                <div id="dropdown-appareils" class="dropdown">
+                    <button class="dropdown__button">
+                        <span class="dropdown__button__title">appareils</span>
+                        <i class="fa-solid fa-chevron-up"></i>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                </div>
+
+            </div>
+            <!-- recipes__result -->
+            <div class="main__filter__recipes__result">
+                <span id="recipes-result-number" class="main__filter__recipes__result__number">50</span>
+                <span id="recipes-result-text" class="main__filter__recipes__result__text">recettes</span>
+            </div>
+
+        </div>
+        <!-- tag -->
+        <div class="tag__selected">
+            resultats des filtres dropdown
+            <i class="fa-regular fa-circle-xmark"></i>
+            <i class="fa-solid fa-circle-xmark"></i>
+        </div>
+        <!-- recipes -->
+        <div class ="recipes__box">
+        les cards des recettes 
+        </div>
+  
+    </main> 
+
+</body>
+
+</html>
