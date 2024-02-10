@@ -36,7 +36,7 @@
                 <h2 class="header__container__search__title">cherchez parmi plus de 1500 recettes <br> du quotidien, simples et délicieuses</h2>
                 <div class="header__container__search__box">
                     <label for="input_search" class="sr-only">rechercher principale</label>
-                    <input type="text" id="input_search" class="header__container__search__box__input" placeholder="Rechercher un plat, une recette, un ingrédient, ..." >
+                    <input type="text" id="input_search" class="header__container__search__box__input" placeholder="Rechercher une recette, un ingrédient, ..." >
                     <button id="header-search-close-button" class="header__container__search__box__button__close">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
@@ -62,32 +62,33 @@
                 <div id="dropdown-ingredients" class="dropdown">
                     <button class="dropdown__button">
                        <span class="dropdown__button__title"> ingrédients </span> 
-                       <i class="fa-solid fa-chevron-up"></i>
-                       <i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                </div>
-                <!-- dropdown__ustensiles -->
-                <div id="dropdown-ustensiles" class="dropdown">
-                    <button class="dropdown__button">
-                        <span class="dropdown__button__title">ustensiles</span>
-                        <i class="fa-solid fa-chevron-up"></i>
-                        <i class="fa-solid fa-chevron-down"></i>
+                       <i class="fa-solid fa-chevron-up dropdown__button__icon"></i>
+                       <!-- <i class="fa-solid fa-chevron-down"></i> -->
                     </button>
                 </div>
                 <!-- dropdown__appareils -->
-                <div id="dropdown-appareils" class="dropdown">
+                <div id="dropdown-ustensiles" class="dropdown">
                     <button class="dropdown__button">
                         <span class="dropdown__button__title">appareils</span>
-                        <i class="fa-solid fa-chevron-up"></i>
-                        <i class="fa-solid fa-chevron-down"></i>
+                        <i class="fa-solid fa-chevron-up dropdown__button__icon"></i>
+                        <!-- <i class="fa-solid fa-chevron-down"></i> -->
+                    </button>
+                </div>
+                <!-- dropdown__ustensiles -->
+                <div id="dropdown-appareils" class="dropdown">
+                    <button class="dropdown__button">
+                        <span class="dropdown__button__title">ustensiles</span>
+                        <i class="fa-solid fa-chevron-up dropdown__button__icon"></i>
+                        <!-- <i class="fa-solid fa-chevron-down"></i> -->
                     </button>
                 </div>
 
             </div>
             <!-- recipes__result -->
             <div class="main__filter__recipes__result">
-                <span id="recipes-result-number" class="main__filter__recipes__result__number">50</span>
-                <span id="recipes-result-text" class="main__filter__recipes__result__text">recettes</span>
+                <!-- <span id="recipes-result-number" class="main__filter__recipes__result__number"><strong>50</strong></span> -->
+                <strong id="recipes-result-number" class="main__filter__recipes__result__number">50</strong>
+                <strong id="recipes-result-text" class="main__filter__recipes__result__text">recettes</strong>
             </div>
 
         </div>
