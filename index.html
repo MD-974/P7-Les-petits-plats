@@ -54,44 +54,43 @@
     <main id="main" class="main">
 
         <!-- filter -->
-        <div class="main__filter">
+        <section class="main__filter">
             <!-- dropbox -->
             <div class="main__filter__dropbox">
-
                 <!-- dropdown__ingredients -->
                 <div id="dropdown-ingredients" class="dropdown">
                     <button class="dropdown__button">
-                       <span class="dropdown__button__title"> ingrédients </span> 
-                       <i class="fa-solid fa-chevron-up dropdown__button__icon"></i>
-                       <!-- <i class="fa-solid fa-chevron-down"></i> -->
+                       <span class="dropdown__button__title"> Ingrédients </span> 
+                       <!-- <i class="fa-solid fa-chevron-up dropdown__button__icon"></i> -->
+                       <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
                     </button>
                 </div>
-                <!-- dropdown__appareils -->
-                <div id="dropdown-ustensiles" class="dropdown">
+                <!-- dropdown__appliance -->
+                <div id="dropdown-appliance" class="dropdown">
                     <button class="dropdown__button">
-                        <span class="dropdown__button__title">appareils</span>
-                        <i class="fa-solid fa-chevron-up dropdown__button__icon"></i>
-                        <!-- <i class="fa-solid fa-chevron-down"></i> -->
+                        <span class="dropdown__button__title">Appareils</span>
+                        <!-- <i class="fa-solid fa-chevron-up dropdown__button__icon"></i> -->
+                        <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
                     </button>
                 </div>
-                <!-- dropdown__ustensiles -->
-                <div id="dropdown-appareils" class="dropdown">
+                <!-- dropdown__ustensils -->
+                <div id="dropdown-ustensils" class="dropdown">
                     <button class="dropdown__button">
-                        <span class="dropdown__button__title">ustensiles</span>
-                        <i class="fa-solid fa-chevron-up dropdown__button__icon"></i>
-                        <!-- <i class="fa-solid fa-chevron-down"></i> -->
+                        <span class="dropdown__button__title">Ustensiles</span>
+                        <!-- <i class="fa-solid fa-chevron-up dropdown__button__icon"></i> -->
+                        <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
                     </button>
                 </div>
-
             </div>
             <!-- recipes__result -->
             <div class="main__filter__recipes__result">
+                <h3 class="main__filter__recipes__result__text"> 50 recettes </h3>
                 <!-- <span id="recipes-result-number" class="main__filter__recipes__result__number"><strong>50</strong></span> -->
-                <strong id="recipes-result-number" class="main__filter__recipes__result__number">50</strong>
-                <strong id="recipes-result-text" class="main__filter__recipes__result__text">recettes</strong>
+                <!-- <strong id="recipes-result-number" class="main__filter__recipes__result__number">50</strong>
+                <strong id="recipes-result-text" class="main__filter__recipes__result__text">recettes</strong> -->
             </div>
 
-        </div>
+        </section>
         <!-- tag -->
         <div class="tag__selected">
             resultats des filtres dropdown
@@ -100,11 +99,10 @@
         </div>
         <!-- recipes -->
         <div class ="recipes__box">
-        les cards des recettes 
         </div>
   
     </main> 
-
+<script src="scripts/index.js" type="module"></script>
 </body>
 
 </html>
