@@ -172,6 +172,8 @@ button{
     padding: 16px;
     background-color: aquamarine;
 }
+
+/* card */
 .card{
     display: flex;
     flex-direction: column;
@@ -209,6 +211,8 @@ button{
     right: 22px;
     background-color: #ffd15c;
 }
+
+/* card content */
 .card__content{
     width: 100%;
     height: 100%;
@@ -216,12 +220,12 @@ button{
     border-radius: 0 0 21px 21px;
     /* background-color: bisque; */
 }
-.content__title{
+.card__content__title{
     font-family: "Anton",sans-serif;
     font-size: 18px;
     font-weight: 400;
 }
-.content__subtitle{
+.card__content__subtitle{
     text-transform: uppercase;
     width: 60px;
     height: 16px;
@@ -230,32 +234,30 @@ button{
     margin-top: 1.8rem;
     color: rgba(122, 122, 122, 1);
 }
-.content__description{
+.card__content__description{
     height: 5.2rem;
     margin-top: 1rem;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
-.content__list{
+.card__content__list{
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
 }
-
-.content__list__item{
+.card__content__list__item{
     width: 50%;
     display: flex;
     flex-direction: column;
     margin-top: 1.3rem;
 }
-.content__list__item--ingredients{
+.card__content__list__item--ingredients{
     font-weight: 600;
     font-size: 14px;
     /* color:rgba(27, 27, 27, 1); */
     color: black;
 }
-.content__list__item--quantity{
+.card__content__list__item--quantity{
     font-weight: 400;
     font-size: 14px;
     color: rgba(122, 122, 122, 1);
