@@ -14,29 +14,25 @@
     <!-- titre -->
     <title>Les petits plats</title>
 </head>
-
 <body class="body">
-
     <!-- HEADER -->
     <header id="header" class="header">
-      <!-- banner -->
+        <!-- banner -->
         <img src="assets/logo/banner.jpg" class="header__banner" alt="image d'une assiette plein de nourriture">
         <h1 class="sr-only" >Les petits plats</h1>
-       <!-- container -->
+        <!-- container -->
         <div class="header__container">
-
-           <!-- logo -->
+            <!-- logo -->
             <div class="header__container__logo">
                 <img src="assets/logo/petit-plat.svg" class="header__container__logo__image" alt="logo du site les petits plats">
                 <img src="assets/logo/petit-plat-sign.svg" class="header__container__logo__image--sign" alt="icone du site les petits plats" >
             </div>
-
-          <!-- search -->
+            <!-- search -->
             <div class="header__container__search">
                 <h2 class="header__container__search__title">cherchez parmi plus de 1500 recettes <br> du quotidien, simples et délicieuses</h2>
                 <div class="header__container__search__box">
                     <label for="input_search" class="sr-only">rechercher principale</label>
-                    <input type="text" id="input_search" class="header__container__search__box__input" placeholder="Rechercher une recette, un ingrédient, ..." >
+                    <input type="text" id="input_search" class="header__container__search__box__input" placeholder="Rechercher une recette, un ingredient, ..." >
                     <button id="header-search-close-button" class="header__container__search__box__button__close">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
@@ -45,14 +41,10 @@
                     </button>
                 </div>
             </div>
-
         </div>
-
     </header>
-
     <!-- MAIN⁡ -->
     <main id="main" class="main">
-
         <!-- filter -->
         <section class="main__filter">
             <!-- dropbox -->
@@ -60,9 +52,9 @@
                 <!-- dropdown__ingredients -->
                 <div id="dropdown-ingredients" class="dropdown">
                     <button class="dropdown__button">
-                       <span class="dropdown__button__title"> Ingrédients </span> 
-                       <!-- <i class="fa-solid fa-chevron-up dropdown__button__icon"></i> -->
-                       <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
+                        <span class="dropdown__button__title"> Ingrédients </span> 
+                        <!-- <i class="fa-solid fa-chevron-up dropdown__button__icon"></i> -->
+                        <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
                     </button>
                 </div>
                 <!-- dropdown__appliance -->
@@ -85,11 +77,7 @@
             <!-- recipes__result -->
             <div class="main__filter__recipes__result">
                 <h3 class="main__filter__recipes__result__text"> 50 recettes </h3>
-                <!-- <span id="recipes-result-number" class="main__filter__recipes__result__number"><strong>50</strong></span> -->
-                <!-- <strong id="recipes-result-number" class="main__filter__recipes__result__number">50</strong>
-                <strong id="recipes-result-text" class="main__filter__recipes__result__text">recettes</strong> -->
             </div>
-
         </section>
         <!-- tag -->
         <div class="tag__selected">
@@ -98,11 +86,39 @@
             <i class="fa-solid fa-circle-xmark"></i>
         </div>
         <!-- recipes -->
-        <div class ="recipes__box">
+        <div id="recipes__box" class ="recipes__box">
+            <article class="card">
+                <figure class="card__figure">
+                    <img src="assets/recettes/Recette01.jpg" class="card__figure__image" alt="morito coco">
+                    <figcaption class="card__figure__timing">10min</figcaption>
+                </figure>
+                <div class="card__content">
+                    <h2 class="content__title"> Limonade de Coco </h2>
+                    <h3 class="content__subtitle">recette</h3>
+                    <p class="content__description">kljjjjjjjhyigyiftofffffffkljhoiuuuuuuuuuuuuuuuuuuuuuuin,hjnuylm,h;kmutt np,p;pu,ohhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh;fffffffffffffuyl_èçy-è_</p>
+                    <h3 class="content__subtitle">ingrédients</h3>
+                    <ul class="content__list">
+                        <li class="content__list__item">
+                            <span class="content__list__item--ingredients">limonade</span>
+                            <span class="content__list__item--quantity">1</span>
+                        </li>
+                        <li class="content__list__item">
+                            <span class="content__list__item--ingredients">glacon</span>
+                            <span class="content__list__item--quantity">3</span>
+                        </li>
+                        <li class="content__list__item">
+                            <span class="content__list__item--ingredients">citron</span>
+                            <span class="content__list__item--quantity">5</span>
+                        </li>
+                        <li class="content__list__item">
+                            <span class="content__list__item--ingredients">menthe</span>
+                            <span class="content__list__item--quantity">4</span>
+                        </li>
+                    </ul>
+                </div>
+            </article>
         </div>
-  
     </main> 
 <script src="scripts/index.js" type="module"></script>
 </body>
-
 </html>
