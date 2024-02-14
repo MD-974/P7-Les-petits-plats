@@ -170,6 +170,8 @@ button{
 .recipes__box{
     display: flex;
     padding: 16px;
+    flex-wrap: wrap;
+    justify-content: space-around;
     background-color: aquamarine;
 }
 
@@ -180,11 +182,8 @@ button{
     width: 380px;
     height: 781px;
     border-radius: 21px;
+    margin: 1rem 0;
     background-color: white;
-    -webkit-border-radius: 21px;
-    -moz-border-radius: 21px;
-    -ms-border-radius: 21px;
-    -o-border-radius: 21px;
 }
 .card__figure{
     width: 100%;
@@ -235,10 +234,13 @@ button{
     color: rgba(122, 122, 122, 1);
 }
 .card__content__description{
-    height: 5.2rem;
+    font-size: 14px;
+    font-weight: 400;
+    height: 5.1rem;
     margin-top: 1rem;
     overflow: hidden;
     text-overflow: ellipsis;
+    color:rgba(27, 27, 27, 1)
 }
 .card__content__list{
     display: flex;
