@@ -50,12 +50,21 @@
             <!-- dropbox -->
             <div class="main__filter__dropbox">
                 <!-- dropdown__ingredients -->
-                <div id="dropdown-ingredients" class="dropdown">
+                <div id ="dropdown-ingredients" class="dropdown">
                     <button class="dropdown__button">
-                        <span class="dropdown__button__title"> Ingrédients </span> 
+                        <span class="dropdown__button__title"> Ingrédients </span>
                         <!-- <i class="fa-solid fa-chevron-up dropdown__button__icon"></i> -->
                         <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
                     </button>
+                    <div class="dropdown__content">
+                        <label for="dropdown-input--ingredients" class="sr-only">recherche ingrédients</label>
+                        <input type="text" id="dropdown-input--ingredients" class="dropdown__content__input">
+                        <button id="dropdown-input--magnifying-glass" class="dropdown__content__button__magnifying-glass">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <ul class="dropdown__content__list--filter"></ul>
+                        <ul class="dropdown__content__list--unfilter"></ul>
+                    </div>
                 </div>
                 <!-- dropdown__appliance -->
                 <div id="dropdown-appliance" class="dropdown">
@@ -64,6 +73,15 @@
                         <!-- <i class="fa-solid fa-chevron-up dropdown__button__icon"></i> -->
                         <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
                     </button>
+                    <div class="dropdown__content">
+                        <label for="dropdown-input--appliance" class="sr-only">recherche appareils</label>
+                        <input type="text" id="dropdown-input--appliance" class="dropdown__content__input">
+                        <button id="dropdown-input--magnifying-glass" class="dropdown__content__button__magnifying-glass">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <ul class="dropdown__content__list--filter"></ul>
+                        <ul class="dropdown__content__list--unfilter"></ul>
+                    </div>
                 </div>
                 <!-- dropdown__ustensils -->
                 <div id="dropdown-ustensils" class="dropdown">
@@ -72,6 +90,15 @@
                         <!-- <i class="fa-solid fa-chevron-up dropdown__button__icon"></i> -->
                         <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
                     </button>
+                    <div class="dropdown__content">
+                        <label for="dropdown-input--ustensils" class="sr-only">recherche ustensiles</label>
+                        <input type="text" id="dropdown-input--ustensils" class="dropdown__content__input">
+                        <button id="dropdown-input--magnifying-glass" class="dropdown__content__button__magnifying-glass">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <ul class="dropdown__content__list--filter"></ul>
+                        <ul class="dropdown__content__list--unfilter"></ul>
+                    </div>
                 </div>
             </div>
             <!-- recipes__result -->

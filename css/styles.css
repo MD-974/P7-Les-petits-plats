@@ -45,7 +45,7 @@ button{
     width: 55.625rem;
     height: 8.25rem;
     margin: 8.7rem auto 2rem auto;
-    color:#ffd15c;
+    color:rgba(255, 209, 92, 1);
     font-family: 'Anton', sans-serif;
     text-transform: uppercase;
     font-size: 2.75rem;
@@ -81,9 +81,16 @@ button{
     top: 0.7rem;
     right: 0.7rem;
     background-color: black;
-    color: white;
+    color:white;
     border: none;
     border-radius: 0.6875rem;
+    transition: 600ms;
+    
+}
+.header__container__search__box__button__magnifying-glass:hover{
+    background-color:rgba(255, 209, 91, 1);
+    color: black;
+    transition:600ms;
 }
 .header__container__search__box__button__close{
     position: absolute;
@@ -110,15 +117,21 @@ button{
     margin-right: auto;
 }
 .main__filter{
+    height: 64px;
     display: flex;
+    position: relative;
+    z-index: 1;
     padding-top: 2rem;
 }
 .main__filter__dropbox{
-    width: 140rem;
+    width: 80rem;
     height: 4rem;
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     justify-content:start;
+    position: absolute;
+    top:10px;
     gap: 2rem;
     background-color: cadetblue;
 }
@@ -126,11 +139,18 @@ button{
 .dropdown__button__title, .dropdown__button__icon{
     font-size: 1rem;
 }
+.dropdown{
+    display: flex;
+    flex-flow: column;
+    height : fit-content;
+    padding: 1rem;
+    border-radius: 0.6875rem;
+    border: none;
+    background-color: white;
+}
 .dropdown__button{
     display: flex;
-    padding: 1rem;
-    gap: 63px;
-    border-radius: 0.6875rem;
+    justify-content: space-between;
     border: none;
     background-color: white;
 }
@@ -138,11 +158,29 @@ button{
     font-weight: 500;
     color: black;
 }
-
+.dropdown__content{
+    height: 0;
+    transition: 300ms;
+    overflow: hidden;
+}
+.dropdown__content--active{
+    height: 255px;
+    transition: 300ms;
+}
+.dropdown__content__input{
+    width: 163px;
+    height: 36px;
+    margin-top: 16px;
+    position: relative;
+}
 /* recipes result */
 .main__filter__recipes__result{
+    height: 4rem;
     display: flex;
     align-items: center;
+    position: absolute;
+    right: 0;
+    top: 10px;
     background-color: burlywood;
 }
 .main__filter__recipes__result__text{

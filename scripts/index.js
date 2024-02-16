@@ -1,5 +1,4 @@
 import { recipes } from '../data/recipes.js'
-
 // Creation de la fonction pour afficher les recettes
 document.addEventListener('DOMContentLoaded', function () {
   const recipesBox = document.getElementById('recipes__box')
@@ -75,4 +74,25 @@ document.addEventListener('DOMContentLoaded', function () {
     recipesBox.appendChild(article)
     // console.log(recipesBox)
   }
+})
+
+// Creation de la fonction pour ouvrir et fermer les dropdowns
+const dropdownsButtons = document.querySelectorAll('.dropdown__button')
+// parcourir tous les dropdowns et ajouter l'event sur le dropdown cliqué
+dropdownsButtons.forEach((dropdownBtn) => {
+  dropdownBtn.addEventListener('click', () => {
+    // Lorsque l'utilisateur clique sur le bouton, afficher le contenu du dropdown
+    const currentDropdownContent = dropdownBtn.nextElementSibling
+    // Si le dropdown est déjà ouvert, pouvoir le refermer
+    if (currentDropdownContent.classList.contains('dropdown__content--active')) {
+      currentDropdownContent.classList.remove('dropdown__content--active')
+    } else {
+      // Fermer tous les dropdowns
+      document.querySelectorAll('.dropdown__content').forEach((dropdownContent) => {
+        dropdownContent.classList.remove('dropdown__content--active')
+      })
+      // Ouvrir le dropdown actuel
+      currentDropdownContent.classList.add('dropdown__content--active')
+    }
+  })
 })
