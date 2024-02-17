@@ -1,12 +1,6 @@
 import { recipes } from '../data/recipes.js'
 import { getAllGlobalLists, getAllUnfilters } from './dropdowns.js'
 
-// const ingredients = getAllIngredients(recipes)
-// // console.log(ingredients)
-// const appliances = getAllAppliances(recipes)
-// // console.log(appliances)
-// const ustensils = getAllUstensils(recipes)
-// // console.log(ustensils)
 // Pour afficher les 3 listes de recipes.js (ingredients, appliances, ustensils)
 const globalLists = getAllGlobalLists(recipes)
 // console.log(globalLists)

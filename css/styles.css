@@ -150,6 +150,9 @@ button{
     border: none;
     background-color: white;
 }
+.dropdown:hover{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
 .dropdown__button{
     display: flex;
     justify-content: space-between;
@@ -195,15 +198,42 @@ button{
 .dropdown__content__list__item--unfilter{
     font-size: 14px;
     font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     text-transform: capitalize;
-    min-height: 21px;
-    margin-top: 19px;
+    padding-left: 3px;
+    min-height: 40px;
     color: rgba(27, 27, 27, 1);
+    position: relative;
+    padding: 0;
 }
 .dropdown__content__list__item--unfilter:hover{
+    display: flex;
+    justify-content: space-around;
+    font-size: 16px;
+    transition: 400ms;
     background-color: rgba(255, 209, 91, 1);
     cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15)
 }
+.dropdown__content__list__item--filter{
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-transform: capitalize;
+    min-height: 40px;
+    color: rgba(122, 122, 122, 1);
+}
+.dropdown__content__list__item--filter:hover{
+    transition: 400ms;
+    background-color: rgba(255, 209, 91, 1);
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15)
+}
+
 
 /* recipes result */
 .main__filter__recipes__result{

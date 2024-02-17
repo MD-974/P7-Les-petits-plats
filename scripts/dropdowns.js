@@ -11,7 +11,7 @@ export function getAllGlobalLists (globalArray) {
   }
 }
 
-// Creation de la fonction pour afficher les listes dans les dropdowns
+// Creation de la fonction pour afficher les listes dans les dropdowns respectifs
 export function getAllUnfilters (globalLists) {
   // Creation de l element "li" pour afficher les ingredients dans "ul"
   const ulIngredientsUnfilter = document.getElementById('ingredients--unfilter')
@@ -39,11 +39,9 @@ export function getAllUnfilters (globalLists) {
   }
 }
 
-/**
- *----------------------------------------------------------------------------*
- *----------------- Recuperation des listes dans "recipes.js" ----------------*
- *----------------------------------------------------------------------------*
- */
+// *-------------------------------------------------------------------------*
+// *-------------- Recuperation des listes dans "recipes.js" ----------------*
+// *-------------------------------------------------------------------------*
 
 // fonction pour recuperer tous les ingredients dans "recipes.js"
 function getAllIngredients (globalArray) {
@@ -84,3 +82,59 @@ function getAllUstensils (globalArray) {
   }
   return ustensilsArray
 }
+
+// *-------------------------------------------------------------------------*
+// *------------------------ changement du chevron --------------------------*
+// *-------------------------------------------------------------------------*
+// chevron reste en up apres le click
+// const chevronRemove = document.querySelectorAll('.dropdown__button__icon')
+
+// chevronRemove.addEventListener('click', () => {
+//   chevronRemove.classList.toggle('fa-chevron-up')
+//   chevronRemove.classList.toggle('fa-chevron-down')
+// })
+// console.log(chevronRemove)
+
+// chevron passe de down a up mais bug si je change de dropdown
+// const dropdownIcons = document.querySelectorAll('.dropdown__button__icon')
+
+// dropdownIcons.forEach((chevronRemove) => {
+//   chevronRemove.addEventListener('click', () => {
+//     chevronRemove.classList.toggle('fa-chevron-up')
+//     chevronRemove.classList.toggle('fa-chevron-down')
+//   })
+// })
+
+// bugg encore
+// const dropdownIcons = document.querySelectorAll('.dropdown__button__icon')
+
+// dropdownIcons.forEach((chevronRemove) => {
+//   chevronRemove.addEventListener('click', () => {
+//     dropdownIcons.forEach((icon) => {
+//       if (icon !== chevronRemove && icon.classList.contains('fa-chevron-up')) {
+//         icon.classList.toggle('fa-chevron-up')
+//         icon.classList.toggle('fa-chevron-down')
+//       }
+//     })
+//     chevronRemove.classList.toggle('fa-chevron-up')
+//     chevronRemove.classList.toggle('fa-chevron-down')
+//   })
+// })
+const dropdownChevronsButtons = document.querySelectorAll('.dropdown__button')
+const dropdownIcons = document.querySelectorAll('.dropdown__button__icon')
+
+dropdownChevronsButtons.forEach((button) => {
+  button.addEventListener('click', (event) => {
+    const chevronIcon = event.target.closest('.dropdown__button').querySelector('.dropdown__button__icon')
+    dropdownIcons.forEach((icon) => {
+      if (icon !== chevronIcon && icon.classList.contains('fa-chevron-up')) {
+        icon.classList.toggle('fa-chevron-up')
+        icon.classList.toggle('fa-chevron-down')
+      }
+    })
+    chevronIcon.classList.toggle('fa-chevron-up')
+    chevronIcon.classList.toggle('fa-chevron-down')
+  })
+})
+console.log(dropdownChevronsButtons)
+console.log(dropdownIcons)
