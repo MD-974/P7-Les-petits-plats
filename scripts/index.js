@@ -1,5 +1,20 @@
 import { recipes } from '../data/recipes.js'
-// Creation de la fonction pour afficher les recettes
+import { getAllGlobalLists, getAllUnfilters } from './dropdowns.js'
+
+// const ingredients = getAllIngredients(recipes)
+// // console.log(ingredients)
+// const appliances = getAllAppliances(recipes)
+// // console.log(appliances)
+// const ustensils = getAllUstensils(recipes)
+// // console.log(ustensils)
+// Pour afficher les 3 listes de recipes.js (ingredients, appliances, ustensils)
+const globalLists = getAllGlobalLists(recipes)
+// console.log(globalLists)
+
+// Afficher une liste parmi les 3 selon le dropdown ouvert
+getAllUnfilters(globalLists)
+
+// Creation pour afficher les recettes
 document.addEventListener('DOMContentLoaded', function () {
   const recipesBox = document.getElementById('recipes__box')
   for (const recipe of recipes) {
@@ -76,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 })
 
-// Creation de la fonction pour ouvrir et fermer les dropdowns
+// Creation pour ouvrir et fermer les dropdowns
 const dropdownsButtons = document.querySelectorAll('.dropdown__button')
 // parcourir tous les dropdowns et ajouter l'event sur le dropdown cliqué
 dropdownsButtons.forEach((dropdownBtn) => {

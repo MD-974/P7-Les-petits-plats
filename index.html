@@ -57,13 +57,14 @@
                         <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
                     </button>
                     <div class="dropdown__content">
-                        <label for="dropdown-input--ingredients" class="sr-only">recherche ingrédients</label>
-                        <input type="text" id="dropdown-input--ingredients" class="dropdown__content__input">
-                        <button id="dropdown-input--magnifying-glass" class="dropdown__content__button__magnifying-glass">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
+                        <div class="dropdown__content__box__input">
+                            <label for="dropdown-input--ingredients" class="sr-only">recherche ingrédients</label>
+                            <input type="text" id="dropdown-input--ingredients" class="dropdown__content__input">
+                            <i class="fa-solid fa-xmark dropdown__content__input__close"></i>
+                            <i class="fa-solid fa-magnifying-glass dropdown__content__input__glass"></i>
+                        </div>
                         <ul class="dropdown__content__list--filter"></ul>
-                        <ul class="dropdown__content__list--unfilter"></ul>
+                        <ul  id ="ingredients--unfilter" class="dropdown__content__list--unfilter"></ul>
                     </div>
                 </div>
                 <!-- dropdown__appliance -->
@@ -74,13 +75,14 @@
                         <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
                     </button>
                     <div class="dropdown__content">
-                        <label for="dropdown-input--appliance" class="sr-only">recherche appareils</label>
-                        <input type="text" id="dropdown-input--appliance" class="dropdown__content__input">
-                        <button id="dropdown-input--magnifying-glass" class="dropdown__content__button__magnifying-glass">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
+                        <div class="dropdown__content__box__input">
+                            <label for="dropdown-input--appliance" class="sr-only">recherche appareils</label>
+                            <input type="text" id="dropdown-input--appliance" class="dropdown__content__input">
+                            <i class="fa-solid fa-xmark dropdown__content__input__close"></i>
+                            <i class="fa-solid fa-magnifying-glass dropdown__content__input__glass"></i>
+                        </div>
                         <ul class="dropdown__content__list--filter"></ul>
-                        <ul class="dropdown__content__list--unfilter"></ul>
+                        <ul id="appliance--unfilter" class="dropdown__content__list--unfilter"></ul>
                     </div>
                 </div>
                 <!-- dropdown__ustensils -->
@@ -91,13 +93,14 @@
                         <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
                     </button>
                     <div class="dropdown__content">
-                        <label for="dropdown-input--ustensils" class="sr-only">recherche ustensiles</label>
-                        <input type="text" id="dropdown-input--ustensils" class="dropdown__content__input">
-                        <button id="dropdown-input--magnifying-glass" class="dropdown__content__button__magnifying-glass">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
+                        <div class="dropdown__content__box__input">
+                            <label for="dropdown-input--ustensils" class="sr-only">recherche Ustensiles</label>
+                            <input type="text" id="dropdown-input--ustensils" class="dropdown__content__input">
+                            <i class="fa-solid fa-xmark dropdown__content__input__close"></i>
+                            <i class="fa-solid fa-magnifying-glass dropdown__content__input__glass"></i>
+                        </div>
                         <ul class="dropdown__content__list--filter"></ul>
-                        <ul class="dropdown__content__list--unfilter"></ul>
+                        <ul id="ustensils--unfilter"  class="dropdown__content__list--unfilter"></ul>
                     </div>
                 </div>
             </div>
@@ -113,38 +116,7 @@
             <i class="fa-solid fa-circle-xmark"></i>
         </div>
         <!-- recipes -->
-        <div id="recipes__box" class ="recipes__box">
-            <!-- <article class="card">
-                <figure class="card__figure">
-                    <img src="assets/recettes/Recette01.webp" class="card__figure__image" alt="morito coco">
-                    <figcaption class="card__figure__timing">10min</figcaption>
-                </figure>
-                <div class="card__content">
-                    <h2 class="card__content__title"> Limonade de Coco </h2>
-                    <h3 class="card__content__subtitle">recette</h3>
-                    <p class="card__content__description">kljjjjjjjhyigyiftofffffffkljhoiuuuuuuuuuuuuuuuuuuuuuuin,hjnuylm,h;kmutt np,p;pu,ohhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh;fffffffffffffuyl_èçy-è_</p>
-                    <h3 class="card__content__subtitle">ingrédients</h3>
-                    <ul class="card__content__list">
-                        <li class="card__content__list__item">
-                            <span class="card__content__list__item--ingredients">limonade</span>
-                            <span class="card__content__list__item--quantity">1</span>
-                        </li>
-                        <li class="card__content__list__item">
-                            <span class="card__content__list__item--ingredients">glacon</span>
-                            <span class="card__content__list__item--quantity">3</span>
-                        </li>
-                        <li class="card__content__list__item">
-                            <span class="card__content__list__item--ingredients">citron</span>
-                            <span class="card__content__list__item--quantity">5</span>
-                        </li>
-                        <li class="card__content__list__item">
-                            <span class="card__content__list__item--ingredients">menthe</span>
-                            <span class="card__content__list__item--quantity">4</span>
-                        </li>
-                    </ul>
-                </div>
-            </article> -->
-        </div>
+        <div id="recipes__box" class ="recipes__box"></div>
     </main> 
 <script src="scripts/index.js" type="module"></script>
 </body>
