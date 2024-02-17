@@ -2,7 +2,7 @@
  * Retourne un objet contenant toutes les listes globales.
  * @param {Array} globalArray - le tableau global à partir duquel extraire les listes
  * @return {Object} un objet contenant des ingrédients, des appareils et des ustensiles
- */
+*/
 export function getAllGlobalLists (globalArray) {
   return {
     ingredients: getAllIngredients(globalArray),
@@ -10,6 +10,40 @@ export function getAllGlobalLists (globalArray) {
     ustensils: getAllUstensils(globalArray)
   }
 }
+
+// Creation de la fonction pour afficher les listes dans les dropdowns
+export function getAllUnfilters (globalLists) {
+  // Creation de l element "li" pour afficher les ingredients dans "ul"
+  const ulIngredientsUnfilter = document.getElementById('ingredients--unfilter')
+  for (let i = 0; i < globalLists.ingredients.length; i++) {
+    const liIngredinentsUnfilter = document.createElement('li')
+    liIngredinentsUnfilter.classList.add('dropdown__content__list__item--unfilter')
+    liIngredinentsUnfilter.textContent = globalLists.ingredients[i]
+    ulIngredientsUnfilter.appendChild(liIngredinentsUnfilter)
+  }
+  // Creation de l element "li" pour afficher les appareils dans "ul"
+  const ulAppliancesUnfilter = document.getElementById('appliances--unfilter')
+  for (let i = 0; i < globalLists.appliances.length; i++) {
+    const liAppliancesUnfilter = document.createElement('li')
+    liAppliancesUnfilter.classList.add('dropdown__content__list__item--unfilter')
+    liAppliancesUnfilter.textContent = globalLists.appliances[i]
+    ulAppliancesUnfilter.appendChild(liAppliancesUnfilter)
+  }
+  // Creation de l element "li" pour afficher les ustenciles dans "ul"
+  const ulUstensilsUnfilter = document.getElementById('ustensils--unfilter')
+  for (let i = 0; i < globalLists.ustensils.length; i++) {
+    const liUstensilsUnfilter = document.createElement('li')
+    liUstensilsUnfilter.classList.add('dropdown__content__list__item--unfilter')
+    liUstensilsUnfilter.textContent = globalLists.ustensils[i]
+    ulUstensilsUnfilter.appendChild(liUstensilsUnfilter)
+  }
+}
+
+/**
+ *----------------------------------------------------------------------------*
+ *----------------- Recuperation des listes dans "recipes.js" ----------------*
+ *----------------------------------------------------------------------------*
+ */
 
 // fonction pour recuperer tous les ingredients dans "recipes.js"
 function getAllIngredients (globalArray) {
@@ -50,16 +84,3 @@ function getAllUstensils (globalArray) {
   }
   return ustensilsArray
 }
-
-/**
- * Récupère tous les éléments non filtrés et crée un élément de liste pour chacun.
- * @param {Array} globalArray - le tableau contenant tous les éléments non filtrés
- * @return {}
- */
-// export function getAllUnfilters (globalArray) {
-//   // console.log(globalArray)
-//   const ulIngredients = document.getElementById('ingredients--unfilter')
-//   const listIngredients = document.createElement('li')
-//   listIngredients.classList.add('dropdown__content__list--unfilter__item')
-//   ulIngredients.appendchild(listIngredients)
-// }
