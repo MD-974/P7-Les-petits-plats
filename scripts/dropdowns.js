@@ -1,41 +1,33 @@
+import { generateUnfilterList } from './fonctions.js'
 /**
- * Retourne un objet contenant toutes les listes globales.
- * @param {Array} globalArray - le tableau global à partir duquel extraire les listes
- * @return {Object} un objet contenant des ingrédients, des appareils et des ustensiles
-*/
-export function getAllGlobalLists (globalArray) {
-  return {
-    ingredients: getAllIngredients(globalArray),
-    appliances: getAllAppliances(globalArray),
-    ustensils: getAllUstensils(globalArray)
-  }
+ * Retourne un objet contenant toutes les listes globales a partir du tableau de recettes donné.
+ * @param {Array} arrayRecipes - Le tableau de recettes à partir duquel on va recuperer les listes globales.
+ * @return {Object} L'objet contenant toutes les listes globales.
+ */
+export function getAllGlobalLists (arrayRecipes) {
+  const globalArray = {}
+  globalArray.allRecipes = arrayRecipes
+  globalArray.ingredients = getAllIngredients(arrayRecipes)
+  globalArray.appliances = getAllAppliances(arrayRecipes)
+  globalArray.ustensils = getAllUstensils(arrayRecipes)
+  return globalArray
 }
 
 // Creation de la fonction pour afficher les listes dans les dropdowns respectifs
-export function getAllUnfilters (globalLists) {
-  // Creation de l element "li" pour afficher les ingredients dans "ul"
-  const ulIngredientsUnfilter = document.getElementById('ingredients--unfilter')
-  for (let i = 0; i < globalLists.ingredients.length; i++) {
-    const liIngredinentsUnfilter = document.createElement('li')
-    liIngredinentsUnfilter.classList.add('dropdown__content__list__item--unfilter')
-    liIngredinentsUnfilter.textContent = globalLists.ingredients[i]
-    ulIngredientsUnfilter.appendChild(liIngredinentsUnfilter)
-  }
-  // Creation de l element "li" pour afficher les appareils dans "ul"
-  const ulAppliancesUnfilter = document.getElementById('appliances--unfilter')
-  for (let i = 0; i < globalLists.appliances.length; i++) {
-    const liAppliancesUnfilter = document.createElement('li')
-    liAppliancesUnfilter.classList.add('dropdown__content__list__item--unfilter')
-    liAppliancesUnfilter.textContent = globalLists.appliances[i]
-    ulAppliancesUnfilter.appendChild(liAppliancesUnfilter)
-  }
-  // Creation de l element "li" pour afficher les ustenciles dans "ul"
-  const ulUstensilsUnfilter = document.getElementById('ustensils--unfilter')
-  for (let i = 0; i < globalLists.ustensils.length; i++) {
-    const liUstensilsUnfilter = document.createElement('li')
-    liUstensilsUnfilter.classList.add('dropdown__content__list__item--unfilter')
-    liUstensilsUnfilter.textContent = globalLists.ustensils[i]
-    ulUstensilsUnfilter.appendChild(liUstensilsUnfilter)
+export function displayAllUnfilters (globalLists, type = null) {
+  if (type === null) {
+    // Creation de l element "li" pour afficher les ingredients dans "ul"
+    const ulIngredientsUnfilter = document.getElementById('ingredients--unfilter')
+    generateUnfilterList(globalLists.ingredients, ulIngredientsUnfilter)
+    // Creation de l element "li" pour afficher les appareils dans "ul"
+    const ulAppliancesUnfilter = document.getElementById('appliances--unfilter')
+    generateUnfilterList(globalLists.appliances, ulAppliancesUnfilter)
+    // Creation de l element "li" pour afficher les ustenciles dans "ul"
+    const ulUstensilsUnfilter = document.getElementById('ustensils--unfilter')
+    generateUnfilterList(globalLists.ustensils, ulUstensilsUnfilter)
+  } else {
+    const ulNewUnfilter = document.getElementById(type + '--unfilter')
+    generateUnfilterList(globalLists.stockFilterList, ulNewUnfilter)
   }
 }
 
@@ -86,6 +78,7 @@ function getAllUstensils (globalArray) {
 // *-------------------------------------------------------------------------*
 // *------------------------ changement du chevron --------------------------*
 // *-------------------------------------------------------------------------*
+
 // chevron reste en up apres le click
 // const chevronRemove = document.querySelectorAll('.dropdown__button__icon')
 
@@ -120,21 +113,27 @@ function getAllUstensils (globalArray) {
 //     chevronRemove.classList.toggle('fa-chevron-down')
 //   })
 // })
+
 const dropdownChevronsButtons = document.querySelectorAll('.dropdown__button')
 const dropdownIcons = document.querySelectorAll('.dropdown__button__icon')
 
+// Pour chaque bouton dropdownChevronsButtons
 dropdownChevronsButtons.forEach((button) => {
+  // Ajouter un écouteur d'événements pour le clic
   button.addEventListener('click', (event) => {
+    // Trouver l'icon de chevron du bouton cliqué
     const chevronIcon = event.target.closest('.dropdown__button').querySelector('.dropdown__button__icon')
+    // Pour chaque icon dropdownIcons
     dropdownIcons.forEach((icon) => {
+      // Si l'icon n'est pas l'icon de chevron actuelle et qu'elle a la classe 'fa-chevron-up'
       if (icon !== chevronIcon && icon.classList.contains('fa-chevron-up')) {
+        // Basculer la class de l'icon entre 'fa-chevron-up' et 'fa-chevron-down'
         icon.classList.toggle('fa-chevron-up')
         icon.classList.toggle('fa-chevron-down')
       }
     })
+    // Basculer la class de l'icon chevron actuelle entre 'fa-chevron-up' et 'fa-chevron-down'
     chevronIcon.classList.toggle('fa-chevron-up')
     chevronIcon.classList.toggle('fa-chevron-down')
   })
 })
-console.log(dropdownChevronsButtons)
-console.log(dropdownIcons)

@@ -1,12 +1,19 @@
 import { recipes } from '../data/recipes.js'
-import { getAllGlobalLists, getAllUnfilters } from './dropdowns.js'
+import { getAllGlobalLists, displayAllUnfilters } from './dropdowns.js'
+import { filterList } from './fonctions.js'
+export let globalLists = {
+  ingredients: [],
+  appliances: [],
+  ustensils: []
+}
 
+const recipesBase = JSON.parse(JSON.stringify(recipes))
 // Pour afficher les 3 listes de recipes.js (ingredients, appliances, ustensils)
-const globalLists = getAllGlobalLists(recipes)
+globalLists = getAllGlobalLists(recipesBase)
 // console.log(globalLists)
 
 // Afficher une liste parmi les 3 selon le dropdown ouvert
-getAllUnfilters(globalLists)
+displayAllUnfilters(globalLists)
 
 // Creation pour afficher les recettes
 document.addEventListener('DOMContentLoaded', function () {
@@ -50,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ingredients = document.createElement('ul')
     ingredients.setAttribute('class', 'card__content__list')
     title.textContent = recipe.name
+
     // Boucle pour ajouter les ingrédients
     for (const ingredient of recipe.ingredients) {
     //   console.log(ingredient)
@@ -102,6 +110,22 @@ dropdownsButtons.forEach((dropdownBtn) => {
       })
       // Ouvrir le dropdown actuel
       currentDropdownContent.classList.add('dropdown__content--active')
+    }
+  })
+})
+
+const filterImputs = document.querySelectorAll('.dropdown__content__input')
+filterImputs.forEach((input) => {
+  input.addEventListener('input', (event) => {
+    console.log(event.target.value.length)
+    if (event.target.value.length >= 3) {
+      // console.log(event.target.value)
+      const type = input.id.split('--')[1]
+      // console.log(inputActive)
+      // console.log(globalLists)
+      globalLists.stockFilterList = filterList(type, event.target.value, globalLists)
+      // console.log(globalLists)
+      displayAllUnfilters(globalLists, type)
     }
   })
 })
