@@ -18,6 +18,7 @@ button{
     cursor: pointer;
 }
 
+
 /* ---------- HEADER ---------- */
 /* => height */
 .header, .header__banner, .header__container{
@@ -54,7 +55,8 @@ button{
     text-align: center;
 }
 
-/* search box */
+
+/*----------- search box -----------*/
 .header__container__search__box{
     display: flex;
     width: 59.625rem;
@@ -106,7 +108,8 @@ button{
     background-color:transparent;
 }
 
-/* dropbox */
+
+/*------------ dropbox -----------*/
 /* => align-items: center */
 .main__filter__dropbox, .dropdown__button, .main__filter__recipes__result{
     align-items: center;
@@ -186,10 +189,14 @@ button{
     position: relative;
 }
 .dropdown__content__input__close{
+    display: none;
     position: absolute;
     top: 50%;
     right: 20%; 
     color:rgba(122, 122, 122, 1);   
+}
+.dropdown__content__input__close--visible{
+    display: block;
 }
 .dropdown__content__input__glass{
     position: absolute;
@@ -237,7 +244,7 @@ button{
 }
 
 
-/* recipes result */
+/*---------- recipes result ----------*/
 .main__filter__recipes__result{
     height: 4rem;
     display: flex;
@@ -257,7 +264,6 @@ button{
     justify-content: flex-end;
     gap: 0.2rem;
 }
-
 /* tag */
 .tag__selected{
     height: 4.6875rem;
@@ -267,7 +273,6 @@ button{
     /* display: none; */
     background-color: blueviolet;
 }
-
 /*recipes box */
 .recipes__box{
     display: flex;
@@ -277,7 +282,8 @@ button{
     /* background-color: aquamarine; */
 }
 
-/* card */
+
+/*--------------- card --------------*/
 .card{
     display: flex;
     flex-direction: column;
@@ -317,7 +323,6 @@ button{
     right: 22px;
     background-color: #ffd15c;
 }
-
 /* card content */
 .card__content{
     width: 100%;

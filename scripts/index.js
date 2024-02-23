@@ -1,6 +1,7 @@
 import { recipes } from '../data/recipes.js'
 import { getAllGlobalLists, displayAllUnfilters } from './dropdowns.js'
-import { filterList } from './fonctions.js'
+import { filterList, generateUnfilterList } from './fonctions.js'
+
 export let globalLists = {
   ingredients: [],
   appliances: [],
@@ -10,12 +11,12 @@ export let globalLists = {
 const recipesBase = JSON.parse(JSON.stringify(recipes))
 // Pour afficher les 3 listes de recipes.js (ingredients, appliances, ustensils)
 globalLists = getAllGlobalLists(recipesBase)
-// console.log(globalLists)
-
 // Afficher une liste parmi les 3 selon le dropdown ouvert
 displayAllUnfilters(globalLists)
 
-// Creation pour afficher les recettes
+// *---------------------------------------------*
+// *---- Creation pour afficher les recettes ----*
+// *---------------------------------------------*
 document.addEventListener('DOMContentLoaded', function () {
   const recipesBox = document.getElementById('recipes__box')
   for (const recipe of recipes) {
@@ -77,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
       listItem.appendChild(spanQuantityUnit)
       ingredients.appendChild(listItem)
     }
+
     // Ajout des enfants "appendChild"
     article.appendChild(figure)
     article.appendChild(contentCard)
@@ -87,13 +89,15 @@ document.addEventListener('DOMContentLoaded', function () {
     contentCard.appendChild(description)
     contentCard.appendChild(subtitleIngredient)
     contentCard.appendChild(ingredients)
+
     // Generation du contenu dans le DOM
     recipesBox.appendChild(article)
-    // console.log(recipesBox)
   }
 })
 
-// Creation pour ouvrir et fermer les dropdowns
+// *------------------------------------------------------*
+// *---- Creation pour ouvrir et fermer les dropdowns ----*
+// *------------------------------------------------------*
 const dropdownsButtons = document.querySelectorAll('.dropdown__button')
 // parcourir tous les dropdowns et ajouter l'event sur le dropdown cliqué
 dropdownsButtons.forEach((dropdownBtn) => {
@@ -114,18 +118,34 @@ dropdownsButtons.forEach((dropdownBtn) => {
   })
 })
 
+// *--------------------------------------------------------------*
+// *---- filtrer les recettes suivant la valeur dans un input ----*
+// *--------------------------------------------------------------*
 const filterImputs = document.querySelectorAll('.dropdown__content__input')
 filterImputs.forEach((input) => {
   input.addEventListener('input', (event) => {
     console.log(event.target.value.length)
+    // Obtenir le type à partir de l'ID de l'input
+    const type = input.id.split('--')[1]
+    // Si longueur de la valeur input est supérieure ou égale à 3
     if (event.target.value.length >= 3) {
-      // console.log(event.target.value)
-      const type = input.id.split('--')[1]
-      // console.log(inputActive)
-      // console.log(globalLists)
+    // Ajouter une class pour rendre visible l'élément croix de l input
+      event.target.nextElementSibling.classList.add('dropdown__content__input__close--visible')
+      // Mettre à jour la liste de filtres globale
       globalLists.stockFilterList = filterList(type, event.target.value, globalLists)
       // console.log(globalLists)
+      // Afficher tous les éléments non filtrés
       displayAllUnfilters(globalLists, type)
+    }
+    // Si longueur de la valeur input est inférieure à 3
+    if (event.target.value.length < 3) {
+      // Supprimer la classe pour rendre invisible l'élément croix de l'input
+      event.target.nextElementSibling.classList.remove('dropdown__content__input__close--visible')
+      // Effacer la liste des éléments non filtrés
+      const targetNode = event.target.parentNode.nextElementSibling.nextElementSibling
+      // console.log({ targetNode })
+      targetNode.innerHTML = ''
+      generateUnfilterList(globalLists[type], targetNode)
     }
   })
 })

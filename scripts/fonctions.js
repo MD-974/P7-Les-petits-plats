@@ -5,7 +5,6 @@
  * @param {object} globalArray - Le tableau global à filtrer
  * @return {array} Le tableau filtré en fonction du type et de la valeur
  */
-
 export const filterList = (type, value, globalArray) => {
   console.log(type)
   console.log(globalArray)
@@ -16,6 +15,12 @@ export const filterList = (type, value, globalArray) => {
   return tempArray
 }
 
+/**
+ * Génère une liste non filtrée dans noeud HTML spécifié en utilisant la liste fournie.
+ * @param {Array} listToUse - liste à utiliser pour générer la liste non filtrée.
+ * @param {HTMLElement} htmlNode - noeud HTML dans lequel la liste non filtrée sera générée.
+ * @return {void}
+ */
 export const generateUnfilterList = (listToUse, htmlNode) => {
   htmlNode.innerHTML = ''
   for (let i = 0; i < listToUse.length; i++) {

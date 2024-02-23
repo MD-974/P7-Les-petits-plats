@@ -13,7 +13,11 @@ export function getAllGlobalLists (arrayRecipes) {
   return globalArray
 }
 
-// Creation de la fonction pour afficher les listes dans les dropdowns respectifs
+/**
+ * Affiche tous les éléments non filtrés en fonction des listes globales et du type spécifié.
+ * @param {Object} globalLists - Les listes globales contenant les éléments à afficher.
+ * @param {string} type - Le type d'élément à afficher (par défaut, null).
+ */
 export function displayAllUnfilters (globalLists, type = null) {
   if (type === null) {
     // Creation de l element "li" pour afficher les ingredients dans "ul"
@@ -26,6 +30,7 @@ export function displayAllUnfilters (globalLists, type = null) {
     const ulUstensilsUnfilter = document.getElementById('ustensils--unfilter')
     generateUnfilterList(globalLists.ustensils, ulUstensilsUnfilter)
   } else {
+    // Creation de l element "li" pour afficher les elements fitrers dans "ul" selon la value dans l'input selectionné
     const ulNewUnfilter = document.getElementById(type + '--unfilter')
     generateUnfilterList(globalLists.stockFilterList, ulNewUnfilter)
   }
@@ -34,7 +39,6 @@ export function displayAllUnfilters (globalLists, type = null) {
 // *-------------------------------------------------------------------------*
 // *-------------- Recuperation des listes dans "recipes.js" ----------------*
 // *-------------------------------------------------------------------------*
-
 // fonction pour recuperer tous les ingredients dans "recipes.js"
 function getAllIngredients (globalArray) {
   const ingredientsArray = []
@@ -78,7 +82,6 @@ function getAllUstensils (globalArray) {
 // *-------------------------------------------------------------------------*
 // *------------------------ changement du chevron --------------------------*
 // *-------------------------------------------------------------------------*
-
 // chevron reste en up apres le click
 // const chevronRemove = document.querySelectorAll('.dropdown__button__icon')
 
@@ -113,10 +116,8 @@ function getAllUstensils (globalArray) {
 //     chevronRemove.classList.toggle('fa-chevron-down')
 //   })
 // })
-
 const dropdownChevronsButtons = document.querySelectorAll('.dropdown__button')
 const dropdownIcons = document.querySelectorAll('.dropdown__button__icon')
-
 // Pour chaque bouton dropdownChevronsButtons
 dropdownChevronsButtons.forEach((button) => {
   // Ajouter un écouteur d'événements pour le clic
