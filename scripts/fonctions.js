@@ -1,3 +1,5 @@
+import { globalLists } from './index.js'
+
 /**
  * Filtre le tableau global en fonction du type et de la valeur donnés.
  * @param {string} type - Le type de filtrage (ingrédients, appareils, ustensiles)
@@ -28,5 +30,12 @@ export const generateUnfilterList = (listToUse, htmlNode) => {
     li.classList.add('dropdown__content__list__item--unfilter')
     li.textContent = listToUse[i]
     htmlNode.appendChild(li)
+    // Ajout d'un ecouteur d'evenement pour afficher au click le 'li' cliquer
+    li.addEventListener('click', (event) => {
+      globalLists.ingredientsFilter.push(event.target.textContent)
+      globalLists.appliancesFilter.push(event.target.textContent)
+      globalLists.ustensilsFilter.push(event.target.textContent)
+      console.log(globalLists)
+    })
   }
 }
