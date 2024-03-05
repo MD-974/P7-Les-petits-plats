@@ -1,4 +1,4 @@
-import { filterList, generateUnfilterList } from './fonctions.js'
+import { filterList } from './fonctions.js'
 import { globalLists } from './index.js'
 
 /**
@@ -55,23 +55,28 @@ export function displayAllDropdownsLists (globalLists, type) {
       listFilterToDisplay = globalLists.ustensilsFilter
       break
     default:
+      listFilterToDisplay = []
       break
   }
-  // Afficher les listes
-  listUnfilterToDisplay.forEach((element) => {
-    console.log(element)
+  // Afficher les listes filtrées
+  listFilterToDisplay.forEach((element) => {
     const li = document.createElement('li')
     li.textContent = element
-    if (listFilterToDisplay.includes(element)) {
-      // pour afficher les listes filtrées
-      li.classList.add('dropdown__content__list__item--filter')
-      ulFiltered.appendChild(li)
-    } else {
-      // pour afficher les listes non filtrées
-      li.classList.add('dropdown__content__list__item--unfilter')
-      ulUnfiltered.appendChild(li)
-    }
+    li.classList.add('dropdown__content__list__item--filter')
+    ulFiltered.appendChild(li)
   })
+
+  // Afficher les listes non filtrées si les listes filtrées sont vides
+  if (listFilterToDisplay.length === 0) {
+    listUnfilterToDisplay.forEach((element) => {
+      const li = document.createElement('li')
+      li.textContent = element
+      if (!listFilterToDisplay.includes(element)) {
+        li.classList.add('dropdown__content__list__item--unfilter')
+        ulUnfiltered.appendChild(li)
+      }
+    })
+  }
 }
 
 // *-------------------------------------------------------------------------*
@@ -175,23 +180,26 @@ filterImputs.forEach((input) => {
     console.log(event.target.value.length)
     // Obtenir le type à partir de l'ID de l'input
     const type = input.id.split('--')[1]
+    // On vide le tout
+    document.getElementById(type + '--unfilter').innerHTML = ''
+    document.getElementById(type + '--filter').innerHTML = ''
     // Si longueur de la valeur input est supérieure ou égale à 3
     if (event.target.value.length >= 3) {
     // Ajouter une class pour rendre visible l'élément croix de l input
       event.target.nextElementSibling.classList.add('dropdown__content__input__close--visible')
       // Mettre à jour la liste de filtres globale
-      globalLists.stockFilterList = filterList(type, event.target.value, globalLists)
-      // console.log(globalLists)
+      globalLists[`${type}Filter`] = filterList(type, event.target.value, globalLists)
+      // Afficher la liste filtrée
+      displayAllDropdownsLists(globalLists, type)
     }
     // Si longueur de la valeur input est inférieure à 3
     if (event.target.value.length < 3) {
       // Supprimer la classe pour rendre invisible l'élément croix de l'input
       event.target.nextElementSibling.classList.remove('dropdown__content__input__close--visible')
-      // Effacer la liste des éléments non filtrés
-      const targetNode = event.target.parentNode.nextElementSibling.nextElementSibling
-      // console.log({ targetNode })
-      targetNode.innerHTML = ''
-      displayAllDropdownsLists(globalLists[type], targetNode)
+      // On vide la liste des éléments filtrés
+      globalLists[`${type}Filter`] = []
+      // Ré-afficher la liste non filtrée
+      displayAllDropdownsLists(globalLists, type)
     }
   })
 })

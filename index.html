@@ -1,140 +1,226 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- ⁡⁢⁢⁢lien font manrope and anton -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope&display=swap"
+      rel="stylesheet"
+    />
     <!-- ⁡⁢⁢⁢lien font-awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <!-- lien css -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css" />
     <!-- titre -->
     <title>Les petits plats</title>
-</head>
-<body class="body">
+  </head>
+  <body class="body">
     <!-- HEADER -->
     <header id="header" class="header">
-        <!-- banner -->
-        <img src="assets/logo/banner.webp" class="header__banner" alt="image d'une assiette plein de nourriture">
-        <h1 class="sr-only" >Les petits plats</h1>
-        <!-- container -->
-        <div class="header__container">
-            <!-- logo -->
-            <div class="header__container__logo">
-                <img src="assets/logo/petit-plat.svg" class="header__container__logo__image" alt="logo du site les petits plats">
-                <img src="assets/logo/petit-plat-sign.svg" class="header__container__logo__image--sign" alt="icone du site les petits plats" >
-            </div>
-            <!-- search -->
-            <div class="header__container__search">
-                <h2 class="header__container__search__title">cherchez parmi plus de 1500 recettes <br> du quotidien, simples et délicieuses</h2>
-                <div class="header__container__search__box">
-                    <label for="input_search" class="sr-only">rechercher principale</label>
-                    <input type="text" id="input_search" class="header__container__search__box__input" placeholder="Rechercher une recette, un ingredient, ..." >
-                    <button id="header-search-close-button" class="header__container__search__box__button__close">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                    <button id="header-search-magnifying-glass-button" class="header__container__search__box__button__magnifying-glass">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </div>
-            </div>
+      <!-- banner -->
+      <img
+        src="assets/logo/banner.webp"
+        class="header__banner"
+        alt="image d'une assiette plein de nourriture"
+      />
+      <h1 class="sr-only">Les petits plats</h1>
+      <!-- container -->
+      <div class="header__container">
+        <!-- logo -->
+        <div class="header__container__logo">
+          <img
+            src="assets/logo/petit-plat.svg"
+            class="header__container__logo__image"
+            alt="logo du site les petits plats"
+          />
+          <img
+            src="assets/logo/petit-plat-sign.svg"
+            class="header__container__logo__image--sign"
+            alt="icone du site les petits plats"
+          />
         </div>
+        <!-- search -->
+        <div class="header__container__search">
+          <h2 class="header__container__search__title">
+            cherchez parmi plus de 1500 recettes <br />
+            du quotidien, simples et délicieuses
+          </h2>
+          <div class="header__container__search__box">
+            <label for="input_search" class="sr-only"
+              >rechercher principale</label
+            >
+            <input
+              type="text"
+              id="input_search"
+              class="header__container__search__box__input"
+              placeholder="Rechercher une recette, un ingredient, ..."
+            />
+            <button
+              id="header-search-close-button"
+              class="header__container__search__box__button__close"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+            <button
+              id="header-search-magnifying-glass-button"
+              class="header__container__search__box__button__magnifying-glass"
+            >
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
+      </div>
     </header>
     <!-- MAIN⁡ -->
     <main id="main" class="main">
-        <!-- filter -->
-        <section class="main__filter">
-            <!-- dropbox -->
-            <div class="main__filter__dropbox">
-                <!-- dropdown__ingredients -->
-                <div id ="dropdown-ingredients" class="dropdown">
-                    <!-- button -->
-                    <button class="dropdown__button">
-                        <span class="dropdown__button__title"> Ingrédients </span>
-                        <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
-                    </button>
-                    <!-- content -->
-                    <div class="dropdown__content">
-                        <!-- box__input -->
-                        <div class="dropdown__content__box__input">
-                            <label for="dropdown-input--ingredients" class="sr-only">recherche ingrédients</label>
-                            <input type="text" id="dropdown-input--ingredients" class="dropdown__content__input">
-                            <i class="fa-solid fa-xmark dropdown__content__input__close "></i>
-                            <i class="fa-solid fa-magnifying-glass dropdown__content__input__glass"></i>
-                        </div>
-                        <ul id ="ingredients--filter" class="dropdown__content__list--filter"></ul>
-                        <ul id ="ingredients--unfilter" class="dropdown__content__list--unfilter"></ul>
-                        <!-- <div class="dropdown__content__list">
-                                pour faire apparaitre une barre de scroll
-                                mettre dedans les ul
-                        </div> -->
-                        <!-- list -->
-                    </div>
-                </div>
-                <!-- dropdown__appliance -->
-                <div id="dropdown-appliance" class="dropdown">
-                    <!-- button -->
-                    <button class="dropdown__button">
-                        <span class="dropdown__button__title">Appareils</span>
-                        <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
-                    </button>
-                    <!-- content -->
-                    <div class="dropdown__content">
-                        <!-- box__input -->
-                        <div class="dropdown__content__box__input">
-                            <label for="dropdown-input--appliances" class="sr-only">recherche appareils</label>
-                            <input type="text" id="dropdown-input--appliances" class="dropdown__content__input">
-                            <i class="fa-solid fa-xmark dropdown__content__input__close "></i>
-                            <i class="fa-solid fa-magnifying-glass dropdown__content__input__glass"></i>
-                        </div>
-                        <!-- list -->
-                        <ul id ="appliances--filter" class="dropdown__content__list--filter"></ul>
-                        <ul id ="appliances--unfilter" class="dropdown__content__list--unfilter"></ul>
-                        <!-- <div class="dropdown__content__list">
-                                pour faire apparaitre une barre de scroll
-                                mettre dedans les ul
-                        </div> -->
-                    </div>
-                </div>
-                <!-- dropdown__ustensils -->
-                <div id="dropdown-ustensils" class="dropdown">
-                    <!-- button -->
-                    <button class="dropdown__button">
-                        <span class="dropdown__button__title">Ustensiles</span>
-                        <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
-                    </button>
-                    <!-- content -->
-                    <div class="dropdown__content">
-                        <!-- box__input -->
-                        <div class="dropdown__content__box__input">
-                            <label for="dropdown-input--ustensils" class="sr-only">recherche Ustensiles</label>
-                            <input type="text" id="dropdown-input--ustensils" class="dropdown__content__input">
-                            <i class="fa-solid fa-xmark dropdown__content__input__close "></i>
-                            <i class="fa-solid fa-magnifying-glass dropdown__content__input__glass"></i>
-                        </div>
-                        <!-- list -->
-                        <ul id ="ustensils--filter" class="dropdown__content__list--filter"></ul>
-                        <ul id ="ustensils--unfilter"  class="dropdown__content__list--unfilter"></ul>
-                        <!-- <div class="dropdown__content__list">
-                                pour faire apparaitre une barre de scroll
-                                mettre dedans les ul
-                        </div> -->
-                    </div>
-                </div>
+      <!-- filter -->
+      <section class="main__filter">
+        <!-- dropbox -->
+        <div class="main__filter__dropbox">
+          <!-- dropdown__ingredients -->
+          <div id="dropdown-ingredients" class="dropdown">
+            <!-- button -->
+            <button class="dropdown__button">
+              <span class="dropdown__button__title"> Ingrédients </span>
+              <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
+            </button>
+            <!-- content -->
+            <div class="dropdown__content">
+              <!-- box__input -->
+              <div class="dropdown__content__box__input">
+                <label for="dropdown-input--ingredients" class="sr-only"
+                  >recherche ingrédients</label
+                >
+                <input
+                  type="text"
+                  id="dropdown-input--ingredients"
+                  class="dropdown__content__input"
+                />
+                <i
+                  class="fa-solid fa-xmark dropdown__content__input__close"
+                ></i>
+                <i
+                  class="fa-solid fa-magnifying-glass dropdown__content__input__glass"
+                ></i>
+              </div>
+              <!-- <ul id ="ingredients--filter" class="dropdown__content__list--filter"></ul>
+                        <ul id ="ingredients--unfilter" class="dropdown__content__list--unfilter"></ul> -->
+              <div class="dropdown__content__list">
+                <ul
+                  id="ingredients--filter"
+                  class="dropdown__content__list--filter"
+                ></ul>
+                <ul
+                  id="ingredients--unfilter"
+                  class="dropdown__content__list--unfilter"
+                ></ul>
+                <!-- pour faire apparaitre une barre de scroll
+                                mettre dedans les ul -->
+              </div>
+              <!-- list -->
             </div>
-            <!-- recipes__result -->
-            <div class="main__filter__recipes__result">
-                <h3 class="main__filter__recipes__result__text"> 50 recettes </h3>
+          </div>
+          <!-- dropdown__appliance -->
+          <div id="dropdown-appliance" class="dropdown">
+            <!-- button -->
+            <button class="dropdown__button">
+              <span class="dropdown__button__title">Appareils</span>
+              <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
+            </button>
+            <!-- content -->
+            <div class="dropdown__content">
+              <!-- box__input -->
+              <div class="dropdown__content__box__input">
+                <label for="dropdown-input--appliances" class="sr-only"
+                  >recherche appareils</label
+                >
+                <input
+                  type="text"
+                  id="dropdown-input--appliances"
+                  class="dropdown__content__input"
+                />
+                <i
+                  class="fa-solid fa-xmark dropdown__content__input__close"
+                ></i>
+                <i
+                  class="fa-solid fa-magnifying-glass dropdown__content__input__glass"
+                ></i>
+              </div>
+              <!-- list -->
+              <ul
+                id="appliances--filter"
+                class="dropdown__content__list--filter"
+              ></ul>
+              <ul
+                id="appliances--unfilter"
+                class="dropdown__content__list--unfilter"
+              ></ul>
+              <!-- <div class="dropdown__content__list">
+                                pour faire apparaitre une barre de scroll
+                                mettre dedans les ul
+                        </div> -->
             </div>
-        </section>
-        <!-- tag -->
-        <div class="tag__selected"></div>
-        <!-- recipes -->
-        <div id="recipes__box" class ="recipes__box"></div>
-    </main> 
-<script src="./scripts/index.js" type="module"></script>
-</body>
+          </div>
+          <!-- dropdown__ustensils -->
+          <div id="dropdown-ustensils" class="dropdown">
+            <!-- button -->
+            <button class="dropdown__button">
+              <span class="dropdown__button__title">Ustensiles</span>
+              <i class="fa-solid fa-chevron-down dropdown__button__icon"></i>
+            </button>
+            <!-- content -->
+            <div class="dropdown__content">
+              <!-- box__input -->
+              <div class="dropdown__content__box__input">
+                <label for="dropdown-input--ustensils" class="sr-only"
+                  >recherche Ustensiles</label
+                >
+                <input
+                  type="text"
+                  id="dropdown-input--ustensils"
+                  class="dropdown__content__input"
+                />
+                <i
+                  class="fa-solid fa-xmark dropdown__content__input__close"
+                ></i>
+                <i
+                  class="fa-solid fa-magnifying-glass dropdown__content__input__glass"
+                ></i>
+              </div>
+              <!-- list -->
+              <ul
+                id="ustensils--filter"
+                class="dropdown__content__list--filter"
+              ></ul>
+              <ul
+                id="ustensils--unfilter"
+                class="dropdown__content__list--unfilter"
+              ></ul>
+              <!-- <div class="dropdown__content__list">
+                                pour faire apparaitre une barre de scroll
+                                mettre dedans les ul
+                        </div> -->
+            </div>
+          </div>
+        </div>
+        <!-- recipes__result -->
+        <div class="main__filter__recipes__result">
+          <h3 class="main__filter__recipes__result__text">50 recettes</h3>
+        </div>
+      </section>
+      <!-- tag -->
+      <div class="tag__selected"></div>
+      <!-- recipes -->
+      <div id="recipes__box" class="recipes__box"></div>
+    </main>
+    <script src="./scripts/index.js" type="module"></script>
+  </body>
 </html>

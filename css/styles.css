@@ -212,10 +212,10 @@ button{
 }
 
 /* dropdown list */
-/* .dropdown__content__list{
+.dropdown__content__list{
     height: 200px;
     overflow-y: auto;
-} */
+}
 .dropdown__content__list__item--unfilter{
     font-size: 14px;
     font-weight: 400;

@@ -1,17 +1,10 @@
 import { recipes } from '../data/recipes.js'
 import { getAllGlobalLists, displayAllDropdownsLists } from './dropdowns.js'
 
-export let globalLists = {
-  ingredients: [],
-  appliances: [],
-  ustensils: []
-}
-
-const recipesBase = JSON.parse(JSON.stringify(recipes))
 // Pour afficher les 3 listes de recipes.js (ingredients, appliances, ustensils)
-globalLists = getAllGlobalLists(recipesBase)
-// Afficher une liste parmi les 3 selon le dropdown ouvert
+export const globalLists = getAllGlobalLists(recipes)
 
+// Afficher une liste parmi les 3 selon le dropdown ouvert
 displayAllDropdownsLists(globalLists, 'ingredients')
 displayAllDropdownsLists(globalLists, 'appliances')
 displayAllDropdownsLists(globalLists, 'ustensils')

@@ -8,8 +8,8 @@ import { globalLists } from './index.js'
  * @return {array} Le tableau filtré en fonction du type et de la valeur
  */
 export const filterList = (type, value, globalArray) => {
-  console.log(type)
-  console.log(globalArray)
+  // console.log(type)
+  // console.log(globalArray)
   // creation tableau temporaire suivant le type de filtrage
   let tempArray = globalArray[type]
   tempArray = tempArray.filter(filter => filter.includes(value))
