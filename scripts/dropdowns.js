@@ -27,14 +27,14 @@ export function getAllGlobalLists (arrayRecipes) {
 }
 
 /**
- * Display all dropdown lists based on the global lists and specified type.
- * @param {Object} globalLists - the global lists containing ingredients, appliances, and ustensils
- * @param {string} type - the type of list to display (ingredients, appliances, ustensils)
- * @param {boolean} [isFilter=false] - flag to indicate if the lists are being filtered
- */
+* Affiche toutes les listes déroulantes en fonction des listes globales et du type spécifié.
+* @param {Object} globalLists - les listes globales contenant les ingrédients, les appareils et les ustensiles
+* @param {string} type - le type de liste à afficher (ingrédients, appareils, ustensiles)
+* @param {boolean} [isFilter=false] - indicateur pour savoir si les listes sont filtrées
+*/
 export function displayAllDropdownsLists (globalLists, type, isFilter = false) {
-  console.log(globalLists)
-  console.log(type)
+  // console.log(globalLists)
+  // console.log(type)
   // Obtenir les éléments ul non filtrés et filtrés
   const ulUnfiltered = document.getElementById(type + '--unfilter')
   const ulFiltered = document.getElementById(type + '--filter')
@@ -101,6 +101,7 @@ function getAllIngredients (globalArray) {
   }
   return ingredientsArray
 }
+
 // fonction pour recuperer tous les appareils dans "recipes.js"
 function getAllAppliances (globalArray) {
   const appliancesArray = []
@@ -111,6 +112,7 @@ function getAllAppliances (globalArray) {
   }
   return appliancesArray
 }
+
 // fonction pour recuperer tous les ustensiles dans "recipes.js"
 function getAllUstensils (globalArray) {
   const ustensilsArray = []
