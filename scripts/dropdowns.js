@@ -27,11 +27,12 @@ export function getAllGlobalLists (arrayRecipes) {
 }
 
 /**
- * Affiche toutes les listes déroulantes en fonction des globalLists et du type
- * @param {Object} globalLists - Objet contenant toutes les listes
- * @param {string} type - Type de liste à afficher
+ * Display all dropdown lists based on the global lists and specified type.
+ * @param {Object} globalLists - the global lists containing ingredients, appliances, and ustensils
+ * @param {string} type - the type of list to display (ingredients, appliances, ustensils)
+ * @param {boolean} [isFilter=false] - flag to indicate if the lists are being filtered
  */
-export function displayAllDropdownsLists (globalLists, type) {
+export function displayAllDropdownsLists (globalLists, type, isFilter = false) {
   console.log(globalLists)
   console.log(type)
   // Obtenir les éléments ul non filtrés et filtrés
@@ -39,7 +40,9 @@ export function displayAllDropdownsLists (globalLists, type) {
   const ulFiltered = document.getElementById(type + '--filter')
   // Initialiser les variables pour contenir les listes à afficher
   let listUnfilterToDisplay = []
+  ulUnfiltered.innerHTML = ''
   let listFilterToDisplay = []
+  ulFiltered.innerHTML = ''
   // Déterminer les listes à afficher en fonction du type
   switch (type) {
     case 'ingredients':
@@ -65,9 +68,8 @@ export function displayAllDropdownsLists (globalLists, type) {
     li.classList.add('dropdown__content__list__item--filter')
     ulFiltered.appendChild(li)
   })
-
   // Afficher les listes non filtrées si les listes filtrées sont vides
-  if (listFilterToDisplay.length === 0) {
+  if (listFilterToDisplay.length === 0 && !isFilter) {
     listUnfilterToDisplay.forEach((element) => {
       const li = document.createElement('li')
       li.textContent = element
@@ -175,6 +177,9 @@ dropdownsButtons.forEach((dropdownBtn) => {
 // *--------- filtrer les recettes suivant la valeur dans un input ----------*
 // *-------------------------------------------------------------------------*
 const filterImputs = document.querySelectorAll('.dropdown__content__input')
+
+// const eventInputs = new Event('input')
+
 filterImputs.forEach((input) => {
   input.addEventListener('input', (event) => {
     console.log(event.target.value.length)
@@ -190,7 +195,7 @@ filterImputs.forEach((input) => {
       // Mettre à jour la liste de filtres globale
       globalLists[`${type}Filter`] = filterList(type, event.target.value, globalLists)
       // Afficher la liste filtrée
-      displayAllDropdownsLists(globalLists, type)
+      displayAllDropdownsLists(globalLists, type, true)
     }
     // Si longueur de la valeur input est inférieure à 3
     if (event.target.value.length < 3) {
@@ -213,6 +218,8 @@ closeIconsDropdown.forEach((icon) => {
   icon.addEventListener('click', (event) => {
     event.target.previousElementSibling.value = ''
     event.target.classList.remove('dropdown__content__input__close--visible')
-    displayAllDropdownsLists(globalLists, event.target.id.split('--')[1])
+    const type = event.target.previousElementSibling.id.split('--')[1]
+    globalLists[`${type}Filter`] = []
+    displayAllDropdownsLists(globalLists, type)
   })
 })
