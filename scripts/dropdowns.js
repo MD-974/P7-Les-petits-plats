@@ -32,7 +32,7 @@ export function getAllGlobalLists (arrayRecipes) {
 * @param {string} type - le type de liste à afficher (ingrédients, appareils, ustensiles)
 * @param {boolean} [isFilter=false] - indicateur pour savoir si les listes sont filtrées
 */
-export function displayAllDropdownsLists (globalLists, type, isFilter = false) {
+export function displayAllDropdownsLists (globalLists, type, isFilterInput = false) {
   // console.log(globalLists)
   // console.log(type)
   // Obtenir les éléments ul non filtrés et filtrés
@@ -41,8 +41,10 @@ export function displayAllDropdownsLists (globalLists, type, isFilter = false) {
   // Initialiser les variables pour contenir les listes à afficher
   let listUnfilterToDisplay = []
   ulUnfiltered.innerHTML = ''
+
   let listFilterToDisplay = []
   ulFiltered.innerHTML = ''
+
   // Déterminer les listes à afficher en fonction du type
   switch (type) {
     case 'ingredients':
@@ -61,24 +63,13 @@ export function displayAllDropdownsLists (globalLists, type, isFilter = false) {
       listFilterToDisplay = []
       break
   }
-  // Afficher les listes filtrées
-  listFilterToDisplay.forEach((element) => {
+  const listToDisplay = isFilterInput ? listFilterToDisplay : listUnfilterToDisplay
+  listToDisplay.forEach((element) => {
     const li = document.createElement('li')
     li.textContent = element
-    li.classList.add('dropdown__content__list__item--filter')
-    ulFiltered.appendChild(li)
+    li.classList.add('dropdown__content__list__item--unfilter')
+    ulUnfiltered.appendChild(li)
   })
-  // Afficher les listes non filtrées si les listes filtrées sont vides
-  if (listFilterToDisplay.length === 0 && !isFilter) {
-    listUnfilterToDisplay.forEach((element) => {
-      const li = document.createElement('li')
-      li.textContent = element
-      if (!listFilterToDisplay.includes(element)) {
-        li.classList.add('dropdown__content__list__item--unfilter')
-        ulUnfiltered.appendChild(li)
-      }
-    })
-  }
 }
 
 // *-------------------------------------------------------------------------*
@@ -224,4 +215,10 @@ closeIconsDropdown.forEach((icon) => {
     globalLists[`${type}Filter`] = []
     displayAllDropdownsLists(globalLists, type)
   })
+})
+
+// *-------------------------------------------------------------------------*
+const itemSelected = document.querySelectorAll('dropdown__content__list__item--unfilter')
+
+itemSelected.addEventListener('click', () => {
 })
