@@ -11,9 +11,6 @@
     padding-top: 0.5rem;
     background-color: #e5e7eb;
 }
-/* .font-anton{
-    font-family: 'Anton', sans-serif;
-} */
 button{
     cursor: pointer;
 }
@@ -198,12 +195,6 @@ button{
 .dropdown__content__input__close--visible{
     display: block;
 }
-/* [type="search"] {
-    appearance: textfield;
-    -webkit-appearance: textfield;
-    box-sizing: content-box;
-    -webkit-box-sizing: content-box;
-} */
 .dropdown__content__input__glass{
     position: absolute;
     top: 50%;
@@ -232,7 +223,6 @@ button{
 }
 .dropdown__content__list__item--unfilter:hover{
     display: flex;
-     /* justify-content: space-around; */
     font-size: 16px; 
     transition: 400ms;
     background-color: rgba(255, 209, 91, 1);
@@ -241,17 +231,15 @@ button{
 }
 .dropdown__content__list__item--filter{
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 900;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    padding: 0 10px;
+    justify-content: space-between;
     text-transform: capitalize;
     min-height: 40px;
-    color: rgba(122, 122, 122, 1);
-}
-.dropdown__content__list__item--filter:hover{
-    transition: 400ms;
     background-color: rgba(255, 209, 91, 1);
+    color: black;
     cursor: pointer;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15)
 }
@@ -277,25 +265,51 @@ button{
     justify-content: flex-end;
     gap: 0.2rem;
 }
-/* tag */
-.tag__selected{
-    height: 4.6875rem;
+.tag__selected {
+    display: flex;
+    flex-wrap: wrap;
+}
+.filter__tags{
+    width: 160px;
+    height: 53px;
+    font-size: 14px;
+    font-weight: 900;
     display: flex;
     flex-direction: row;
+    padding: 0 10px;
+    margin-right: 10px;
+    margin-top: 10px;
     align-items: center;
-    /* display: none; */
-    background-color: blueviolet;
+    justify-content: space-between;
+    text-transform: capitalize;
+    border-radius: 10px;
+    min-height: 40px;
+    background-color: rgba(255, 209, 91, 1);
+    color: black;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
 }
-/*recipes box */
+.tags__close{
+    padding: 5px 7px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: 300ms;
+}
+.tags__close:hover{
+    border-radius: 50px;
+    background-color:black;
+    color:rgba(255, 209, 91, 1);
+    transition: 300ms;
+}
+
+
+/*----------- recipes box -----------*/
 .recipes__box{
     display: flex;
-    padding: 16px;
+    padding: 16px 0;
     flex-wrap: wrap;
-    justify-content: space-around;
-    /* background-color: aquamarine; */
+    justify-content: space-between;
+
 }
-
-
 /*--------------- card --------------*/
 .card{
     display: flex;

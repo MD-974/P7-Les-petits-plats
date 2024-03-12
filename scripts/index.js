@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const time = document.createElement('figcaption')
     time.classList.add('class', 'card__figure__timing')
     time.textContent = recipe.time + 'min'
-    // Creation de l element "div" pourle contenu de la card
+    // Creation de l element "div" pour le contenu de la card
     const contentCard = document.createElement('div')
     contentCard.setAttribute('class', 'card__content')
     // Creation de l element "h2" pour le titre

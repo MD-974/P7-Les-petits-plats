@@ -1,4 +1,5 @@
 import { globalLists } from './index.js'
+import { displayAllDropdownsLists } from './dropdowns.js'
 
 /**
  * Filtre le tableau global en fonction du type et de la valeur donnés.
@@ -8,8 +9,6 @@ import { globalLists } from './index.js'
  * @return {array} Le tableau filtré en fonction du type et de la valeur
  */
 export const filterList = (type, value, globalArray) => {
-  // console.log(type)
-  // console.log(globalArray)
   // creation tableau temporaire suivant le type de filtrage
   let tempArray = globalArray[type]
   tempArray = tempArray.filter(filter => filter.includes(value))
@@ -38,4 +37,51 @@ export const generateUnfilterList = (listToUse, htmlNode) => {
       console.log(globalLists)
     })
   }
+}
+
+/**
+ * Fonction pour afficher les tags de filtre.
+ * @param {Object} globalLists - les listes globales
+ * @param {string} type - le type de tag de filtre
+ * @return {HTMLElement} l'élément de balise de filtre créé
+ */
+export const displayFilterTags = (globalLists) => {
+  // console.log(displayFilterTags)
+  const filterTagSelected = document.querySelector('.tag__selected')
+  filterTagSelected.innerHTML = ''
+  const allTags = globalLists.ingredientsSelected.concat(globalLists.appliancesSelected, globalLists.ustensilsSelected, globalLists.searchBarSelected)
+  console.log(allTags)
+  allTags.forEach((element) => {
+    console.log(element)
+    const filterTagsContainers = document.createElement('div')
+    filterTagsContainers.classList.add('filter__tags__container')
+    const tagsClose = document.createElement('span')
+    tagsClose.classList.add('fa-solid', 'fa-xmark')
+    tagsClose.classList.add('tags__close')
+    const filterTags = document.createElement('span')
+    filterTags.classList.add('filter__tags')
+    filterTags.textContent = element
+    filterTagSelected.appendChild(filterTagsContainers)
+    filterTagsContainers.appendChild(filterTags)
+    filterTags.appendChild(tagsClose)
+    // tagsClose.addEventListener('click', () => {
+    //   globalLists.ingredientsSelected = globalLists.ingredientsSelected.filter((tag) => tag !== element)
+    //   globalLists.appliancesSelected = globalLists.appliancesSelected.filter((tag) => tag !== element)
+    //   globalLists.ustensilsSelected = globalLists.ustensilsSelected.filter((tag) => tag !== element)
+    //   globalLists.searchBarSelected = globalLists.searchBarSelected.filter((tag) => tag !== element)
+    //   displayFilterTags(globalLists)
+    // })
+    // Ajout d'un ecouteur d'evenement pour supprimer au click le 'li' cliquer
+    tagsClose.addEventListener('click', (event) => {
+      globalLists.ingredientsSelected = globalLists.ingredientsSelected.filter((tag) => tag !== element)
+      globalLists.appliancesSelected = globalLists.appliancesSelected.filter((tag) => tag !== element)
+      globalLists.ustensilsSelected = globalLists.ustensilsSelected.filter((tag) => tag !== element)
+      globalLists.searchBarSelected = globalLists.searchBarSelected.filter((tag) => tag !== element)
+      displayFilterTags(globalLists)
+      displayAllDropdownsLists(globalLists, 'ingredients')
+      displayAllDropdownsLists(globalLists, 'appliances')
+      displayAllDropdownsLists(globalLists, 'ustensils')
+      displayAllDropdownsLists(globalLists, 'searchBar')
+    })
+  })
 }

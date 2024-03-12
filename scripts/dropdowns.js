@@ -1,4 +1,4 @@
-import { filterList } from './fonctions.js'
+import { filterList, displayFilterTags } from './fonctions.js'
 import { globalLists } from './index.js'
 
 /**
@@ -22,6 +22,14 @@ export function getAllGlobalLists (arrayRecipes) {
   globalArray.appliancesFilter = []
   // Liste vide pour filtrer les ustensiles
   globalArray.ustensilsFilter = []
+  // contient la liste des recherches selectionnees
+  globalArray.searchBarSelected = []
+  // contient la liste des ingredients selectionnes
+  globalArray.ingredientsSelected = []
+  // contient la liste des appareils selectionnes
+  globalArray.appliancesSelected = []
+  // contient la liste des ustensiles selectionnes
+  globalArray.ustensilsSelected = []
   // Retourne l'objet globalArray contenant les listes globales
   return globalArray
 }
@@ -66,9 +74,36 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
   const listToDisplay = isFilterInput ? listFilterToDisplay : listUnfilterToDisplay
   listToDisplay.forEach((element) => {
     const li = document.createElement('li')
+    li.dataset.type = type
     li.textContent = element
-    li.classList.add('dropdown__content__list__item--unfilter')
-    ulUnfiltered.appendChild(li)
+    if (globalLists[type + 'Selected'].includes(element)) {
+      console.log('ok')
+      li.classList.add('dropdown__content__list__item--filter')
+      const tagsClose = document.createElement('span')
+      tagsClose.classList.add('fa-solid', 'fa-xmark')
+      tagsClose.classList.add('tags__close')
+      ulFiltered.appendChild(li)
+      li.appendChild(tagsClose)
+      // Ajout d'un ecouteur d'evenement pour supprimer au click le 'li' cliquer
+      tagsClose.addEventListener('click', (event) => {
+        console.log(event.currentTarget.parentElement.textContent + ' ' + type)
+        globalLists[type + 'Selected'].splice(globalLists[type + 'Selected'].indexOf(event.target.parentElement.textContent), 1)
+        console.log(globalLists)
+        displayAllDropdownsLists(globalLists, type)
+        displayFilterTags(globalLists, type)
+      })
+    } else {
+      li.classList.add('dropdown__content__list__item--unfilter')
+      ulUnfiltered.appendChild(li)
+      // Ajout d'un ecouteur d'evenement pour afficher au clic le 'li' cliquer
+      li.addEventListener('click', (event) => {
+        console.log(event.currentTarget.textContent + ' ' + type)
+        globalLists[type + 'Selected'].push(event.target.textContent)
+        console.log(globalLists)
+        displayAllDropdownsLists(globalLists, type)
+        displayFilterTags(globalLists, type)
+      })
+    }
   })
 }
 
@@ -171,8 +206,6 @@ dropdownsButtons.forEach((dropdownBtn) => {
 // *-------------------------------------------------------------------------*
 const filterImputs = document.querySelectorAll('.dropdown__content__input')
 
-// const eventInputs = new Event('input')
-
 filterImputs.forEach((input) => {
   input.addEventListener('input', (event) => {
     console.log(event.target.value.length)
@@ -215,10 +248,4 @@ closeIconsDropdown.forEach((icon) => {
     globalLists[`${type}Filter`] = []
     displayAllDropdownsLists(globalLists, type)
   })
-})
-
-// *-------------------------------------------------------------------------*
-const itemSelected = document.querySelectorAll('dropdown__content__list__item--unfilter')
-
-itemSelected.addEventListener('click', () => {
 })
