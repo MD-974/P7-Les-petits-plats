@@ -1,13 +1,13 @@
-import { globalLists } from './index.js'
+import { globalLists, displayRecipesList } from './index.js'
 import { displayAllDropdownsLists } from './dropdowns.js'
 
-/**
- * Filtre le tableau global en fonction du type et de la valeur donnés.
- * @param {string} type - Le type de filtrage (ingrédients, appareils, ustensiles)
- * @param {string} value - La valeur à filtrer
- * @param {object} globalArray - Le tableau global à filtrer
- * @return {array} Le tableau filtré en fonction du type et de la valeur
- */
+/**************************************************************************************
+ * Filtre le tableau global en fonction du type et de la valeur donnés.              **
+ * @param {string} type - Le type de filtrage (ingrédients, appareils, ustensiles)   **
+ * @param {string} value - La valeur à filtrer                                       **
+ * @param {object} globalArray - Le tableau global à filtrer                         **
+ * @return {array} Le tableau filtré en fonction du type et de la valeur             **
+ *************************************************************************************/
 export const filterList = (type, value, globalArray) => {
   // creation tableau temporaire suivant le type de filtrage
   let tempArray = globalArray[type]
@@ -16,12 +16,12 @@ export const filterList = (type, value, globalArray) => {
   return tempArray
 }
 
-/**
- * Génère une liste non filtrée dans noeud HTML spécifié en utilisant la liste fournie.
- * @param {Array} listToUse - liste à utiliser pour générer la liste non filtrée.
- * @param {HTMLElement} htmlNode - noeud HTML dans lequel la liste non filtrée sera générée.
- * @return {void}
- */
+/***********************************************************************************************
+ * Génère une liste non filtrée dans noeud HTML spécifié en utilisant la liste fournie.       **
+ * @param {Array} listToUse - liste à utiliser pour générer la liste non filtrée.             **
+ * @param {HTMLElement} htmlNode - noeud HTML dans lequel la liste non filtrée sera générée.  **
+ * @return {void}                                                                             **
+ **********************************************************************************************/
 export const generateUnfilterList = (listToUse, htmlNode) => {
   htmlNode.innerHTML = ''
   for (let i = 0; i < listToUse.length; i++) {
@@ -39,12 +39,12 @@ export const generateUnfilterList = (listToUse, htmlNode) => {
   }
 }
 
-/**
- * Fonction pour afficher les tags de filtre.
- * @param {Object} globalLists - les listes globales
- * @param {string} type - le type de tag de filtre
- * @return {HTMLElement} l'élément de balise de filtre créé
- */
+/***************************************************************
+ * Fonction pour afficher les tags de filtre.                 **
+ * @param {Object} globalLists - les listes globales          **
+ * @param {string} type - le type de tag de filtre            **
+ * @return {HTMLElement} l'élément de balise de filtre créé   **
+ **************************************************************/
 export const displayFilterTags = (globalLists) => {
   // console.log(displayFilterTags)
   const filterTagSelected = document.querySelector('.tag__selected')
@@ -64,13 +64,6 @@ export const displayFilterTags = (globalLists) => {
     filterTagSelected.appendChild(filterTagsContainers)
     filterTagsContainers.appendChild(filterTags)
     filterTags.appendChild(tagsClose)
-    // tagsClose.addEventListener('click', () => {
-    //   globalLists.ingredientsSelected = globalLists.ingredientsSelected.filter((tag) => tag !== element)
-    //   globalLists.appliancesSelected = globalLists.appliancesSelected.filter((tag) => tag !== element)
-    //   globalLists.ustensilsSelected = globalLists.ustensilsSelected.filter((tag) => tag !== element)
-    //   globalLists.searchBarSelected = globalLists.searchBarSelected.filter((tag) => tag !== element)
-    //   displayFilterTags(globalLists)
-    // })
     // Ajout d'un ecouteur d'evenement pour supprimer au click le 'li' cliquer
     tagsClose.addEventListener('click', (event) => {
       globalLists.ingredientsSelected = globalLists.ingredientsSelected.filter((tag) => tag !== element)
@@ -81,7 +74,8 @@ export const displayFilterTags = (globalLists) => {
       displayAllDropdownsLists(globalLists, 'ingredients')
       displayAllDropdownsLists(globalLists, 'appliances')
       displayAllDropdownsLists(globalLists, 'ustensils')
-      displayAllDropdownsLists(globalLists, 'searchBar')
+      // displayAllDropdownsLists(globalLists, 'searchBar')
+      displayRecipesList(globalLists)
     })
   })
 }

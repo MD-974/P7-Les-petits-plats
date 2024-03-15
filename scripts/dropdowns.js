@@ -1,11 +1,11 @@
 import { filterList, displayFilterTags } from './fonctions.js'
-import { globalLists } from './index.js'
+import { globalLists, displayRecipesList } from './index.js'
 
-/**
- * Retourne un objet contenant toutes les listes globales a partir du tableau de recettes donné.
- * @param {Array} arrayRecipes - Le tableau de recettes à partir duquel on va recuperer les listes globales.
- * @return {Object} L'objet contenant toutes les listes globales.
- */
+/***************************************************************************************************************
+ * Retourne un objet contenant toutes les listes globales a partir du tableau de recettes donné.              **
+ * @param {Array} arrayRecipes - Le tableau de recettes à partir duquel on va recuperer les listes globales.  **
+ * @return {Object} L'objet contenant toutes les listes globales.                                             **
+ **************************************************************************************************************/
 export function getAllGlobalLists (arrayRecipes) {
   const globalArray = {}
   // Contient toutes les recettes
@@ -34,12 +34,12 @@ export function getAllGlobalLists (arrayRecipes) {
   return globalArray
 }
 
-/**
-* Affiche toutes les listes déroulantes en fonction des listes globales et du type spécifié.
-* @param {Object} globalLists - les listes globales contenant les ingrédients, les appareils et les ustensiles
-* @param {string} type - le type de liste à afficher (ingrédients, appareils, ustensiles)
-* @param {boolean} [isFilter=false] - indicateur pour savoir si les listes sont filtrées
-*/
+/***********************************************************************************************************************
+* Affiche toutes les listes déroulantes en fonction des listes globales et du type spécifié.                          **
+* @param {Object} globalLists - les listes globales contenant les ingrédients, les appareils et les ustensiles        **
+* @param {string} type - le type de liste à afficher (ingrédients, appareils, ustensiles)                             **
+* @param {boolean} [isFilter=false] - indicateur pour savoir si les listes sont filtrées                              **
+***********************************************************************************************************************/
 export function displayAllDropdownsLists (globalLists, type, isFilterInput = false) {
   // console.log(globalLists)
   // console.log(type)
@@ -48,10 +48,9 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
   const ulFiltered = document.getElementById(type + '--filter')
   // Initialiser les variables pour contenir les listes à afficher
   let listUnfilterToDisplay = []
-  ulUnfiltered.innerHTML = ''
-
+  ulUnfiltered.innerHTML = ' '
   let listFilterToDisplay = []
-  ulFiltered.innerHTML = ''
+  ulFiltered.innerHTML = ' '
 
   // Déterminer les listes à afficher en fonction du type
   switch (type) {
@@ -91,6 +90,7 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
         console.log(globalLists)
         displayAllDropdownsLists(globalLists, type)
         displayFilterTags(globalLists, type)
+        displayRecipesList(globalLists)
       })
     } else {
       li.classList.add('dropdown__content__list__item--unfilter')
@@ -102,6 +102,7 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
         console.log(globalLists)
         displayAllDropdownsLists(globalLists, type)
         displayFilterTags(globalLists, type)
+        displayRecipesList(globalLists)
       })
     }
   })
@@ -127,7 +128,6 @@ function getAllIngredients (globalArray) {
   }
   return ingredientsArray
 }
-
 // fonction pour recuperer tous les appareils dans "recipes.js"
 function getAllAppliances (globalArray) {
   const appliancesArray = []
@@ -138,7 +138,6 @@ function getAllAppliances (globalArray) {
   }
   return appliancesArray
 }
-
 // fonction pour recuperer tous les ustensiles dans "recipes.js"
 function getAllUstensils (globalArray) {
   const ustensilsArray = []
@@ -205,7 +204,6 @@ dropdownsButtons.forEach((dropdownBtn) => {
 // *--------- filtrer les recettes suivant la valeur dans un input ----------*
 // *-------------------------------------------------------------------------*
 const filterImputs = document.querySelectorAll('.dropdown__content__input')
-
 filterImputs.forEach((input) => {
   input.addEventListener('input', (event) => {
     console.log(event.target.value.length)

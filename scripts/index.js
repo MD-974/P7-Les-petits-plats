@@ -9,12 +9,42 @@ displayAllDropdownsLists(globalLists, 'ingredients')
 displayAllDropdownsLists(globalLists, 'appliances')
 displayAllDropdownsLists(globalLists, 'ustensils')
 
-// *---------------------------------------------*
-// *---- Creation pour afficher les recettes ----*
-// *---------------------------------------------*
-document.addEventListener('DOMContentLoaded', function () {
+// *----------------------------------------------------------*
+// *--------- fonction pour filtrer les recettes -------------*
+// *----------------------------------------------------------*
+/** Filtrer les recettes en fonction des ingrédients, appareils et ustensiles sélectionnés.
+* @param {Array} recipesFiltered - l'objet contenant les ingrédients, appareils et ustensiles sélectionnés
+* @return {Array} retourne les recettes filtrées à afficher
+*/
+function getRecipesToDisplay (recipesFiltered) {
+  return recipes.filter(recipe => {
+    if (
+      recipesFiltered.ingredientsSelected.length > 0 ||
+      recipesFiltered.appliancesSelected.length > 0 ||
+      recipesFiltered.ustensilsSelected.length > 0
+    ) {
+      if (recipesFiltered.ingredientsSelected.some(ingredient => recipe.ingredients.some(item => item.ingredient.toLowerCase() === ingredient))) {
+        return true
+      }
+      if (recipesFiltered.appliancesSelected.includes(recipe.appliance.toLowerCase())) {
+        return true
+      }
+      if (recipesFiltered.ustensilsSelected.some(ustensil => recipe.ustensils.includes(ustensil.toLowerCase()))) {
+        return true
+      }
+    } else {
+      return true
+    }
+  })
+}
+
+// *----------------------------------------------------------*
+// *------- fonction pour creer la liste des recettes --------*
+// *----------------------------------------------------------*
+export function displayRecipesList (recipesFiltered) {
   const recipesBox = document.getElementById('recipes__box')
-  for (const recipe of recipes) {
+  recipesBox.innerHTML = ''
+  for (const recipe of getRecipesToDisplay(recipesFiltered)) {
     // Creation de l element "article" pour la card
     const article = document.createElement('article')
     article.classList.add('class', 'card')
@@ -88,4 +118,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Generation du contenu dans le DOM
     recipesBox.appendChild(article)
   }
+}
+// *--------------------------------------------------------------------------------------------*
+// *-------------------------- affiche la liste de tout recettes --------------------------*
+// *--------------------------------------------------------------------------------------------*
+// Lors du chargement de la page
+document.addEventListener('DOMContentLoaded', function () {
+  // Affiche la liste des recettes en utilisant la variable globale globalLists
+  displayRecipesList(globalLists)
 })
