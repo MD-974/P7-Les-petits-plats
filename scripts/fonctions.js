@@ -72,10 +72,10 @@ export const displayFilterTags = (globalLists) => {
       globalLists.searchBarSelected = globalLists.searchBarSelected.filter((tag) => tag !== element)
       displayFilterTags(globalLists)
       displayRecipesList(globalLists)
+      // displaySearchBar(globalLists, 'searchBar')
       displayAllDropdownsLists(globalLists, 'ingredients')
       displayAllDropdownsLists(globalLists, 'appliances')
       displayAllDropdownsLists(globalLists, 'ustensils')
-      // displayAllDropdownsLists(globalLists, 'searchBar')
     })
   })
 }

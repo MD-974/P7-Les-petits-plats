@@ -1,5 +1,6 @@
 import { recipes } from '../data/recipes.js'
-import { getAllGlobalLists, displayAllDropdownsLists, updateRecipesCount } from './dropdowns.js'
+import { getAllGlobalLists, displayAllDropdownsLists } from './dropdowns.js'
+import { updateRecipesCount } from './fonctions.js'
 
 // Pour afficher les 3 listes de recipes.js (ingredients, appliances, ustensils)
 export const globalLists = getAllGlobalLists(recipes)
