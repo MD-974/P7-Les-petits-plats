@@ -1,6 +1,9 @@
 import { filterList, displayFilterTags } from './fonctions.js'
 import { globalLists, displayRecipesList } from './index.js'
 
+// Tableau des types
+const typesArray = ['ingredients', 'appliances', 'ustensils']
+
 /***************************************************************************************************************
  * Retourne un objet contenant toutes les listes globales a partir du tableau de recettes donné.              **
  * @param {Array} arrayRecipes - Le tableau de recettes à partir duquel on va recuperer les listes globales.  **
@@ -10,12 +13,14 @@ export function getAllGlobalLists (arrayRecipes) {
   const globalArray = {}
   // Contient toutes les recettes
   globalArray.allRecipes = arrayRecipes
+  // Contient les recettes à afficher
+  globalArray.recipesToDisplay = [...arrayRecipes]
   // Contient tous les ingrédients
-  globalArray.ingredients = getAllIngredients(arrayRecipes)
+  globalArray.ingredients = getAllIngredients(globalArray.recipesToDisplay)
   // Contient tous les appareils
-  globalArray.appliances = getAllAppliances(arrayRecipes)
+  globalArray.appliances = getAllAppliances(globalArray.recipesToDisplay)
   // Contient tous les ustensiles
-  globalArray.ustensils = getAllUstensils(arrayRecipes)
+  globalArray.ustensils = getAllUstensils(globalArray.recipesToDisplay)
   // Liste vide pour filtrer les ingrédients
   globalArray.ingredientsFilter = []
   // Liste vide pour filtrer les appareils
@@ -51,6 +56,11 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
   ulUnfiltered.innerHTML = ' '
   let listFilterToDisplay = []
   ulFiltered.innerHTML = ' '
+
+  // On regénère le contenu de chaque liste depuis les recettes à afficher
+  globalLists.ingredients = getAllIngredients(globalLists.recipesToDisplay)
+  globalLists.appliances = getAllAppliances(globalLists.recipesToDisplay)
+  globalLists.ustensils = getAllUstensils(globalLists.recipesToDisplay)
 
   // Déterminer les listes à afficher en fonction du type
   switch (type) {
@@ -88,9 +98,9 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
         console.log(event.currentTarget.parentElement.textContent + ' ' + type)
         globalLists[type + 'Selected'].splice(globalLists[type + 'Selected'].indexOf(event.target.parentElement.textContent), 1)
         console.log(globalLists)
-        displayAllDropdownsLists(globalLists, type)
-        displayFilterTags(globalLists, type)
         displayRecipesList(globalLists)
+        typesArray.forEach(tmpType => displayAllDropdownsLists(globalLists, tmpType))
+        displayFilterTags(globalLists, type)
       })
     } else {
       li.classList.add('dropdown__content__list__item--unfilter')
@@ -100,9 +110,9 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
         console.log(event.currentTarget.textContent + ' ' + type)
         globalLists[type + 'Selected'].push(event.target.textContent)
         console.log(globalLists)
-        displayAllDropdownsLists(globalLists, type)
-        displayFilterTags(globalLists, type)
         displayRecipesList(globalLists)
+        typesArray.forEach(tmpType => displayAllDropdownsLists(globalLists, tmpType))
+        displayFilterTags(globalLists, type)
       })
     }
   })
@@ -247,3 +257,9 @@ closeIconsDropdown.forEach((icon) => {
     displayAllDropdownsLists(globalLists, type)
   })
 })
+
+export function updateRecipesCount (globalLists) {
+  const recipesCount = globalLists.recipesToDisplay.length
+  const recipesNumbersSpan = document.getElementById('recipes__numbers')
+  recipesNumbersSpan.textContent = recipesCount
+}

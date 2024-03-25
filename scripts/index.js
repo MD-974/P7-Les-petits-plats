@@ -1,5 +1,5 @@
 import { recipes } from '../data/recipes.js'
-import { getAllGlobalLists, displayAllDropdownsLists } from './dropdowns.js'
+import { getAllGlobalLists, displayAllDropdownsLists, updateRecipesCount } from './dropdowns.js'
 
 // Pour afficher les 3 listes de recipes.js (ingredients, appliances, ustensils)
 export const globalLists = getAllGlobalLists(recipes)
@@ -9,32 +9,44 @@ displayAllDropdownsLists(globalLists, 'ingredients')
 displayAllDropdownsLists(globalLists, 'appliances')
 displayAllDropdownsLists(globalLists, 'ustensils')
 
-// *----------------------------------------------------------*
-// *--------- fonction pour filtrer les recettes -------------*
-// *----------------------------------------------------------*
-/** Filtrer les recettes en fonction des ingrédients, appareils et ustensiles sélectionnés.
-* @param {Array} recipesFiltered - l'objet contenant les ingrédients, appareils et ustensiles sélectionnés
-* @return {Array} retourne les recettes filtrées à afficher
-*/
-function getRecipesToDisplay (recipesFiltered) {
-  return recipes.filter(recipe => {
-    if (
-      recipesFiltered.ingredientsSelected.length > 0 ||
-      recipesFiltered.appliancesSelected.length > 0 ||
-      recipesFiltered.ustensilsSelected.length > 0
-    ) {
+function setRecipesToDisplay (recipesFiltered) {
+  recipesFiltered.recipesToDisplay = recipes.filter(recipe => {
+    const result = [false, false, false]
+
+    // Si le tableau des filtres contient un ou plusieurs ingrédients
+    if (recipesFiltered.ingredientsSelected.length > 0) {
+      // Si la recette contient cet ingrédient
       if (recipesFiltered.ingredientsSelected.some(ingredient => recipe.ingredients.some(item => item.ingredient.toLowerCase() === ingredient))) {
-        return true
-      }
-      if (recipesFiltered.appliancesSelected.includes(recipe.appliance.toLowerCase())) {
-        return true
-      }
-      if (recipesFiltered.ustensilsSelected.some(ustensil => recipe.ustensils.includes(ustensil.toLowerCase()))) {
-        return true
+        // La recette valide le filtre ingrédient
+        result[0] = true
       }
     } else {
-      return true
+      result[0] = true
     }
+
+    // Si le tableau  des filtres contient un ou plusieurs appareils
+    if (recipesFiltered.appliancesSelected.length > 0) {
+      // Si la recette contient cet appareils
+      if (recipesFiltered.appliancesSelected.includes(recipe.appliance.toLowerCase())) {
+        // La recette valide le filtre appareils
+        result[1] = true
+      }
+    } else {
+      result[1] = true
+    }
+
+    // Si le tableau  des filtres contient un ou plusieurs ustensils
+    if (recipesFiltered.ustensilsSelected.length > 0) {
+      // Si la recette contient cet ustensils
+      if (recipesFiltered.ustensilsSelected.some(ustensil => recipe.ustensils.includes(ustensil.toLowerCase()))) {
+        // La recette valide le filtre ustensils
+        result[2] = true
+      }
+    } else {
+      result[2] = true
+    }
+
+    return result.every(v => v === true)
   })
 }
 
@@ -44,7 +56,8 @@ function getRecipesToDisplay (recipesFiltered) {
 export function displayRecipesList (recipesFiltered) {
   const recipesBox = document.getElementById('recipes__box')
   recipesBox.innerHTML = ''
-  for (const recipe of getRecipesToDisplay(recipesFiltered)) {
+  setRecipesToDisplay(recipesFiltered)
+  for (const recipe of recipesFiltered.recipesToDisplay) {
     // Creation de l element "article" pour la card
     const article = document.createElement('article')
     article.classList.add('class', 'card')
@@ -118,6 +131,8 @@ export function displayRecipesList (recipesFiltered) {
     // Generation du contenu dans le DOM
     recipesBox.appendChild(article)
   }
+  // Mise a jour du compteur de recette
+  updateRecipesCount(globalLists)
 }
 // *--------------------------------------------------------------------------------------------*
 // *-------------------------- affiche la liste de tout recettes --------------------------*

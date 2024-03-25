@@ -265,6 +265,12 @@ button{
     justify-content: flex-end;
     gap: 0.2rem;
 }
+#recipes__numbers{
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-family: 'Anton', sans-serif;
+}
 .tag__selected {
     display: flex;
     flex-wrap: wrap;
