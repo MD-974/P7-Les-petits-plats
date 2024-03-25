@@ -257,9 +257,3 @@ closeIconsDropdown.forEach((icon) => {
     displayAllDropdownsLists(globalLists, type)
   })
 })
-
-export function updateRecipesCount (globalLists) {
-  const recipesCount = globalLists.recipesToDisplay.length
-  const recipesNumbersSpan = document.getElementById('recipes__numbers')
-  recipesNumbersSpan.textContent = recipesCount
-}

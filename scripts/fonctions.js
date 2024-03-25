@@ -79,3 +79,14 @@ export const displayFilterTags = (globalLists) => {
     })
   })
 }
+
+/************************************************************************************************
+* Mise à jour du nombre (span id="recipes__numbers") des recettes affichées sur la page.       **
+* @param {Object} globalLists - L'objet des listes globales contenant les recettes à afficher. **
+* @return {void} Cette fonction ne retourne rien.                                              **
+************************************************************************************************/
+export function updateRecipesCount (globalLists) {
+  const recipesCount = globalLists.recipesToDisplay.length
+  const recipesNumbersSpan = document.getElementById('recipes__numbers')
+  recipesNumbersSpan.textContent = recipesCount
+}
