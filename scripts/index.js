@@ -17,7 +17,7 @@ function setRecipesToDisplay (recipesFiltered) {
     // Si le tableau des filtres contient un ou plusieurs ingrédients
     if (recipesFiltered.ingredientsSelected.length > 0) {
       // Si la recette contient cet ingrédient
-      if (recipesFiltered.ingredientsSelected.some(ingredient => recipe.ingredients.some(item => item.ingredient.toLowerCase() === ingredient))) {
+      if (recipesFiltered.ingredientsSelected.every(ingredient => recipe.ingredients.some(item => item.ingredient.toLowerCase() === ingredient))) {
         // La recette valide le filtre ingrédient
         result[0] = true
       }
@@ -38,6 +38,10 @@ function setRecipesToDisplay (recipesFiltered) {
 
     // Si le tableau  des filtres contient un ou plusieurs ustensils
     if (recipesFiltered.ustensilsSelected.length > 0) {
+      // Nettoyer le tableu recipe.ustensils pour vraiment mettre en minuscule
+      const cleanUstensils = []
+      recipe.ustensils.forEach(ustensil => cleanUstensils.push(ustensil.toLowerCase()))
+      recipe.ustensils = cleanUstensils
       // Si la recette contient cet ustensils
       if (recipesFiltered.ustensilsSelected.some(ustensil => recipe.ustensils.includes(ustensil.toLowerCase()))) {
         // La recette valide le filtre ustensils
