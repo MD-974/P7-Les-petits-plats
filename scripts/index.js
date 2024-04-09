@@ -43,7 +43,7 @@ function setRecipesToDisplay (recipesFiltered) {
       recipe.ustensils.forEach(ustensil => cleanUstensils.push(ustensil.toLowerCase()))
       recipe.ustensils = cleanUstensils
       // Si la recette contient cet ustensils
-      if (recipesFiltered.ustensilsSelected.some(ustensil => recipe.ustensils.includes(ustensil.toLowerCase()))) {
+      if (recipesFiltered.ustensilsSelected.every(ustensil => recipe.ustensils.includes(ustensil.toLowerCase()))) {
         // La recette valide le filtre ustensils
         result[2] = true
       }
