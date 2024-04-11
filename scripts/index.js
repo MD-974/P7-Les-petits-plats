@@ -147,3 +147,57 @@ document.addEventListener('DOMContentLoaded', function () {
   // Affiche la liste des recettes en utilisant la variable globale globalLists
   displayRecipesList(globalLists)
 })
+
+const mainSearchBar = document.getElementById('input_search')
+mainSearchBar.addEventListener('input', (event) => {
+  // tableau qui va contenir les recettes
+  const resultsArray = []
+
+  if (event.target.value.length >= 3) {
+    // Ajouter une class pour rendre visible l'élément croix de l input
+    event.target.nextElementSibling.classList.add('header__container__search__box__button__close--visible')
+    const closeBtn = document.getElementById('header-search-close-button')
+    closeBtn.addEventListener('click', (event) => {
+      // effacer la value de l'input
+      mainSearchBar.value = ''
+      // Enlever la class pour rendre invisible l'élément croix de l input
+      event.target.classList.remove('header__container__search__box__button__close--visible')
+      mainSearchBar.nextElementSibling.classList.remove('header__container__search__box__button__close--visible')
+      console.log('click : croix enlever')
+    })
+
+    const userSearch = event.target.value
+    const userSearchTrimmed = userSearch.trim()
+    const userSearchSplit = userSearchTrimmed.split(' ')
+
+    console.log('recherche : ', userSearch)
+    console.log('split : ', userSearchSplit)
+
+    for (let i = 0; i < userSearchSplit.length; i++) {
+      const world = userSearchSplit[i]
+      console.log('world : ', world)
+      // Boucle pour les recettes
+      for (let j = 0; j < globalLists.recipesToDisplay.length; j++) {
+        const recipe = globalLists.recipesToDisplay[j]
+        if (recipe.name.toLowerCase().includes(world.toLowerCase())) {
+          resultsArray.push(recipe)
+          // console.log('recette : ', recipe.name)
+        } else if (recipe.description.toLowerCase().includes(world.toLowerCase())) {
+          resultsArray.push(recipe)
+          // console.log('description : ', recipe.description)
+        } else if (recipe.ingredients[0].ingredient.toLowerCase().includes((world.toLowerCase()))) {
+          resultsArray.push(recipe)
+          // console.log('ingredient : ', recipe.ingredients[0].ingredient)
+        }
+      }
+    }
+  }
+  console.log('nombre de recette : ', resultsArray.length)
+  console.log('recette : ', resultsArray)
+  // if (event.target.value.length < 3) {
+  //   // Ajouter une class pour rendre invisible l'élément croix de l input
+
+  //   // Supprimer la class pour rendre invisible l'élément croix de l'input
+  //   event.target.nextElementSibling.classList.remove('header__container__search__box__button__close--visible')
+  // }
+})

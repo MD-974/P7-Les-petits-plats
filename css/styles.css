@@ -93,6 +93,7 @@ button{
     transition:600ms;
 }
 .header__container__search__box__button__close{
+    display: none;
     position: absolute;
     font-size: 1.5rem;
     width: 3rem;
@@ -103,6 +104,10 @@ button{
     border-radius: 0.3rem;
     color:rgba(122, 122, 122, 1);
     background-color:transparent;
+}
+.header__container__search__box__button__close--visible{
+    display: block;
+    cursor: pointer;
 }
 
 
