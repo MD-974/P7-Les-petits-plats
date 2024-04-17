@@ -4,20 +4,68 @@ import { updateRecipesCount } from './fonctions.js'
 
 // Pour afficher les 3 listes de recipes.js (ingredients, appliances, ustensils)
 export const globalLists = getAllGlobalLists(recipes)
+// console.log(globalLists)
 
-// Afficher une liste parmi les 3 selon le dropdown ouvert
-displayAllDropdownsLists(globalLists, 'ingredients')
-displayAllDropdownsLists(globalLists, 'appliances')
-displayAllDropdownsLists(globalLists, 'ustensils')
+export function setRecipesToDisplay (mainSearchBarWordArray = []) {
+  // Recalcul de la liste des recettes a afficher en fonction des recherches dans la searchbar
+  generateRecipesListSearchBar(mainSearchBarWordArray)
 
-function setRecipesToDisplay (recipesFiltered) {
-  recipesFiltered.recipesToDisplay = recipes.filter(recipe => {
+  // Recalcul de la liste des recettes a afficher en fonction des filtres selectionnes
+  generateRecipesListFilters()
+
+  // Rafraîchit l'affichage avec toutes les recettes
+  displayRecipesList(globalLists)
+
+  // Raffraichir l'affichage des dropdowns
+  displayAllDropdownsLists(globalLists, 'ingredients')
+  displayAllDropdownsLists(globalLists, 'appliances')
+  displayAllDropdownsLists(globalLists, 'ustensils')
+}
+
+// *----------------------------------------------------------*
+// *------- fonction pour generer la liste des recettes ------*
+// *------ en fonction de la recherche dans la searchbar -----*
+// *----------------------------------------------------------*
+function generateRecipesListSearchBar (mainSearchBarWordArray) {
+  if (mainSearchBarWordArray.length > 0) {
+    // tableau vide pour stocker les recettes
+    const resultsArray = []
+    console.log('tableau :', resultsArray)
+
+    for (let i = 0; i < globalLists.recipesToDisplay.length; i++) {
+      const recipe = globalLists.recipesToDisplay[i]
+      console.log('recette : ', globalLists.recipesToDisplay)
+      // const ingredients = recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase())
+      if (mainSearchBarWordArray.every(word => recipe.name.toLowerCase().includes(word.toLowerCase()))) {
+        resultsArray.push(recipe)
+        console.log('recette : ', recipe.name)
+      } else if (mainSearchBarWordArray.every(word => recipe.description.toLowerCase().includes(word.toLowerCase()))) {
+        resultsArray.push(recipe)
+        // console.log('description : ', recipe.description)
+      }
+      //  else if (mainSearchBarWordArray.every(word => ingredients.includes(word.toLowerCase()))) {
+      //   resultsArray.push(recipe)
+      //   // console.log('ingredients : ', ingredients)
+      // }
+    }
+
+    // On garde uniquement les recettes qui ont tous les mots de la recherche
+    globalLists.recipesToDisplay = resultsArray
+  }
+}
+
+// *----------------------------------------------------------*
+// *------- fonction pour generer la liste des recettes ------*
+// *---------- en fonction des filtres selectionnes ----------*
+// *----------------------------------------------------------*
+function generateRecipesListFilters () {
+  globalLists.recipesToDisplay = globalLists.recipesToDisplay.filter(recipe => {
     const result = [false, false, false]
 
     // Si le tableau des filtres contient un ou plusieurs ingrédients
-    if (recipesFiltered.ingredientsSelected.length > 0) {
+    if (globalLists.ingredientsSelected.length > 0) {
       // Si la recette contient cet ingrédient
-      if (recipesFiltered.ingredientsSelected.every(ingredient => recipe.ingredients.some(item => item.ingredient.toLowerCase() === ingredient))) {
+      if (globalLists.ingredientsSelected.every(ingredient => recipe.ingredients.some(item => item.ingredient.toLowerCase() === ingredient))) {
         // La recette valide le filtre ingrédient
         result[0] = true
       }
@@ -26,9 +74,9 @@ function setRecipesToDisplay (recipesFiltered) {
     }
 
     // Si le tableau  des filtres contient un ou plusieurs appareils
-    if (recipesFiltered.appliancesSelected.length > 0) {
+    if (globalLists.appliancesSelected.length > 0) {
       // Si la recette contient cet appareils
-      if (recipesFiltered.appliancesSelected.includes(recipe.appliance.toLowerCase())) {
+      if (globalLists.appliancesSelected.includes(recipe.appliance.toLowerCase())) {
         // La recette valide le filtre appareils
         result[1] = true
       }
@@ -37,13 +85,13 @@ function setRecipesToDisplay (recipesFiltered) {
     }
 
     // Si le tableau  des filtres contient un ou plusieurs ustensils
-    if (recipesFiltered.ustensilsSelected.length > 0) {
+    if (globalLists.ustensilsSelected.length > 0) {
       // Nettoyer le tableu recipe.ustensils pour vraiment mettre en minuscule
       const cleanUstensils = []
       recipe.ustensils.forEach(ustensil => cleanUstensils.push(ustensil.toLowerCase()))
       recipe.ustensils = cleanUstensils
       // Si la recette contient cet ustensils
-      if (recipesFiltered.ustensilsSelected.every(ustensil => recipe.ustensils.includes(ustensil.toLowerCase()))) {
+      if (globalLists.ustensilsSelected.every(ustensil => recipe.ustensils.includes(ustensil.toLowerCase()))) {
         // La recette valide le filtre ustensils
         result[2] = true
       }
@@ -58,11 +106,11 @@ function setRecipesToDisplay (recipesFiltered) {
 // *----------------------------------------------------------*
 // *------- fonction pour creer la liste des recettes --------*
 // *----------------------------------------------------------*
-export function displayRecipesList (recipesFiltered) {
+export function displayRecipesList (globalLists) {
   const recipesBox = document.getElementById('recipes__box')
   recipesBox.innerHTML = ''
-  setRecipesToDisplay(recipesFiltered)
-  for (const recipe of recipesFiltered.recipesToDisplay) {
+  // setRecipesToDisplay(globalLists)
+  for (const recipe of globalLists.recipesToDisplay) {
     // Creation de l element "article" pour la card
     const article = document.createElement('article')
     article.classList.add('class', 'card')
@@ -139,20 +187,9 @@ export function displayRecipesList (recipesFiltered) {
   // Mise a jour du compteur de recette
   updateRecipesCount(globalLists)
 }
-// *--------------------------------------------------------------------------------------------*
-// *-------------------------- affiche la liste de tout recettes --------------------------*
-// *--------------------------------------------------------------------------------------------*
-// Lors du chargement de la page
-document.addEventListener('DOMContentLoaded', function () {
-  // Affiche la liste des recettes en utilisant la variable globale globalLists
-  displayRecipesList(globalLists)
-})
 
 const mainSearchBar = document.getElementById('input_search')
 mainSearchBar.addEventListener('input', (event) => {
-  // tableau qui va contenir les recettes
-  const resultsArray = []
-
   if (event.target.value.length >= 3) {
     // Ajouter une class pour rendre visible l'élément croix de l input
     event.target.nextElementSibling.classList.add('header__container__search__box__button__close--visible')
@@ -173,31 +210,13 @@ mainSearchBar.addEventListener('input', (event) => {
     console.log('recherche : ', userSearch)
     console.log('split : ', userSearchSplit)
 
-    for (let i = 0; i < userSearchSplit.length; i++) {
-      const world = userSearchSplit[i]
-      console.log('world : ', world)
-      // Boucle pour les recettes
-      for (let j = 0; j < globalLists.recipesToDisplay.length; j++) {
-        const recipe = globalLists.recipesToDisplay[j]
-        if (recipe.name.toLowerCase().includes(world.toLowerCase())) {
-          resultsArray.push(recipe)
-          // console.log('recette : ', recipe.name)
-        } else if (recipe.description.toLowerCase().includes(world.toLowerCase())) {
-          resultsArray.push(recipe)
-          // console.log('description : ', recipe.description)
-        } else if (recipe.ingredients[0].ingredient.toLowerCase().includes((world.toLowerCase()))) {
-          resultsArray.push(recipe)
-          // console.log('ingredient : ', recipe.ingredients[0].ingredient)
-        }
-      }
-    }
+    // Recuperation de la frappe de l utilisateur
+    setRecipesToDisplay(userSearchSplit)
   }
-  console.log('nombre de recette : ', resultsArray.length)
-  console.log('recette : ', resultsArray)
-  // if (event.target.value.length < 3) {
-  //   // Ajouter une class pour rendre invisible l'élément croix de l input
-
-  //   // Supprimer la class pour rendre invisible l'élément croix de l'input
-  //   event.target.nextElementSibling.classList.remove('header__container__search__box__button__close--visible')
-  // }
 })
+
+// *--------------------------------------------------------------------------------------------*
+// *----------------------------- affiche la liste de tout recettes ----------------------------*
+// *---------------------------------- au chargement de la page --------------------------------*
+// *--------------------------------------------------------------------------------------------*
+setRecipesToDisplay()

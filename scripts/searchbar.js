@@ -11,11 +11,11 @@
 //     const userSearchSplit = userSearchTrimmed.split(' ')
 
 //     for (let i = 0; i < userSearchSplit.length; i++) {
-//       const world = userSearchSplit[i]
+//       const word = userSearchSplit[i]
 //       for (let j = 0; j < globalLists.recipesToDisplay.length; j++) {
-//         if (recipe.name.toLowerCase().includes(world.toLowerCase())) {
+//         if (recipe.name.toLowerCase().includes(wold.toLowerCase())) {
 //           resultsArray.push(recipe)
-//         } else if (recipe.description.toLowerCase().includes(world.toLowerCase())) {
+//         } else if (recipe.description.toLowerCase().includes(word.toLowerCase())) {
 //           resultsArray.push(recipe)
 //         }
 //       }

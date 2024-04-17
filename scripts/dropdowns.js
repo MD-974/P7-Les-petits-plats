@@ -1,5 +1,5 @@
 import { filterList, displayFilterTags } from './fonctions.js'
-import { globalLists, displayRecipesList } from './index.js'
+import { globalLists, displayRecipesList, setRecipesToDisplay } from './index.js'
 
 // Tableau des types
 const typesArray = ['ingredients', 'appliances', 'ustensils']
@@ -95,24 +95,28 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
       li.appendChild(tagsClose)
       // Ajout d'un ecouteur d'evenement pour supprimer au click le 'li' cliquer
       tagsClose.addEventListener('click', (event) => {
-        console.log(event.currentTarget.parentElement.textContent + ' ' + type)
+        // console.log(event.currentTarget.parentElement.textContent + ' ' + type)
         globalLists[type + 'Selected'].splice(globalLists[type + 'Selected'].indexOf(event.target.parentElement.textContent), 1)
         console.log(globalLists)
-        displayRecipesList(globalLists)
+        // displayRecipesList(globalLists)
+        setRecipesToDisplay()
         typesArray.forEach(tmpType => displayAllDropdownsLists(globalLists, tmpType))
         displayFilterTags(globalLists, type)
+        console.log(globalLists)
       })
     } else {
       li.classList.add('dropdown__content__list__item--unfilter')
       ulUnfiltered.appendChild(li)
       // Ajout d'un ecouteur d'evenement pour afficher au clic le 'li' cliquer
       li.addEventListener('click', (event) => {
-        console.log(event.currentTarget.textContent + ' ' + type)
+        // console.log(event.currentTarget.textContent + ' ' + type)
         globalLists[type + 'Selected'].push(event.target.textContent)
         console.log(globalLists)
-        displayRecipesList(globalLists)
+        // displayRecipesList(globalLists)
+        setRecipesToDisplay()
         typesArray.forEach(tmpType => displayAllDropdownsLists(globalLists, tmpType))
         displayFilterTags(globalLists, type)
+        console.log(globalLists)
       })
     }
   })
