@@ -218,6 +218,11 @@ mainSearchBar.addEventListener('input', (event) => {
 
     // Recuperation de la frappe de l utilisateur
     setRecipesToDisplay(userSearchSplit)
+  } else {
+    // reafficher la liste de toutes les recettes
+    // si la longueur de la recherche est inférieure à 3
+    globalLists.mainSearch = []
+    setRecipesToDisplay()
   }
 })
 
