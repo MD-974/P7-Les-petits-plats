@@ -6,9 +6,12 @@ import { updateRecipesCount } from './fonctions.js'
 export const globalLists = getAllGlobalLists(recipes)
 // console.log(globalLists)
 
-export function setRecipesToDisplay (mainSearchBarWordArray = []) {
+export function setRecipesToDisplay () {
+  // reinitialisation de la liste des recettes a afficher
+  globalLists.recipesToDisplay = recipes
+
   // Recalcul de la liste des recettes a afficher en fonction des recherches dans la searchbar
-  generateRecipesListSearchBar(mainSearchBarWordArray)
+  generateRecipesListSearchBar()
 
   // Recalcul de la liste des recettes a afficher en fonction des filtres selectionnes
   generateRecipesListFilters()
@@ -26,20 +29,19 @@ export function setRecipesToDisplay (mainSearchBarWordArray = []) {
 // *------- fonction pour generer la liste des recettes ------*
 // *------ en fonction de la recherche dans la searchbar -----*
 // *----------------------------------------------------------*
-function generateRecipesListSearchBar (mainSearchBarWordArray) {
-  if (mainSearchBarWordArray.length > 0) {
+function generateRecipesListSearchBar () {
+  if (globalLists.mainSearch.length > 0) {
     // tableau vide pour stocker les recettes
     const resultsArray = []
-    console.log('tableau :', resultsArray)
+    // console.log('tableau :', resultsArray)
 
     for (let i = 0; i < globalLists.recipesToDisplay.length; i++) {
       const recipe = globalLists.recipesToDisplay[i]
-      console.log('recette : ', globalLists.recipesToDisplay)
       // const ingredients = recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase())
-      if (mainSearchBarWordArray.every(word => recipe.name.toLowerCase().includes(word.toLowerCase()))) {
+      if (globalLists.mainSearch.every(word => recipe.name.toLowerCase().includes(word.toLowerCase()))) {
         resultsArray.push(recipe)
-        console.log('recette : ', recipe.name)
-      } else if (mainSearchBarWordArray.every(word => recipe.description.toLowerCase().includes(word.toLowerCase()))) {
+        // console.log('recette : ', recipe.name)
+      } else if (globalLists.mainSearch.every(word => recipe.description.toLowerCase().includes(word.toLowerCase()))) {
         resultsArray.push(recipe)
         // console.log('description : ', recipe.description)
       }
@@ -51,6 +53,7 @@ function generateRecipesListSearchBar (mainSearchBarWordArray) {
 
     // On garde uniquement les recettes qui ont tous les mots de la recherche
     globalLists.recipesToDisplay = resultsArray
+    console.log('recette : ', globalLists.recipesToDisplay)
   }
 }
 
@@ -209,6 +212,9 @@ mainSearchBar.addEventListener('input', (event) => {
 
     console.log('recherche : ', userSearch)
     console.log('split : ', userSearchSplit)
+
+    globalLists.mainSearch = userSearchSplit
+    console.log(globalLists)
 
     // Recuperation de la frappe de l utilisateur
     setRecipesToDisplay(userSearchSplit)

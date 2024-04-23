@@ -1,4 +1,4 @@
-import { globalLists, displayRecipesList } from './index.js'
+import { globalLists, setRecipesToDisplay } from './index.js'
 import { displayAllDropdownsLists } from './dropdowns.js'
 
 /**************************************************************************************
@@ -71,7 +71,8 @@ export const displayFilterTags = (globalLists) => {
       globalLists.ustensilsSelected = globalLists.ustensilsSelected.filter((tag) => tag !== element)
       globalLists.searchBarSelected = globalLists.searchBarSelected.filter((tag) => tag !== element)
       displayFilterTags(globalLists)
-      displayRecipesList(globalLists)
+      setRecipesToDisplay()
+      // displayRecipesList(globalLists)
       // displaySearchBar(globalLists, 'searchBar')
       displayAllDropdownsLists(globalLists, 'ingredients')
       displayAllDropdownsLists(globalLists, 'appliances')

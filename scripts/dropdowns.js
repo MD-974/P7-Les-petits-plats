@@ -1,5 +1,5 @@
 import { filterList, displayFilterTags } from './fonctions.js'
-import { globalLists, displayRecipesList, setRecipesToDisplay } from './index.js'
+import { globalLists, setRecipesToDisplay } from './index.js'
 
 // Tableau des types
 const typesArray = ['ingredients', 'appliances', 'ustensils']
@@ -35,6 +35,8 @@ export function getAllGlobalLists (arrayRecipes) {
   globalArray.appliancesSelected = []
   // contient la liste des ustensiles selectionnes
   globalArray.ustensilsSelected = []
+  // contient les mots de la barre de recherche
+  globalArray.mainSearch = []
   // Retourne l'objet globalArray contenant les listes globales
   return globalArray
 }
