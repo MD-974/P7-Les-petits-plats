@@ -1,7 +1,6 @@
 import { recipes } from '../data/recipes.js'
 import { getAllGlobalLists, displayAllDropdownsLists } from './dropdowns.js'
 import { updateRecipesCount } from './fonctions.js'
-
 // Pour afficher les 3 listes de recipes.js (ingredients, appliances, ustensils)
 export const globalLists = getAllGlobalLists(recipes)
 // console.log(globalLists)
@@ -9,52 +8,54 @@ export const globalLists = getAllGlobalLists(recipes)
 export function setRecipesToDisplay () {
   // reinitialisation de la liste des recettes a afficher
   globalLists.recipesToDisplay = recipes
+  // console.log(globalLists.recipesToDisplay)
 
   // Recalcul de la liste des recettes a afficher en fonction des recherches dans la searchbar
   generateRecipesListSearchBar()
-
   // Recalcul de la liste des recettes a afficher en fonction des filtres selectionnes
   generateRecipesListFilters()
-
   // Rafraîchit l'affichage avec toutes les recettes
   displayRecipesList(globalLists)
+  // console.log(globalLists)
 
-  // Raffraichir l'affichage des dropdowns
+  // Rafraichir l'affichage des dropdowns
   displayAllDropdownsLists(globalLists, 'ingredients')
   displayAllDropdownsLists(globalLists, 'appliances')
   displayAllDropdownsLists(globalLists, 'ustensils')
+
+  // console.log(globalLists)
+  // console.log(displayAllDropdownsLists)
 }
 
 // *----------------------------------------------------------*
 // *------- fonction pour generer la liste des recettes ------*
 // *------ en fonction de la recherche dans la searchbar -----*
 // *----------------------------------------------------------*
+
 function generateRecipesListSearchBar () {
+  const resultsArray = []
   if (globalLists.mainSearch.length > 0) {
     // tableau vide pour stocker les recettes
-    const resultsArray = []
+    // const resultsArray = []
     // console.log('tableau :', resultsArray)
 
     for (let i = 0; i < globalLists.recipesToDisplay.length; i++) {
       const recipe = globalLists.recipesToDisplay[i]
-      // const ingredients = recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase())
       if (globalLists.mainSearch.every(word => recipe.name.toLowerCase().includes(word.toLowerCase()))) {
         resultsArray.push(recipe)
         // console.log('recette : ', recipe.name)
       } else if (globalLists.mainSearch.every(word => recipe.description.toLowerCase().includes(word.toLowerCase()))) {
         resultsArray.push(recipe)
         // console.log('description : ', recipe.description)
+      } else if (globalLists.mainSearch.every(word => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(word.toLowerCase())))) {
+        resultsArray.push(recipe)
+        console.log('ingredients : ', recipe.ingredients)
       }
-      //  else if (mainSearchBarWordArray.every(word => ingredients.includes(word.toLowerCase()))) {
-      //   resultsArray.push(recipe)
-      //   // console.log('ingredients : ', ingredients)
-      // }
     }
-
-    // On garde uniquement les recettes qui ont tous les mots de la recherche
-    globalLists.recipesToDisplay = resultsArray
-    console.log('recette : ', globalLists.recipesToDisplay)
   }
+  // On garde uniquement les recettes qui ont tous les mots de la recherche
+  globalLists.recipesToDisplay = resultsArray
+  // console.log('recette : ', globalLists.recipesToDisplay)
 }
 
 // *----------------------------------------------------------*
@@ -215,15 +216,15 @@ mainSearchBar.addEventListener('input', (event) => {
 
     globalLists.mainSearch = userSearchSplit
     console.log(globalLists)
-
-    // Recuperation de la frappe de l utilisateur
-    setRecipesToDisplay(userSearchSplit)
   } else {
     // reafficher la liste de toutes les recettes
     // si la longueur de la recherche est inférieure à 3
     globalLists.mainSearch = []
-    setRecipesToDisplay()
   }
+  // Mettre à jour la liste des recettes a afficher en fonction
+  // des recherches dans la searchbar
+  setRecipesToDisplay()
+  console.log('recettes a afficher ', globalLists.recipesToDisplay)
 })
 
 // *--------------------------------------------------------------------------------------------*
@@ -231,3 +232,4 @@ mainSearchBar.addEventListener('input', (event) => {
 // *---------------------------------- au chargement de la page --------------------------------*
 // *--------------------------------------------------------------------------------------------*
 setRecipesToDisplay()
+// console.log(setRecipesToDisplay)
