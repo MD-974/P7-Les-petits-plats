@@ -142,6 +142,9 @@ function getAllIngredients (globalArray) {
       }
     }
   }
+  // Trier les ingrédients en ordre alphabétique
+  ingredientsArray.sort()
+  // Retourner la liste d ingredients
   return ingredientsArray
 }
 // fonction pour recuperer tous les appareils dans "recipes.js"
@@ -152,6 +155,9 @@ function getAllAppliances (globalArray) {
       appliancesArray.push(recipe.appliance.toLowerCase())
     }
   }
+  // Trier les appareils en ordre alphabétique
+  appliancesArray.sort()
+  // Retourner la liste d appareils
   return appliancesArray
 }
 // fonction pour recuperer tous les ustensiles dans "recipes.js"
@@ -164,6 +170,9 @@ function getAllUstensils (globalArray) {
       }
     }
   }
+  // Trier les ustensiles en ordre alphabétique
+  ustensilsArray.sort()
+  // Retourner la liste d ustensiles
   return ustensilsArray
 }
 

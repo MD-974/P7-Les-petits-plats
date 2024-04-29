@@ -33,10 +33,10 @@ export function setRecipesToDisplay () {
 // *----------------------------------------------------------*
 
 function generateRecipesListSearchBar () {
-  const resultsArray = []
+  // const resultsArray = []
   if (globalLists.mainSearch.length > 0) {
     // tableau vide pour stocker les recettes
-    // const resultsArray = []
+    const resultsArray = []
     // console.log('tableau :', resultsArray)
 
     for (let i = 0; i < globalLists.recipesToDisplay.length; i++) {
@@ -52,10 +52,10 @@ function generateRecipesListSearchBar () {
         console.log('ingredients : ', recipe.ingredients)
       }
     }
+    // On garde uniquement les recettes qui ont tous les mots de la recherche
+    globalLists.recipesToDisplay = resultsArray
+    // console.log('recette : ', globalLists.recipesToDisplay)
   }
-  // On garde uniquement les recettes qui ont tous les mots de la recherche
-  globalLists.recipesToDisplay = resultsArray
-  // console.log('recette : ', globalLists.recipesToDisplay)
 }
 
 // *----------------------------------------------------------*
