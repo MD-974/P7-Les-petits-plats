@@ -109,7 +109,23 @@ button{
     display: block;
     cursor: pointer;
 }
-
+#header__container__search__box__error{
+    display: none;
+    background-color:rgb(255, 209, 92, 1);
+    width: 954px;
+    height: 2.5rem;
+    margin: 10px auto;
+    border-radius: 0.6875rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+.header__container__search__box__error__text{
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 9px;
+}
 
 /*------------ dropbox -----------*/
 /* => align-items: center */
@@ -409,7 +425,6 @@ button{
 .card__content__list__item--ingredients{
     font-weight: 600;
     font-size: 14px;
-    /* color:rgba(27, 27, 27, 1); */
     color: black;
 }
 .card__content__list__item--quantity{

@@ -40,7 +40,6 @@ export function getAllGlobalLists (arrayRecipes) {
   // Retourne l'objet globalArray contenant les listes globales
   return globalArray
 }
-
 /***********************************************************************************************************************
 * Affiche toutes les listes déroulantes en fonction des listes globales et du type spécifié.                          **
 * @param {Object} globalLists - les listes globales contenant les ingrédients, les appareils et les ustensiles        **
@@ -123,7 +122,6 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
     }
   })
 }
-
 // *-------------------------------------------------------------------------*
 // *-------------- Recuperation des listes dans "recipes.js" ----------------*
 // *-------------------------------------------------------------------------*
@@ -175,7 +173,6 @@ function getAllUstensils (globalArray) {
   // Retourner la liste d ustensiles
   return ustensilsArray
 }
-
 // *-------------------------------------------------------------------------*
 // *------------------------ changement du chevron --------------------------*
 // *-------------------------------------------------------------------------*
@@ -201,7 +198,6 @@ dropdownChevronsButtons.forEach((button) => {
     chevronIcon.classList.toggle('fa-chevron-down')
   })
 })
-
 // *-------------------------------------------------------------------------*
 // *------------- Creation pour ouvrir et fermer les dropdowns --------------*
 // *-------------------------------------------------------------------------*
@@ -224,7 +220,6 @@ dropdownsButtons.forEach((dropdownBtn) => {
     }
   })
 })
-
 // *-------------------------------------------------------------------------*
 // *--------- filtrer les recettes suivant la valeur dans un input ----------*
 // *-------------------------------------------------------------------------*
@@ -257,7 +252,6 @@ filterImputs.forEach((input) => {
     }
   })
 })
-
 // *-------------------------------------------------------------------------*
 // *------ Remise a zero de l'input du dropdown au click sur la croix -------*
 // *-------------------------------------------------------------------------*

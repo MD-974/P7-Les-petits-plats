@@ -15,7 +15,6 @@ export const filterList = (type, value, globalArray) => {
   // console.log(tempArray)
   return tempArray
 }
-
 /***********************************************************************************************
  * Génère une liste non filtrée dans noeud HTML spécifié en utilisant la liste fournie.       **
  * @param {Array} listToUse - liste à utiliser pour générer la liste non filtrée.             **
@@ -38,7 +37,6 @@ export const generateUnfilterList = (listToUse, htmlNode) => {
     })
   }
 }
-
 /***************************************************************
  * Fonction pour afficher les tags de filtre.                 **
  * @param {Object} globalLists - les listes globales          **
@@ -80,7 +78,6 @@ export const displayFilterTags = (globalLists) => {
     })
   })
 }
-
 /************************************************************************************************
 * Mise à jour du nombre (span id="recipes__numbers") des recettes affichées sur la page.       **
 * @param {Object} globalLists - L'objet des listes globales contenant les recettes à afficher. **

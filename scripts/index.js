@@ -22,18 +22,14 @@ export function setRecipesToDisplay () {
   displayAllDropdownsLists(globalLists, 'ingredients')
   displayAllDropdownsLists(globalLists, 'appliances')
   displayAllDropdownsLists(globalLists, 'ustensils')
-
   // console.log(globalLists)
   // console.log(displayAllDropdownsLists)
 }
-
 // *----------------------------------------------------------*
 // *------- fonction pour generer la liste des recettes ------*
 // *------ en fonction de la recherche dans la searchbar -----*
 // *----------------------------------------------------------*
-
 function generateRecipesListSearchBar () {
-  // const resultsArray = []
   if (globalLists.mainSearch.length > 0) {
     // tableau vide pour stocker les recettes
     const resultsArray = []
@@ -55,9 +51,18 @@ function generateRecipesListSearchBar () {
     // On garde uniquement les recettes qui ont tous les mots de la recherche
     globalLists.recipesToDisplay = resultsArray
     // console.log('recette : ', globalLists.recipesToDisplay)
+
+    // Message d'alerte si aucun resultat n'a été trouvé
+    if (resultsArray.length === 0) {
+      const errorMessage = document.getElementById('header__container__search__box__error')
+      errorMessage.style.display = 'block'
+      const textError = errorMessage.querySelector('p')
+      textError.style.display = 'block'
+      const searchValue = document.getElementById('input_search').value
+      textError.innerHTML = `Aucune recette ne contient " ${searchValue} ". Vous pouvez chercher « tarte aux pommes », « poisson », etc.`
+    }
   }
 }
-
 // *----------------------------------------------------------*
 // *------- fonction pour generer la liste des recettes ------*
 // *---------- en fonction des filtres selectionnes ----------*
@@ -106,7 +111,6 @@ function generateRecipesListFilters () {
     return result.every(v => v === true)
   })
 }
-
 // *----------------------------------------------------------*
 // *------- fonction pour creer la liste des recettes --------*
 // *----------------------------------------------------------*
@@ -191,7 +195,6 @@ export function displayRecipesList (globalLists) {
   // Mise a jour du compteur de recette
   updateRecipesCount(globalLists)
 }
-
 const mainSearchBar = document.getElementById('input_search')
 mainSearchBar.addEventListener('input', (event) => {
   if (event.target.value.length >= 3) {
@@ -204,6 +207,11 @@ mainSearchBar.addEventListener('input', (event) => {
       // Enlever la class pour rendre invisible l'élément croix de l input
       event.target.classList.remove('header__container__search__box__button__close--visible')
       mainSearchBar.nextElementSibling.classList.remove('header__container__search__box__button__close--visible')
+      // Enlever le style d'affichage du message d'erreur
+      const errorMessage = document.getElementById('header__container__search__box__error')
+      errorMessage.style.display = 'none'
+      const textError = errorMessage.querySelector('p')
+      textError.style.display = 'none'
       console.log('click : croix enlever')
     })
 
@@ -226,7 +234,6 @@ mainSearchBar.addEventListener('input', (event) => {
   setRecipesToDisplay()
   console.log('recettes a afficher ', globalLists.recipesToDisplay)
 })
-
 // *--------------------------------------------------------------------------------------------*
 // *----------------------------- affiche la liste de tout recettes ----------------------------*
 // *---------------------------------- au chargement de la page --------------------------------*
