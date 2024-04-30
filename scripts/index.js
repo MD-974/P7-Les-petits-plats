@@ -52,15 +52,16 @@ function generateRecipesListSearchBar () {
     globalLists.recipesToDisplay = resultsArray
     // console.log('recette : ', globalLists.recipesToDisplay)
 
+    // _________________________________________________________________________
     // Message d'alerte si aucun resultat n'a été trouvé
-    if (resultsArray.length === 0) {
-      const errorMessage = document.getElementById('header__container__search__box__error')
-      errorMessage.style.display = 'block'
-      const textError = errorMessage.querySelector('p')
-      textError.style.display = 'block'
-      const searchValue = document.getElementById('input_search').value
-      textError.innerHTML = `Aucune recette ne contient " ${searchValue} ". Vous pouvez chercher « tarte aux pommes », « poisson », etc.`
-    }
+    // if (resultsArray.length === 0) {
+    //   const errorMessage = document.getElementById('header__container__search__box__error')
+    //   errorMessage.style.display = 'block'
+    //   const textError = errorMessage.querySelector('p')
+    //   textError.style.display = 'block'
+    //   const searchValue = document.getElementById('input_search').value
+    //   textError.innerHTML = `Aucune recette ne contient " ${searchValue} ". Vous pouvez chercher « tarte aux pommes », « poisson », etc.`
+    // }
   }
 }
 // *----------------------------------------------------------*
@@ -117,6 +118,15 @@ function generateRecipesListFilters () {
 export function displayRecipesList (globalLists) {
   const recipesBox = document.getElementById('recipes__box')
   recipesBox.innerHTML = ''
+
+  // _________________________________________________________________________
+  // Message d'alerte si aucun resultat n'a été trouvé
+  if (globalLists.recipesToDisplay.length === 0) {
+    const searchValue = document.getElementById('input_search').value
+    recipesBox.textContent = `Aucune recette ne contient " ${searchValue} ". Vous pouvez chercher « tarte aux pommes », « poisson », etc.`
+    return false
+  // _________________________________________________________________________
+  }
   // setRecipesToDisplay(globalLists)
   for (const recipe of globalLists.recipesToDisplay) {
     // Creation de l element "article" pour la card
@@ -207,20 +217,22 @@ mainSearchBar.addEventListener('input', (event) => {
       // Enlever la class pour rendre invisible l'élément croix de l input
       event.target.classList.remove('header__container__search__box__button__close--visible')
       mainSearchBar.nextElementSibling.classList.remove('header__container__search__box__button__close--visible')
-      // Enlever le style d'affichage du message d'erreur
-      const errorMessage = document.getElementById('header__container__search__box__error')
-      errorMessage.style.display = 'none'
-      const textError = errorMessage.querySelector('p')
-      textError.style.display = 'none'
       console.log('click : croix enlever')
+
+      // ------------------------------------------------
+      // reafficher la liste de toutes les recettes
+      globalLists.mainSearch = []
+      // Mettre à jour la liste des recettes a afficher en fonction
+      // des recherches dans la searchbar
+      setRecipesToDisplay()
     })
 
     const userSearch = event.target.value
     const userSearchTrimmed = userSearch.trim()
     const userSearchSplit = userSearchTrimmed.split(' ')
 
-    console.log('recherche : ', userSearch)
-    console.log('split : ', userSearchSplit)
+    // console.log('recherche : ', userSearch)
+    // console.log('split : ', userSearchSplit)
 
     globalLists.mainSearch = userSearchSplit
     console.log(globalLists)
