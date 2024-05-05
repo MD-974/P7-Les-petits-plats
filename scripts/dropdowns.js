@@ -40,6 +40,7 @@ export function getAllGlobalLists (arrayRecipes) {
   // Retourne l'objet globalArray contenant les listes globales
   return globalArray
 }
+
 /***********************************************************************************************************************
 * Affiche toutes les listes déroulantes en fonction des listes globales et du type spécifié.                          **
 * @param {Object} globalLists - les listes globales contenant les ingrédients, les appareils et les ustensiles        **
@@ -81,11 +82,13 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
       listFilterToDisplay = []
       break
   }
+
   const listToDisplay = isFilterInput ? listFilterToDisplay : listUnfilterToDisplay
   listToDisplay.forEach((element) => {
     const li = document.createElement('li')
     li.dataset.type = type
     li.textContent = element
+
     if (globalLists[type + 'Selected'].includes(element)) {
       console.log('ok')
       li.classList.add('dropdown__content__list__item--filter')
@@ -94,12 +97,13 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
       tagsClose.classList.add('tags__close')
       ulFiltered.appendChild(li)
       li.appendChild(tagsClose)
+
       // Ajout d'un ecouteur d'evenement pour supprimer au click le 'li' cliquer
       tagsClose.addEventListener('click', (event) => {
         // console.log(event.currentTarget.parentElement.textContent + ' ' + type)
         globalLists[type + 'Selected'].splice(globalLists[type + 'Selected'].indexOf(event.target.parentElement.textContent), 1)
         console.log(globalLists)
-        // displayRecipesList(globalLists)
+
         setRecipesToDisplay()
         typesArray.forEach(tmpType => displayAllDropdownsLists(globalLists, tmpType))
         displayFilterTags(globalLists, type)
@@ -122,6 +126,7 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
     }
   })
 }
+
 // *-------------------------------------------------------------------------*
 // *-------------- Recuperation des listes dans "recipes.js" ----------------*
 // *-------------------------------------------------------------------------*
@@ -145,6 +150,7 @@ function getAllIngredients (globalArray) {
   // Retourner la liste d ingredients
   return ingredientsArray
 }
+
 // fonction pour recuperer tous les appareils dans "recipes.js"
 function getAllAppliances (globalArray) {
   const appliancesArray = []
@@ -158,6 +164,7 @@ function getAllAppliances (globalArray) {
   // Retourner la liste d appareils
   return appliancesArray
 }
+
 // fonction pour recuperer tous les ustensiles dans "recipes.js"
 function getAllUstensils (globalArray) {
   const ustensilsArray = []
@@ -173,6 +180,7 @@ function getAllUstensils (globalArray) {
   // Retourner la liste d ustensiles
   return ustensilsArray
 }
+
 // *-------------------------------------------------------------------------*
 // *------------------------ changement du chevron --------------------------*
 // *-------------------------------------------------------------------------*
@@ -198,6 +206,7 @@ dropdownChevronsButtons.forEach((button) => {
     chevronIcon.classList.toggle('fa-chevron-down')
   })
 })
+
 // *-------------------------------------------------------------------------*
 // *------------- Creation pour ouvrir et fermer les dropdowns --------------*
 // *-------------------------------------------------------------------------*
@@ -220,6 +229,7 @@ dropdownsButtons.forEach((dropdownBtn) => {
     }
   })
 })
+
 // *-------------------------------------------------------------------------*
 // *--------- filtrer les recettes suivant la valeur dans un input ----------*
 // *-------------------------------------------------------------------------*
@@ -252,6 +262,7 @@ filterImputs.forEach((input) => {
     }
   })
 })
+
 // *-------------------------------------------------------------------------*
 // *------ Remise a zero de l'input du dropdown au click sur la croix -------*
 // *-------------------------------------------------------------------------*

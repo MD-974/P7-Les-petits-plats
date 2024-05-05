@@ -15,6 +15,7 @@ export const filterList = (type, value, globalArray) => {
   // console.log(tempArray)
   return tempArray
 }
+
 /***********************************************************************************************
  * Génère une liste non filtrée dans noeud HTML spécifié en utilisant la liste fournie.       **
  * @param {Array} listToUse - liste à utiliser pour générer la liste non filtrée.             **
@@ -37,6 +38,7 @@ export const generateUnfilterList = (listToUse, htmlNode) => {
     })
   }
 }
+
 /***************************************************************
  * Fonction pour afficher les tags de filtre.                 **
  * @param {Object} globalLists - les listes globales          **
@@ -49,6 +51,7 @@ export const displayFilterTags = (globalLists) => {
   filterTagSelected.innerHTML = ''
   const allTags = globalLists.ingredientsSelected.concat(globalLists.appliancesSelected, globalLists.ustensilsSelected, globalLists.searchBarSelected)
   console.log(allTags)
+
   allTags.forEach((element) => {
     console.log(element)
     const filterTagsContainers = document.createElement('div')
@@ -62,6 +65,7 @@ export const displayFilterTags = (globalLists) => {
     filterTagSelected.appendChild(filterTagsContainers)
     filterTagsContainers.appendChild(filterTags)
     filterTags.appendChild(tagsClose)
+
     // Ajout d'un ecouteur d'evenement pour supprimer au click le 'li' cliquer
     tagsClose.addEventListener('click', (event) => {
       globalLists.ingredientsSelected = globalLists.ingredientsSelected.filter((tag) => tag !== element)
@@ -70,14 +74,13 @@ export const displayFilterTags = (globalLists) => {
       globalLists.searchBarSelected = globalLists.searchBarSelected.filter((tag) => tag !== element)
       displayFilterTags(globalLists)
       setRecipesToDisplay()
-      // displayRecipesList(globalLists)
-      // displaySearchBar(globalLists, 'searchBar')
       displayAllDropdownsLists(globalLists, 'ingredients')
       displayAllDropdownsLists(globalLists, 'appliances')
       displayAllDropdownsLists(globalLists, 'ustensils')
     })
   })
 }
+
 /************************************************************************************************
 * Mise à jour du nombre (span id="recipes__numbers") des recettes affichées sur la page.       **
 * @param {Object} globalLists - L'objet des listes globales contenant les recettes à afficher. **

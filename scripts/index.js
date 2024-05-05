@@ -1,14 +1,13 @@
 import { recipes } from '../data/recipes.js'
 import { getAllGlobalLists, displayAllDropdownsLists } from './dropdowns.js'
 import { updateRecipesCount } from './fonctions.js'
+
 // Pour afficher les 3 listes de recipes.js (ingredients, appliances, ustensils)
 export const globalLists = getAllGlobalLists(recipes)
-// console.log(globalLists)
 
 export function setRecipesToDisplay () {
   // reinitialisation de la liste des recettes a afficher
   globalLists.recipesToDisplay = recipes
-  // console.log(globalLists.recipesToDisplay)
 
   // Recalcul de la liste des recettes a afficher en fonction des recherches dans la searchbar
   generateRecipesListSearchBar()
@@ -16,15 +15,13 @@ export function setRecipesToDisplay () {
   generateRecipesListFilters()
   // Rafraîchit l'affichage avec toutes les recettes
   displayRecipesList(globalLists)
-  // console.log(globalLists)
 
   // Rafraichir l'affichage des dropdowns
   displayAllDropdownsLists(globalLists, 'ingredients')
   displayAllDropdownsLists(globalLists, 'appliances')
   displayAllDropdownsLists(globalLists, 'ustensils')
-  // console.log(globalLists)
-  // console.log(displayAllDropdownsLists)
 }
+
 // *----------------------------------------------------------*
 // *------- fonction pour generer la liste des recettes ------*
 // *------ en fonction de la recherche dans la searchbar -----*
@@ -48,22 +45,13 @@ function generateRecipesListSearchBar () {
         console.log('ingredients : ', recipe.ingredients)
       }
     }
+
     // On garde uniquement les recettes qui ont tous les mots de la recherche
     globalLists.recipesToDisplay = resultsArray
     // console.log('recette : ', globalLists.recipesToDisplay)
-
-    // _________________________________________________________________________
-    // Message d'alerte si aucun resultat n'a été trouvé
-    // if (resultsArray.length === 0) {
-    //   const errorMessage = document.getElementById('header__container__search__box__error')
-    //   errorMessage.style.display = 'block'
-    //   const textError = errorMessage.querySelector('p')
-    //   textError.style.display = 'block'
-    //   const searchValue = document.getElementById('input_search').value
-    //   textError.innerHTML = `Aucune recette ne contient " ${searchValue} ". Vous pouvez chercher « tarte aux pommes », « poisson », etc.`
-    // }
   }
 }
+
 // *----------------------------------------------------------*
 // *------- fonction pour generer la liste des recettes ------*
 // *---------- en fonction des filtres selectionnes ----------*
@@ -112,6 +100,7 @@ function generateRecipesListFilters () {
     return result.every(v => v === true)
   })
 }
+
 // *----------------------------------------------------------*
 // *------- fonction pour creer la liste des recettes --------*
 // *----------------------------------------------------------*
@@ -119,14 +108,16 @@ export function displayRecipesList (globalLists) {
   const recipesBox = document.getElementById('recipes__box')
   recipesBox.innerHTML = ''
 
-  // _________________________________________________________________________
   // Message d'alerte si aucun resultat n'a été trouvé
   if (globalLists.recipesToDisplay.length === 0) {
     const searchValue = document.getElementById('input_search').value
-    recipesBox.textContent = `Aucune recette ne contient " ${searchValue} ". Vous pouvez chercher « tarte aux pommes », « poisson », etc.`
+    const errorMessageDiv = document.createElement('div')
+    errorMessageDiv.classList.add('recipes__box__error')
+    errorMessageDiv.innerHTML = errorMessageDiv.textContent = `Aucune recette ne contient " <strong style="color: red">${searchValue}</strong> ". Vous pouvez chercher « tarte aux pommes », « poisson, », etc.`
+    recipesBox.appendChild(errorMessageDiv)
     return false
-  // _________________________________________________________________________
   }
+
   // setRecipesToDisplay(globalLists)
   for (const recipe of globalLists.recipesToDisplay) {
     // Creation de l element "article" pour la card
@@ -202,9 +193,11 @@ export function displayRecipesList (globalLists) {
     // Generation du contenu dans le DOM
     recipesBox.appendChild(article)
   }
+
   // Mise a jour du compteur de recette
   updateRecipesCount(globalLists)
 }
+
 const mainSearchBar = document.getElementById('input_search')
 mainSearchBar.addEventListener('input', (event) => {
   if (event.target.value.length >= 3) {
@@ -241,11 +234,13 @@ mainSearchBar.addEventListener('input', (event) => {
     // si la longueur de la recherche est inférieure à 3
     globalLists.mainSearch = []
   }
+
   // Mettre à jour la liste des recettes a afficher en fonction
   // des recherches dans la searchbar
   setRecipesToDisplay()
   console.log('recettes a afficher ', globalLists.recipesToDisplay)
 })
+
 // *--------------------------------------------------------------------------------------------*
 // *----------------------------- affiche la liste de tout recettes ----------------------------*
 // *---------------------------------- au chargement de la page --------------------------------*
