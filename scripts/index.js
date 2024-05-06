@@ -115,6 +115,8 @@ export function displayRecipesList (globalLists) {
     errorMessageDiv.classList.add('recipes__box__error')
     errorMessageDiv.innerHTML = errorMessageDiv.textContent = `Aucune recette ne contient " <strong style="color: red">${searchValue}</strong> ". Vous pouvez chercher « tarte aux pommes », « poisson, », etc.`
     recipesBox.appendChild(errorMessageDiv)
+    const recipesNumber = document.getElementById('recipes__numbers')
+    recipesNumber.textContent = '0'
     return false
   }
 
