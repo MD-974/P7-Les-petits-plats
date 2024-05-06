@@ -109,23 +109,24 @@ button{
     display: block;
     cursor: pointer;
 }
-/* #recipes__box{
+#header__container__search__box__error{
     display: none;
-    background-color:rgb(255, 209, 92, 1);
+    border:rgb(255, 92, 92) 1px solid;
+    background-color:black;
     width: 954px;
     height: 2.5rem;
     margin: 10px auto;
     border-radius: 0.6875rem;
-    font-size: 1rem;
-    font-weight: 700;
-} */
-/* .header__container__search__box__error__text{
+}
+.header__container__search__box__error__text{
     display: flex;
     justify-content: center;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-top: 9px;
-} */
+    padding-top: 6px;
+    color: rgb(255, 92, 92);
+
+}
 
 
 /*------------ dropbox -----------*/
@@ -347,15 +348,13 @@ button{
     background-color:rgba(255, 209, 92, 0.3);
     width: 954px;
     height: 2.5rem;
-    margin: 10px auto;
+    margin: 100px auto;
     border-radius: 0.6875rem;
     font-size: 1rem;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
-/* .recipes__box__error:hover{
-    scale: 1.02;
-    transition: 300ms;
-} */
+
+
 /*--------------- card --------------*/
 .card{
     display: flex;

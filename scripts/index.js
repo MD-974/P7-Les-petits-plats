@@ -209,10 +209,12 @@ mainSearchBar.addEventListener('input', (event) => {
     closeBtn.addEventListener('click', (event) => {
       // effacer la value de l'input
       mainSearchBar.value = ''
+      // Enlever le message d'erreur
+      securityErrorDiv.style.display = 'none'
       // Enlever la class pour rendre invisible l'élément croix de l input
       event.target.classList.remove('header__container__search__box__button__close--visible')
       mainSearchBar.nextElementSibling.classList.remove('header__container__search__box__button__close--visible')
-      console.log('click : croix enlever')
+      // console.log('click : croix enlever')
 
       // ------------------------------------------------
       // reafficher la liste de toutes les recettes
@@ -223,11 +225,26 @@ mainSearchBar.addEventListener('input', (event) => {
     })
 
     const userSearch = event.target.value
+
+    // controle de sécurité pour l'input de recherche
+    const regex = /^[a-zA-ZÀ-ÿ\s]+$/gm
+    const securityErrorDiv = document.getElementById('header__container__search__box__error')
+
+    if (!userSearch.match(regex) || userSearch.length < 3) {
+      console.log('Caractère non autorisé')
+      // Afficher le message d'erreur
+      const securityErrorParagraph = document.getElementById('header__container__search__box__error__text')
+      securityErrorParagraph.innerText = 'Caractère non autorisé, veuillez utiliser 3 caractères alphabétiques au minimum.'
+      securityErrorDiv.style.display = 'block'
+      return false
+    } else {
+      // Enlever le message d'erreur
+      console.log('Caractère autorisé')
+      securityErrorDiv.style.display = 'none'
+    }
+
     const userSearchTrimmed = userSearch.trim()
     const userSearchSplit = userSearchTrimmed.split(' ')
-
-    // console.log('recherche : ', userSearch)
-    // console.log('split : ', userSearchSplit)
 
     globalLists.mainSearch = userSearchSplit
     console.log(globalLists)
