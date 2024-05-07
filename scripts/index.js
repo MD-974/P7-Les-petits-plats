@@ -201,6 +201,7 @@ export function displayRecipesList (globalLists) {
 }
 
 const mainSearchBar = document.getElementById('input_search')
+
 mainSearchBar.addEventListener('input', (event) => {
   if (event.target.value.length >= 3) {
     // Ajouter une class pour rendre visible l'élément croix de l input
