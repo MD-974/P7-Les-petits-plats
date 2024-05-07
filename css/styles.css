@@ -17,17 +17,16 @@ button{
 
 
 /* ---------- HEADER ---------- */
-/* => height */
+/* => height & width <= */
 .header, .header__banner, .header__container{
     height: 46.6875rem;
+    width: 100%;
 }
 .header__banner{
-    width: 100%;
     object-fit: cover;
     object-position: center 85.5%;
 }
 .header__container{
-    width: 100%;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -125,7 +124,6 @@ button{
     text-overflow: ellipsis;
     padding-top: 6px;
     color: rgb(255, 92, 92);
-
 }
 
 
@@ -244,58 +242,55 @@ button{
     position: relative;
     padding: 0;
 }
-.dropdown__content__list__item--unfilter:hover{
+/* => display: flex, color: black, background-color: rgba(255, 209, 91, 1) & cursor: pointer <= */
+.dropdown__content__list__item--unfilter:hover, .dropdown__content__list__item--filter{
     display: flex;
-    font-size: 16px; 
-    transition: 400ms;
-    background-color: rgba(255, 209, 91, 1);
     cursor: pointer;
     color: black;
+    background-color: rgba(255, 209, 91, 1);
+}
+.dropdown__content__list__item--unfilter:hover{
+    font-size: 16px; 
+    transition: 400ms;
 }
 .dropdown__content__list__item--filter{
     font-size: 14px;
     font-weight: 900;
-    display: flex;
     align-items: center;
     padding: 0 10px;
     justify-content: space-between;
     text-transform: capitalize;
     min-height: 40px;
-    background-color: rgba(255, 209, 91, 1);
-    color: black;
-    cursor: pointer;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15)
 }
 
 
 /*---------- recipes result ----------*/
-.main__filter__recipes__result{
-    height: 4rem;
+/* => display: flex, align-items: center <= */
+.main__filter__recipes__result, .main__filter__recipes__result__text, #recipes__numbers, .tag__selected, .filter__tags{
     display: flex;
     align-items: center;
+}
+.main__filter__recipes__result{
+    height: 4rem;
     position: absolute;
     right: 0;
     top: 10px;
-    /* background-color: burlywood; */
 }
 .main__filter__recipes__result__text{
     width: 115px;
     font-weight: 400;
     font-family: 'Anton', sans-serif;
     font-size: 1.3125rem;
-    display: flex;
     flex-direction: row;
     justify-content: flex-end;
     gap: 0.2rem;
 }
 #recipes__numbers{
-    display: flex;
-    align-items: center;
     font-weight: 400;
     font-family: 'Anton', sans-serif;
 }
 .tag__selected {
-    display: flex;
     flex-wrap: wrap;
 }
 .filter__tags{
@@ -303,12 +298,10 @@ button{
     height: 53px;
     font-size: 14px;
     font-weight: 900;
-    display: flex;
     flex-direction: row;
     padding: 0 10px;
     margin-right: 10px;
     margin-top: 10px;
-    align-items: center;
     justify-content: space-between;
     text-transform: capitalize;
     border-radius: 10px;
@@ -352,6 +345,7 @@ button{
     border-radius: 0.6875rem;
     font-size: 1rem;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+
 }
 .recipes__box__error--hidden {
     display: none;
@@ -404,7 +398,6 @@ button{
     height: 100%;
     padding: 24px 32px;
     border-radius: 0 0 21px 21px;
-    /* background-color: bisque; */
 }
 .card__content__title{
     font-family: "Anton",sans-serif;
