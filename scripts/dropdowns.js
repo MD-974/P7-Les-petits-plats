@@ -48,8 +48,6 @@ export function getAllGlobalLists (arrayRecipes) {
 * @param {boolean} [isFilter=false] - indicateur pour savoir si les listes sont filtrées                              **
 ***********************************************************************************************************************/
 export function displayAllDropdownsLists (globalLists, type, isFilterInput = false) {
-  // console.log(globalLists)
-  // console.log(type)
   // Obtenir les éléments ul non filtrés et filtrés
   const ulUnfiltered = document.getElementById(type + '--unfilter')
   const ulFiltered = document.getElementById(type + '--filter')
@@ -90,7 +88,6 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
     li.textContent = element
 
     if (globalLists[type + 'Selected'].includes(element)) {
-      console.log('ok')
       li.classList.add('dropdown__content__list__item--filter')
       const tagsClose = document.createElement('span')
       tagsClose.classList.add('fa-solid', 'fa-xmark')
@@ -100,28 +97,21 @@ export function displayAllDropdownsLists (globalLists, type, isFilterInput = fal
 
       // Ajout d'un ecouteur d'evenement pour supprimer au click le 'li' cliquer
       tagsClose.addEventListener('click', (event) => {
-        // console.log(event.currentTarget.parentElement.textContent + ' ' + type)
         globalLists[type + 'Selected'].splice(globalLists[type + 'Selected'].indexOf(event.target.parentElement.textContent), 1)
-        console.log(globalLists)
 
         setRecipesToDisplay()
         typesArray.forEach(tmpType => displayAllDropdownsLists(globalLists, tmpType))
         displayFilterTags(globalLists, type)
-        console.log(globalLists)
       })
     } else {
       li.classList.add('dropdown__content__list__item--unfilter')
       ulUnfiltered.appendChild(li)
       // Ajout d'un ecouteur d'evenement pour afficher au clic le 'li' cliquer
       li.addEventListener('click', (event) => {
-        // console.log(event.currentTarget.textContent + ' ' + type)
         globalLists[type + 'Selected'].push(event.target.textContent)
-        console.log(globalLists)
-        // displayRecipesList(globalLists)
         setRecipesToDisplay()
         typesArray.forEach(tmpType => displayAllDropdownsLists(globalLists, tmpType))
         displayFilterTags(globalLists, type)
-        console.log(globalLists)
       })
     }
   })
@@ -236,7 +226,6 @@ dropdownsButtons.forEach((dropdownBtn) => {
 const filterImputs = document.querySelectorAll('.dropdown__content__input')
 filterImputs.forEach((input) => {
   input.addEventListener('input', (event) => {
-    console.log(event.target.value.length)
     // Obtenir le type à partir de l'ID de l'input
     const type = input.id.split('--')[1]
     // On vide le tout
@@ -267,7 +256,6 @@ filterImputs.forEach((input) => {
 // *------ Remise a zero de l'input du dropdown au click sur la croix -------*
 // *-------------------------------------------------------------------------*
 const closeIconsDropdown = document.querySelectorAll('.dropdown__content__input__close')
-// console.log(closeIconsDropdown)
 closeIconsDropdown.forEach((icon) => {
   icon.addEventListener('click', (event) => {
     event.target.previousElementSibling.value = ''
