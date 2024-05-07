@@ -32,22 +32,18 @@ function generateRecipesListSearchBar () {
     const resultsArray = globalLists.recipesToDisplay.filter(recipe => {
       return globalLists.mainSearch.every(searchWord => {
         const lowercaseSearchWord = searchWord.toLowerCase()
-
         if (recipe.name.toLowerCase().includes(lowercaseSearchWord)) {
           return true
         }
-
         if (recipe.description.toLowerCase().includes(lowercaseSearchWord)) {
           return true
         }
-
         return recipe.ingredients.some(ingredient => {
           const lowercaseIngredient = ingredient.ingredient.toLowerCase()
           return lowercaseIngredient.includes(lowercaseSearchWord)
         })
       })
     })
-
     globalLists.recipesToDisplay = resultsArray
   }
 }
@@ -59,7 +55,6 @@ function generateRecipesListSearchBar () {
 function generateRecipesListFilters () {
   globalLists.recipesToDisplay = globalLists.recipesToDisplay.filter(recipe => {
     const result = [false, false, false]
-
     // Si le tableau des filtres contient un ou plusieurs ingrédients
     if (globalLists.ingredientsSelected.length > 0) {
       // Si la recette contient cet ingrédient
@@ -70,7 +65,6 @@ function generateRecipesListFilters () {
     } else {
       result[0] = true
     }
-
     // Si le tableau  des filtres contient un ou plusieurs appareils
     if (globalLists.appliancesSelected.length > 0) {
       // Si la recette contient cet appareils
@@ -81,7 +75,6 @@ function generateRecipesListFilters () {
     } else {
       result[1] = true
     }
-
     // Si le tableau  des filtres contient un ou plusieurs ustensils
     if (globalLists.ustensilsSelected.length > 0) {
       // Nettoyer le tableu recipe.ustensils pour vraiment mettre en minuscule
@@ -96,7 +89,6 @@ function generateRecipesListFilters () {
     } else {
       result[2] = true
     }
-
     return result.every(v => v === true)
   })
 }
@@ -160,10 +152,8 @@ export function displayRecipesList (globalLists) {
     const ingredients = document.createElement('ul')
     ingredients.setAttribute('class', 'card__content__list')
     title.textContent = recipe.name
-
     // Boucle pour ajouter les ingrédients
     for (const ingredient of recipe.ingredients) {
-    //   console.log(ingredient)
       // Creation d'un element "li" pour chaque ingrédient
       const listItem = document.createElement('li')
       listItem.setAttribute('class', 'card__content__list__item')
@@ -180,7 +170,6 @@ export function displayRecipesList (globalLists) {
       listItem.appendChild(spanQuantityUnit)
       ingredients.appendChild(listItem)
     }
-
     // Ajout des enfants "appendChild"
     article.appendChild(figure)
     article.appendChild(contentCard)
@@ -191,17 +180,14 @@ export function displayRecipesList (globalLists) {
     contentCard.appendChild(description)
     contentCard.appendChild(subtitleIngredient)
     contentCard.appendChild(ingredients)
-
     // Generation du contenu dans le DOM
     recipesBox.appendChild(article)
   }
-
   // Mise a jour du compteur de recette
   updateRecipesCount(globalLists)
 }
 
 const mainSearchBar = document.getElementById('input_search')
-
 mainSearchBar.addEventListener('input', (event) => {
   if (event.target.value.length >= 3) {
     // Ajouter une class pour rendre visible l'élément croix de l input
@@ -215,9 +201,6 @@ mainSearchBar.addEventListener('input', (event) => {
       // Enlever la class pour rendre invisible l'élément croix de l input
       event.target.classList.remove('header__container__search__box__button__close--visible')
       mainSearchBar.nextElementSibling.classList.remove('header__container__search__box__button__close--visible')
-      // console.log('click : croix enlever')
-
-      // ------------------------------------------------
       // reafficher la liste de toutes les recettes
       globalLists.mainSearch = []
       // Mettre à jour la liste des recettes a afficher en fonction
@@ -230,9 +213,7 @@ mainSearchBar.addEventListener('input', (event) => {
     // controle de sécurité pour l'input de recherche
     const regex = /^[a-zA-ZÀ-ÿ\s]+$/gm
     const securityErrorDiv = document.getElementById('header__container__search__box__error')
-
     if (!userSearch.match(regex) || userSearch.length < 3) {
-      console.log('Caractère non autorisé')
       // Afficher le message d'erreur
       const securityErrorParagraph = document.getElementById('header__container__search__box__error__text')
       securityErrorParagraph.innerText = 'Caractère non autorisé, veuillez utiliser 3 caractères alphabétiques au minimum.'
@@ -240,15 +221,11 @@ mainSearchBar.addEventListener('input', (event) => {
       return false
     } else {
       // Enlever le message d'erreur
-      console.log('Caractère autorisé')
       securityErrorDiv.style.display = 'none'
     }
-
     const userSearchTrimmed = userSearch.trim()
     const userSearchSplit = userSearchTrimmed.split(' ')
-
     globalLists.mainSearch = userSearchSplit
-    console.log(globalLists)
   } else {
     // reafficher la liste de toutes les recettes
     // si la longueur de la recherche est inférieure à 3
@@ -258,7 +235,6 @@ mainSearchBar.addEventListener('input', (event) => {
   // Mettre à jour la liste des recettes a afficher en fonction
   // des recherches dans la searchbar
   setRecipesToDisplay()
-  console.log('recettes a afficher ', globalLists.recipesToDisplay)
 })
 
 // *--------------------------------------------------------------------------------------------*
@@ -266,4 +242,3 @@ mainSearchBar.addEventListener('input', (event) => {
 // *---------------------------------- au chargement de la page --------------------------------*
 // *--------------------------------------------------------------------------------------------*
 setRecipesToDisplay()
-// console.log(setRecipesToDisplay)
