@@ -12,7 +12,6 @@ export const filterList = (type, value, globalArray) => {
   // creation tableau temporaire suivant le type de filtrage
   let tempArray = globalArray[type]
   tempArray = tempArray.filter(filter => filter.includes(value))
-  // console.log(tempArray)
   return tempArray
 }
 
@@ -34,7 +33,6 @@ export const generateUnfilterList = (listToUse, htmlNode) => {
       globalLists.ingredientsFilter.push(event.target.textContent)
       globalLists.appliancesFilter.push(event.target.textContent)
       globalLists.ustensilsFilter.push(event.target.textContent)
-      console.log(globalLists)
     })
   }
 }
@@ -46,14 +44,10 @@ export const generateUnfilterList = (listToUse, htmlNode) => {
  * @return {HTMLElement} l'élément de balise de filtre créé   **
  **************************************************************/
 export const displayFilterTags = (globalLists) => {
-  // console.log(displayFilterTags)
   const filterTagSelected = document.querySelector('.tag__selected')
   filterTagSelected.innerHTML = ''
   const allTags = globalLists.ingredientsSelected.concat(globalLists.appliancesSelected, globalLists.ustensilsSelected, globalLists.searchBarSelected)
-  console.log(allTags)
-
   allTags.forEach((element) => {
-    console.log(element)
     const filterTagsContainers = document.createElement('div')
     filterTagsContainers.classList.add('filter__tags__container')
     const tagsClose = document.createElement('span')
@@ -65,7 +59,6 @@ export const displayFilterTags = (globalLists) => {
     filterTagSelected.appendChild(filterTagsContainers)
     filterTagsContainers.appendChild(filterTags)
     filterTags.appendChild(tagsClose)
-
     // Ajout d'un ecouteur d'evenement pour supprimer au click le 'li' cliquer
     tagsClose.addEventListener('click', (event) => {
       globalLists.ingredientsSelected = globalLists.ingredientsSelected.filter((tag) => tag !== element)

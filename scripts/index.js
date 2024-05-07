@@ -8,14 +8,12 @@ export const globalLists = getAllGlobalLists(recipes)
 export function setRecipesToDisplay () {
   // reinitialisation de la liste des recettes a afficher
   globalLists.recipesToDisplay = recipes
-
   // Recalcul de la liste des recettes a afficher en fonction des recherches dans la searchbar
   generateRecipesListSearchBar()
   // Recalcul de la liste des recettes a afficher en fonction des filtres selectionnes
   generateRecipesListFilters()
   // Rafraîchit l'affichage avec toutes les recettes
   displayRecipesList(globalLists)
-
   // Rafraichir l'affichage des dropdowns
   displayAllDropdownsLists(globalLists, 'ingredients')
   displayAllDropdownsLists(globalLists, 'appliances')
@@ -30,25 +28,18 @@ function generateRecipesListSearchBar () {
   if (globalLists.mainSearch.length > 0) {
     // tableau vide pour stocker les recettes
     const resultsArray = []
-    // console.log('tableau :', resultsArray)
-
     for (let i = 0; i < globalLists.recipesToDisplay.length; i++) {
       const recipe = globalLists.recipesToDisplay[i]
       if (globalLists.mainSearch.every(word => recipe.name.toLowerCase().includes(word.toLowerCase()))) {
         resultsArray.push(recipe)
-        // console.log('recette : ', recipe.name)
       } else if (globalLists.mainSearch.every(word => recipe.description.toLowerCase().includes(word.toLowerCase()))) {
         resultsArray.push(recipe)
-        // console.log('description : ', recipe.description)
       } else if (globalLists.mainSearch.every(word => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(word.toLowerCase())))) {
         resultsArray.push(recipe)
-        console.log('ingredients : ', recipe.ingredients)
       }
     }
-
     // On garde uniquement les recettes qui ont tous les mots de la recherche
     globalLists.recipesToDisplay = resultsArray
-    // console.log('recette : ', globalLists.recipesToDisplay)
   }
 }
 
@@ -59,7 +50,6 @@ function generateRecipesListSearchBar () {
 function generateRecipesListFilters () {
   globalLists.recipesToDisplay = globalLists.recipesToDisplay.filter(recipe => {
     const result = [false, false, false]
-
     // Si le tableau des filtres contient un ou plusieurs ingrédients
     if (globalLists.ingredientsSelected.length > 0) {
       // Si la recette contient cet ingrédient
@@ -70,7 +60,6 @@ function generateRecipesListFilters () {
     } else {
       result[0] = true
     }
-
     // Si le tableau  des filtres contient un ou plusieurs appareils
     if (globalLists.appliancesSelected.length > 0) {
       // Si la recette contient cet appareils
@@ -81,7 +70,6 @@ function generateRecipesListFilters () {
     } else {
       result[1] = true
     }
-
     // Si le tableau  des filtres contient un ou plusieurs ustensils
     if (globalLists.ustensilsSelected.length > 0) {
       // Nettoyer le tableu recipe.ustensils pour vraiment mettre en minuscule
@@ -96,7 +84,6 @@ function generateRecipesListFilters () {
     } else {
       result[2] = true
     }
-
     return result.every(v => v === true)
   })
 }
@@ -163,7 +150,6 @@ export function displayRecipesList (globalLists) {
 
     // Boucle pour ajouter les ingrédients
     for (const ingredient of recipe.ingredients) {
-    //   console.log(ingredient)
       // Creation d'un element "li" pour chaque ingrédient
       const listItem = document.createElement('li')
       listItem.setAttribute('class', 'card__content__list__item')
@@ -180,7 +166,6 @@ export function displayRecipesList (globalLists) {
       listItem.appendChild(spanQuantityUnit)
       ingredients.appendChild(listItem)
     }
-
     // Ajout des enfants "appendChild"
     article.appendChild(figure)
     article.appendChild(contentCard)
@@ -191,11 +176,9 @@ export function displayRecipesList (globalLists) {
     contentCard.appendChild(description)
     contentCard.appendChild(subtitleIngredient)
     contentCard.appendChild(ingredients)
-
     // Generation du contenu dans le DOM
     recipesBox.appendChild(article)
   }
-
   // Mise a jour du compteur de recette
   updateRecipesCount(globalLists)
 }
@@ -214,9 +197,6 @@ mainSearchBar.addEventListener('input', (event) => {
       // Enlever la class pour rendre invisible l'élément croix de l input
       event.target.classList.remove('header__container__search__box__button__close--visible')
       mainSearchBar.nextElementSibling.classList.remove('header__container__search__box__button__close--visible')
-      // console.log('click : croix enlever')
-
-      // ------------------------------------------------
       // reafficher la liste de toutes les recettes
       globalLists.mainSearch = []
       // Mettre à jour la liste des recettes a afficher en fonction
@@ -225,13 +205,10 @@ mainSearchBar.addEventListener('input', (event) => {
     })
 
     const userSearch = event.target.value
-
     // controle de sécurité pour l'input de recherche
     const regex = /^[a-zA-ZÀ-ÿ\s]+$/gm
     const securityErrorDiv = document.getElementById('header__container__search__box__error')
-
     if (!userSearch.match(regex) || userSearch.length < 3) {
-      console.log('Caractère non autorisé')
       // Afficher le message d'erreur
       const securityErrorParagraph = document.getElementById('header__container__search__box__error__text')
       securityErrorParagraph.innerText = 'Caractère non autorisé, veuillez utiliser 3 caractères alphabétiques au minimum.'
@@ -239,25 +216,19 @@ mainSearchBar.addEventListener('input', (event) => {
       return false
     } else {
       // Enlever le message d'erreur
-      console.log('Caractère autorisé')
       securityErrorDiv.style.display = 'none'
     }
-
     const userSearchTrimmed = userSearch.trim()
     const userSearchSplit = userSearchTrimmed.split(' ')
-
     globalLists.mainSearch = userSearchSplit
-    console.log(globalLists)
   } else {
     // reafficher la liste de toutes les recettes
     // si la longueur de la recherche est inférieure à 3
     globalLists.mainSearch = []
   }
-
   // Mettre à jour la liste des recettes a afficher en fonction
   // des recherches dans la searchbar
   setRecipesToDisplay()
-  console.log('recettes a afficher ', globalLists.recipesToDisplay)
 })
 
 // *--------------------------------------------------------------------------------------------*
@@ -265,4 +236,3 @@ mainSearchBar.addEventListener('input', (event) => {
 // *---------------------------------- au chargement de la page --------------------------------*
 // *--------------------------------------------------------------------------------------------*
 setRecipesToDisplay()
-// console.log(setRecipesToDisplay)
