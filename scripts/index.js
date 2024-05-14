@@ -25,35 +25,46 @@ export function setRecipesToDisplay () {
 // *------ en fonction de la recherche dans la searchbar -----*
 // *----------------------------------------------------------*
 function generateRecipesListSearchBar () {
+  // Vérifie s'il y a une recherche principale
   if (globalLists.mainSearch.length > 0) {
+    // Initialise un tableau pour stocker les résultats
     const resultsArray = []
+    // Parcour toutes les recettes à afficher
     for (let i = 0; i < globalLists.recipesToDisplay.length; i++) {
       const recipe = globalLists.recipesToDisplay[i]
       let foundInName = false
       let foundInDescription = false
       let foundInIngredients = false
+      // Parcour tous les mots de la recherche principale
       for (let j = 0; j < globalLists.mainSearch.length; j++) {
         const word = globalLists.mainSearch[j].toLowerCase()
+        // Vérifie si le nom de la recette contient le mot
         if (recipe.name.toLowerCase().includes(word)) {
           foundInName = true
         }
+        // Vérifie si la description de la recette contient le mot
         if (recipe.description.toLowerCase().includes(word)) {
           foundInDescription = true
         }
+        // Parcourt tous les ingrédients de la recette
         for (let k = 0; k < recipe.ingredients.length; k++) {
+          // Vérifie si un ingrédient contient le mot
           if (recipe.ingredients[k].ingredient.toLowerCase().includes(word)) {
             foundInIngredients = true
             break
           }
         }
+        // Sort de la boucle si le mot est trouvé dans le nom, la description et les ingrédients
         if (foundInName && foundInDescription && foundInIngredients) {
           break
         }
       }
+      // Ajoute la recette aux résultats si le mot est trouvé dans le nom, la description ou les ingrédients
       if (foundInName || foundInDescription || foundInIngredients) {
         resultsArray.push(recipe)
       }
     }
+    // Met à jour la liste des recettes à afficher avec les résultats
     globalLists.recipesToDisplay = resultsArray
   }
 }
