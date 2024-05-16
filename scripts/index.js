@@ -8,12 +8,14 @@ export const globalLists = getAllGlobalLists(recipes)
 export function setRecipesToDisplay () {
   // reinitialisation de la liste des recettes a afficher
   globalLists.recipesToDisplay = recipes
+
   // Recalcul de la liste des recettes a afficher en fonction des recherches dans la searchbar
   generateRecipesListSearchBar()
   // Recalcul de la liste des recettes a afficher en fonction des filtres selectionnes
   generateRecipesListFilters()
   // Rafraîchit l'affichage avec toutes les recettes
   displayRecipesList(globalLists)
+
   // Rafraichir l'affichage des dropdowns
   displayAllDropdownsLists(globalLists, 'ingredients')
   displayAllDropdownsLists(globalLists, 'appliances')
@@ -25,46 +27,29 @@ export function setRecipesToDisplay () {
 // *------ en fonction de la recherche dans la searchbar -----*
 // *----------------------------------------------------------*
 function generateRecipesListSearchBar () {
-  // Vérifie s'il y a une recherche principale
+  // Vérifie si le tableau de recherche principal est non vide
   if (globalLists.mainSearch.length > 0) {
-    // Initialise un tableau pour stocker les résultats
-    const resultsArray = []
-    // Parcour toutes les recettes à afficher
-    for (let i = 0; i < globalLists.recipesToDisplay.length; i++) {
-      const recipe = globalLists.recipesToDisplay[i]
-      let foundInName = false
-      let foundInDescription = false
-      let foundInIngredients = false
-      // Parcour tous les mots de la recherche principale
-      for (let j = 0; j < globalLists.mainSearch.length; j++) {
-        const word = globalLists.mainSearch[j].toLowerCase()
-        // Vérifie si le nom de la recette contient le mot
-        if (recipe.name.toLowerCase().includes(word)) {
-          foundInName = true
+    // Crée un tableau de résultats en filtrant les recettes à afficher
+    const resultsArray = globalLists.recipesToDisplay.filter(recipe => {
+      // Vérifie si chaque mot clé de recherche est présent dans la recette
+      return globalLists.mainSearch.every(searchWord => {
+        // Convertit le mot clé de recherche en minuscules
+        const lowercaseSearchWord = searchWord.toLowerCase()
+        // Vérifie si le nom de la recette ou la description contient le mot clé de recherche
+        if (recipe.name.toLowerCase().includes(lowercaseSearchWord)) {
+          return true
         }
-        // Vérifie si la description de la recette contient le mot
-        if (recipe.description.toLowerCase().includes(word)) {
-          foundInDescription = true
+        if (recipe.description.toLowerCase().includes(lowercaseSearchWord)) {
+          return true
         }
-        // Parcourt tous les ingrédients de la recette
-        for (let k = 0; k < recipe.ingredients.length; k++) {
-          // Vérifie si un ingrédient contient le mot
-          if (recipe.ingredients[k].ingredient.toLowerCase().includes(word)) {
-            foundInIngredients = true
-            break
-          }
-        }
-        // Sort de la boucle si le mot est trouvé dans le nom, la description et les ingrédients
-        if (foundInName && foundInDescription && foundInIngredients) {
-          break
-        }
-      }
-      // Ajoute la recette aux résultats si le mot est trouvé dans le nom, la description ou les ingrédients
-      if (foundInName || foundInDescription || foundInIngredients) {
-        resultsArray.push(recipe)
-      }
-    }
-    // Met à jour la liste des recettes à afficher avec les résultats
+        // Vérifie si au moins un ingrédient de la recette contient le mot clé de recherche
+        return recipe.ingredients.some(ingredient => {
+          const lowercaseIngredient = ingredient.ingredient.toLowerCase()
+          return lowercaseIngredient.includes(lowercaseSearchWord)
+        })
+      })
+    })
+    // Met à jour le tableau des recettes à afficher avec le tableau de résultats
     globalLists.recipesToDisplay = resultsArray
   }
 }
@@ -74,64 +59,44 @@ function generateRecipesListSearchBar () {
 // *---------- en fonction des filtres selectionnes ----------*
 // *----------------------------------------------------------*
 function generateRecipesListFilters () {
-  // Création d'une liste pour stocker les recettes filtrées
-  const filteredRecipes = []
-  // Parcours de toutes les recettes dans globalLists.recipesToDisplay
-  for (let i = 0; i < globalLists.recipesToDisplay.length; i++) {
-    const recipe = globalLists.recipesToDisplay[i]
+  globalLists.recipesToDisplay = globalLists.recipesToDisplay.filter(recipe => {
     const result = [false, false, false]
-    // Vérification du filtre d'ingrédients
+    // Si le tableau des filtres contient un ou plusieurs ingrédients
     if (globalLists.ingredientsSelected.length > 0) {
-      let hasAllIngredients = true
-      for (let j = 0; j < globalLists.ingredientsSelected.length; j++) {
-        const ingredient = globalLists.ingredientsSelected[j]
-        let found = false
-        for (let k = 0; k < recipe.ingredients.length; k++) {
-          if (recipe.ingredients[k].ingredient.toLowerCase() === ingredient) {
-            found = true
-            break
-          }
-        }
-        if (!found) {
-          hasAllIngredients = false
-          break
-        }
+      // Si la recette contient cet ingrédient
+      if (globalLists.ingredientsSelected.every(ingredient => recipe.ingredients.some(item => item.ingredient.toLowerCase() === ingredient))) {
+        // La recette valide le filtre ingrédient
+        result[0] = true
       }
-      result[0] = hasAllIngredients
     } else {
       result[0] = true
     }
-    // Vérification du filtre d'appareils
+    // Si le tableau  des filtres contient un ou plusieurs appareils
     if (globalLists.appliancesSelected.length > 0) {
-      result[1] = globalLists.appliancesSelected.includes(recipe.appliance.toLowerCase())
+      // Si la recette contient cet appareils
+      if (globalLists.appliancesSelected.includes(recipe.appliance.toLowerCase())) {
+        // La recette valide le filtre appareils
+        result[1] = true
+      }
     } else {
       result[1] = true
     }
-    // Vérification du filtre d'ustensiles
+    // Si le tableau  des filtres contient un ou plusieurs ustensils
     if (globalLists.ustensilsSelected.length > 0) {
-      let hasAllUstensils = true
+      // Nettoyer le tableu recipe.ustensils pour vraiment mettre en minuscule
       const cleanUstensils = []
-      for (let j = 0; j < recipe.ustensils.length; j++) {
-        cleanUstensils.push(recipe.ustensils[j].toLowerCase())
+      recipe.ustensils.forEach(ustensil => cleanUstensils.push(ustensil.toLowerCase()))
+      recipe.ustensils = cleanUstensils
+      // Si la recette contient cet ustensils
+      if (globalLists.ustensilsSelected.every(ustensil => recipe.ustensils.includes(ustensil.toLowerCase()))) {
+        // La recette valide le filtre ustensils
+        result[2] = true
       }
-      for (let j = 0; j < globalLists.ustensilsSelected.length; j++) {
-        const ustensil = globalLists.ustensilsSelected[j]
-        if (!cleanUstensils.includes(ustensil.toLowerCase())) {
-          hasAllUstensils = false
-          break
-        }
-      }
-      result[2] = hasAllUstensils
     } else {
       result[2] = true
     }
-    // Vérification si la recette passe tous les filtres
-    if (result.every(v => v === true)) {
-      filteredRecipes.push(recipe)
-    }
-  }
-  // Remplacer globalLists.recipesToDisplay par les recettes filtrées
-  globalLists.recipesToDisplay = filteredRecipes
+    return result.every(v => v === true)
+  })
 }
 
 // *----------------------------------------------------------*
@@ -228,7 +193,6 @@ export function displayRecipesList (globalLists) {
   updateRecipesCount(globalLists)
 }
 
-// Ecouteur d'evenement pour la barre de recherche
 const mainSearchBar = document.getElementById('input_search')
 mainSearchBar.addEventListener('input', (event) => {
   if (event.target.value.length >= 3) {
@@ -251,6 +215,7 @@ mainSearchBar.addEventListener('input', (event) => {
     })
 
     const userSearch = event.target.value
+
     // controle de sécurité pour l'input de recherche
     const regex = /^[a-zA-ZÀ-ÿ\s]+$/gm
     const securityErrorDiv = document.getElementById('header__container__search__box__error')
@@ -272,6 +237,7 @@ mainSearchBar.addEventListener('input', (event) => {
     // si la longueur de la recherche est inférieure à 3
     globalLists.mainSearch = []
   }
+
   // Mettre à jour la liste des recettes a afficher en fonction
   // des recherches dans la searchbar
   setRecipesToDisplay()
