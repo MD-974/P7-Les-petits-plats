@@ -49,45 +49,105 @@ function generateRecipesListSearchBar () {
 // *------- fonction pour generer la liste des recettes ------*
 // *---------- en fonction des filtres selectionnes ----------*
 // *----------------------------------------------------------*
+// function generateRecipesListFilters () {
+//   globalLists.recipesToDisplay = globalLists.recipesToDisplay.filter(recipe => {
+//     const result = [false, false, false]
+//     // Si le tableau des filtres contient un ou plusieurs ingrédients
+//     if (globalLists.ingredientsSelected.length > 0) {
+//       // Si la recette contient cet ingrédient
+//       if (globalLists.ingredientsSelected.every(ingredient => recipe.ingredients.some(item => item.ingredient.toLowerCase() === ingredient))) {
+//         // La recette valide le filtre ingrédient
+//         result[0] = true
+//       }
+//     } else {
+//       result[0] = true
+//     }
+//     // Si le tableau  des filtres contient un ou plusieurs appareils
+//     if (globalLists.appliancesSelected.length > 0) {
+//       // Si la recette contient cet appareils
+//       if (globalLists.appliancesSelected.includes(recipe.appliance.toLowerCase())) {
+//         // La recette valide le filtre appareils
+//         result[1] = true
+//       }
+//     } else {
+//       result[1] = true
+//     }
+//     // Si le tableau  des filtres contient un ou plusieurs ustensils
+//     if (globalLists.ustensilsSelected.length > 0) {
+//       // Nettoyer le tableu recipe.ustensils pour vraiment mettre en minuscule
+//       const cleanUstensils = []
+//       recipe.ustensils.forEach(ustensil => cleanUstensils.push(ustensil.toLowerCase()))
+//       recipe.ustensils = cleanUstensils
+//       // Si la recette contient cet ustensils
+//       if (globalLists.ustensilsSelected.every(ustensil => recipe.ustensils.includes(ustensil.toLowerCase()))) {
+//         // La recette valide le filtre ustensils
+//         result[2] = true
+//       }
+//     } else {
+//       result[2] = true
+//     }
+//     return result.every(v => v === true)
+//   })
+// }
 function generateRecipesListFilters () {
-  globalLists.recipesToDisplay = globalLists.recipesToDisplay.filter(recipe => {
+  // Création d'une liste pour stocker les recettes filtrées
+  const filteredRecipes = []
+  // Parcours de toutes les recettes dans globalLists.recipesToDisplay
+  for (let i = 0; i < globalLists.recipesToDisplay.length; i++) {
+    const recipe = globalLists.recipesToDisplay[i]
     const result = [false, false, false]
-    // Si le tableau des filtres contient un ou plusieurs ingrédients
+    // Vérification du filtre d'ingrédients
     if (globalLists.ingredientsSelected.length > 0) {
-      // Si la recette contient cet ingrédient
-      if (globalLists.ingredientsSelected.every(ingredient => recipe.ingredients.some(item => item.ingredient.toLowerCase() === ingredient))) {
-        // La recette valide le filtre ingrédient
-        result[0] = true
+      let hasAllIngredients = true
+      for (let j = 0; j < globalLists.ingredientsSelected.length; j++) {
+        const ingredient = globalLists.ingredientsSelected[j]
+        let found = false
+        for (let k = 0; k < recipe.ingredients.length; k++) {
+          if (recipe.ingredients[k].ingredient.toLowerCase() === ingredient) {
+            found = true
+            break
+          }
+        }
+        if (!found) {
+          hasAllIngredients = false
+          break
+        }
       }
+      result[0] = hasAllIngredients
     } else {
       result[0] = true
     }
-    // Si le tableau  des filtres contient un ou plusieurs appareils
+    // Vérification du filtre d'appareils
     if (globalLists.appliancesSelected.length > 0) {
-      // Si la recette contient cet appareils
-      if (globalLists.appliancesSelected.includes(recipe.appliance.toLowerCase())) {
-        // La recette valide le filtre appareils
-        result[1] = true
-      }
+      result[1] = globalLists.appliancesSelected.includes(recipe.appliance.toLowerCase())
     } else {
       result[1] = true
     }
-    // Si le tableau  des filtres contient un ou plusieurs ustensils
+    // Vérification du filtre d'ustensiles
     if (globalLists.ustensilsSelected.length > 0) {
-      // Nettoyer le tableu recipe.ustensils pour vraiment mettre en minuscule
+      let hasAllUstensils = true
       const cleanUstensils = []
-      recipe.ustensils.forEach(ustensil => cleanUstensils.push(ustensil.toLowerCase()))
-      recipe.ustensils = cleanUstensils
-      // Si la recette contient cet ustensils
-      if (globalLists.ustensilsSelected.every(ustensil => recipe.ustensils.includes(ustensil.toLowerCase()))) {
-        // La recette valide le filtre ustensils
-        result[2] = true
+      for (let j = 0; j < recipe.ustensils.length; j++) {
+        cleanUstensils.push(recipe.ustensils[j].toLowerCase())
       }
+      for (let j = 0; j < globalLists.ustensilsSelected.length; j++) {
+        const ustensil = globalLists.ustensilsSelected[j]
+        if (!cleanUstensils.includes(ustensil.toLowerCase())) {
+          hasAllUstensils = false
+          break
+        }
+      }
+      result[2] = hasAllUstensils
     } else {
       result[2] = true
     }
-    return result.every(v => v === true)
-  })
+    // Vérification si la recette passe tous les filtres
+    if (result.every(v => v === true)) {
+      filteredRecipes.push(recipe)
+    }
+  }
+  // Remplacer globalLists.recipesToDisplay par les recettes filtrées
+  globalLists.recipesToDisplay = filteredRecipes
 }
 
 // *----------------------------------------------------------*
