@@ -27,29 +27,20 @@ export function setRecipesToDisplay () {
 // *------ en fonction de la recherche dans la searchbar -----*
 // *----------------------------------------------------------*
 function generateRecipesListSearchBar () {
-  // Vérifie si le tableau de recherche principal est non vide
   if (globalLists.mainSearch.length > 0) {
-    // Crée un tableau de résultats en filtrant les recettes à afficher
-    const resultsArray = globalLists.recipesToDisplay.filter(recipe => {
-      // Vérifie si chaque mot clé de recherche est présent dans la recette
-      return globalLists.mainSearch.every(searchWord => {
-        // Convertit le mot clé de recherche en minuscules
-        const lowercaseSearchWord = searchWord.toLowerCase()
-        // Vérifie si le nom de la recette ou la description contient le mot clé de recherche
-        if (recipe.name.toLowerCase().includes(lowercaseSearchWord)) {
-          return true
-        }
-        if (recipe.description.toLowerCase().includes(lowercaseSearchWord)) {
-          return true
-        }
-        // Vérifie si au moins un ingrédient de la recette contient le mot clé de recherche
-        return recipe.ingredients.some(ingredient => {
-          const lowercaseIngredient = ingredient.ingredient.toLowerCase()
-          return lowercaseIngredient.includes(lowercaseSearchWord)
-        })
-      })
-    })
-    // Met à jour le tableau des recettes à afficher avec le tableau de résultats
+    // tableau vide pour stocker les recettes
+    const resultsArray = []
+    for (let i = 0; i < globalLists.recipesToDisplay.length; i++) {
+      const recipe = globalLists.recipesToDisplay[i]
+      if (globalLists.mainSearch.every(word => recipe.name.toLowerCase().includes(word.toLowerCase()))) {
+        resultsArray.push(recipe)
+      } else if (globalLists.mainSearch.every(word => recipe.description.toLowerCase().includes(word.toLowerCase()))) {
+        resultsArray.push(recipe)
+      } else if (globalLists.mainSearch.every(word => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(word.toLowerCase())))) {
+        resultsArray.push(recipe)
+      }
+    }
+    // On garde uniquement les recettes qui ont tous les mots de la recherche
     globalLists.recipesToDisplay = resultsArray
   }
 }
